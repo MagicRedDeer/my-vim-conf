@@ -33,7 +33,7 @@ endfunction
 " Vundle Settings {{{
 set nocompatible
 filetype off 
-set rtp+=~/vimfiles/bundle/vundle/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let vundle manage vundle 
@@ -81,6 +81,20 @@ vnoremap <leader>sm :py sendBufferToMaya ()<cr>
 nnoremap <leader>sb :py sendBufferToMaya (True)<cr>
 vnoremap <leader>sb :py sendBufferToMaya (True)<cr>
 " }}}
+
+
+Bundle 'bufexplorer.zip'
+Bundle 'bufkill.vim'
+Bundle 'YankRing.vim'
+Bundle 'surround.vim'
+Bundle 'snipMate'
+Bundle 'The-NERD-Commenter'
+Bundle 'The-NERD-tree'
+Bundle 'pyflakes.vim'
+Bundle 'CamelCaseComplete'
+Bundle 'camelcasemotion'
+Bundle 'a.vim'
+Bundle 'c.vim'
 
 
 "
