@@ -1,0 +1,5 @@
+--langdef=mel
+--langmap=mel:.mel
+
+--regex-mel=/^global proc([ \t]|string|int|float|matrix|vector|\[\])*([a-zA-Z0-9_]+)/\2/global procedure/l
+--regex-mel=/^proc([ \t]|string|int|float|matrix|vector|\[\])*([a-zA-Z0-9_]+)/\2/local procedure/g
