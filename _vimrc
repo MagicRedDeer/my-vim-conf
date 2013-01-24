@@ -43,7 +43,6 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup'
-
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 
@@ -73,6 +72,7 @@ let Tlist_Use_Right_Window=1 " Make Tag list appear on the right side
 "}}}
 
 " sending buffer contents to maya
+Bundle 'Tail-Bundle'
 Bundle "Vimya"
 " Settings for vimya {{{
 let vimyaPort = 7720
@@ -80,8 +80,14 @@ nnoremap <leader>sm :py sendBufferToMaya ()<cr>
 vnoremap <leader>sm :py sendBufferToMaya ()<cr>
 nnoremap <leader>sb :py sendBufferToMaya (True)<cr>
 vnoremap <leader>sb :py sendBufferToMaya (True)<cr>
+" Map my own additions to the plugin
+nnoremap <leader>vt :py resetVimyaTail()<cr>
+nnoremap <leader>vl :py resetVimyaLog()<cr>
+vnoremap <leader>vt :py resetVimyaTail()<cr>
+vnoremap <leader>vl :py resetVimyaLog()<cr>
+nnoremap <leader>vr :call tail#Refresh()<cr>
+vnoremap <leader>vr :call tail#Refresh()<cr>
 " }}}
-
 
 Bundle 'bufexplorer.zip'
 Bundle 'bufkill.vim'
@@ -95,6 +101,14 @@ Bundle 'CamelCaseComplete'
 Bundle 'camelcasemotion'
 Bundle 'a.vim'
 Bundle 'c.vim'
+Bundle 'TaskList.vim'
+Bundle 'ack.vim'
+Bundle 'win9xblueback.vim'
+Bundle 'darkblack.vim'
+Bundle 'oceanblack.vim'
+Bundle 'pep8'
+Bundle 'Gundo'
+Bundle 'pytest.vim'
 
 
 "
@@ -111,14 +125,28 @@ Bundle 'c.vim'
 " }}}
 
 " Setting gui font {{{ 
-colorscheme darkblue
+colorscheme darkblack
 set guifont=Consolas:h10:cANSI
+set guifont-=mT
+if has('gui_running')
+	colorscheme darkblue
+endif
 " }}}
 
 " Show line numbers and disable wrapping by default{{{
 set number
 set nowrap
+" when wrapping is enabled do wrap friendly scrolling
+nnoremap j gj
+nnoremap k gk
 " }}}
+
+" History and undo settings  {{{
+set history =1000         " remember more commands and search history
+set undolevels =1000      " use many muchos levels of undo
+set hidden
+" }}}
+
 
 " Maps for switching windows {{{
 map <c-j> <c-w>j
@@ -167,15 +195,15 @@ endfunction
 " Default fold and indent Settings {{{
 function! Set_Default_Settings()
   " fold settings 
-  setlocal foldmethod=marker
-  setlocal foldmarker={{{,}}}
-  
+  setlocal foldmethod&
+  setlocal foldmarker&
+
   "pep8 settings 
-  setlocal tabstop=8
-  setlocal expandtab
-  setlocal softtabstop=4
-  setlocal shiftwidth=4
-  setlocal textwidth=999
+  setlocal tabstop&
+  setlocal expandtab&
+  setlocal softtabstop&
+  setlocal shiftwidth&
+  setlocal textwidth&
   setlocal autoindent
 endfunction
 " }}}
@@ -187,9 +215,19 @@ autocmd BufLeave *.{c,C,cpp,java,h,py} call Set_Default_Settings()
 
 " Change the default working directory {{{
 let g:homedir = "D:\\talha.ahmed\\workspace\\vim-home"
+command! GoHome execute 'cd ' . homedir
 " }}}
 
 " Settings for split {{{
 set noequalalways
 " }}}
+
+" Editing behaviour {{{ 
+" visualizing tab and space characters, lines that extend beyond the terminal
+" by a # at the end 
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+" }}}
+
+
 
