@@ -97,6 +97,7 @@ Bundle 'snipMate'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'pyflakes.vim'
+Bundle 'CompleteHelper'
 Bundle 'CamelCaseComplete'
 Bundle 'camelcasemotion'
 Bundle 'a.vim'
@@ -109,7 +110,13 @@ Bundle 'oceanblack.vim'
 Bundle 'pep8'
 Bundle 'Gundo'
 Bundle 'pytest.vim'
+Bundle 'PyDiction'
+let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
 
+Bundle 'lepture/vim-velocity.git'
+Bundle 'genutils'
+Bundle 'multvals.vim'
+Bundle 'greputils'
 
 "
  " Brief help
@@ -127,7 +134,8 @@ Bundle 'pytest.vim'
 " Setting gui font {{{ 
 colorscheme darkblack
 set guifont=Consolas:h10:cANSI
-set guifont-=mT
+set guioptions-=m
+set guioptions-=T
 if has('gui_running')
 	colorscheme darkblue
 endif
@@ -197,10 +205,8 @@ function! Set_Default_Settings()
   " fold settings 
   setlocal foldmethod&
   setlocal foldmarker&
-
-  "pep8 settings 
   setlocal tabstop&
-  setlocal expandtab&
+  setlocal expandtab
   setlocal softtabstop&
   setlocal shiftwidth&
   setlocal textwidth&
@@ -229,5 +235,11 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " }}}
 
+fun! PullAndRefresh()
+  set noconfirm
+  !git pull
+  bufdo e!
+  set confirm
+endfun
 
-
+nnoremap <leader>gr call PullAndRefresh()
