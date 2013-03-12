@@ -118,6 +118,8 @@ Bundle 'genutils'
 Bundle 'multvals.vim'
 Bundle 'greputils'
 
+Bundle 'ivanov/vim-ipython'
+
 "
  " Brief help
  " :BundleList          - list configured bundles
@@ -137,7 +139,7 @@ set guifont=Consolas:h10:cANSI
 set guioptions-=m
 set guioptions-=T
 if has('gui_running')
-	colorscheme darkblue
+	colorscheme desert
 endif
 " }}}
 
@@ -237,7 +239,7 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
 fun! PullAndRefresh()
   set noconfirm
-  !git pull
+  "!git pull
   bufdo e!
   set confirm
 endfun
