@@ -146,6 +146,7 @@ endif
 " Show line numbers and disable wrapping by default{{{
 set number
 set nowrap
+set shiftround
 " when wrapping is enabled do wrap friendly scrolling
 nnoremap j gj
 nnoremap k gk
@@ -159,10 +160,10 @@ set hidden
 
 
 " Maps for switching windows {{{
-map <c-j> <c-w>j
-map <c-h> <c-w>h
-map <c-k> <c-w>k
-map <c-l> <c-w>l
+noremap <c-j> <c-w>j
+noremap <c-h> <c-w>h
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
 " }}}
 
 " Syntax and Highlighting Setting "{{{
@@ -216,9 +217,12 @@ function! Set_Default_Settings()
 endfunction
 " }}}
 call Set_Default_Settings()
-autocmd BufNewFile,BufEnter *.{py} call Set_Python_Settings()
-autocmd BufNewFile,BufEnter *.{c,C,cpp,java,h,mel,php} call Set_C_Settings()
-autocmd BufLeave *.{c,C,cpp,java,h,py} call Set_Default_Settings()
+augroup lang_settings
+	autocmd!
+	autocmd BufNewFile,BufEnter *.{py} call Set_Python_Settings()
+	autocmd BufNewFile,BufEnter *.{c,C,cpp,java,h,mel,php} call Set_C_Settings()
+	autocmd BufLeave *.{c,C,cpp,java,h,py} call Set_Default_Settings()
+augroup END
 " }}}
 
 " Change the default working directory {{{
@@ -237,11 +241,26 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " }}}
 
-fun! PullAndRefresh()
+fun! RefreshAllBuffers()
   set noconfirm
   "!git pull
   bufdo e!
   set confirm
 endfun
 
-nnoremap <leader>gr call PullAndRefresh()
+nnoremap <leader>gr call RefreshAllBuffers()
+
+" Ideas from LVSTHW @ steve losh {{{
+" echom ">^.^<"
+
+" Delete a line in insert mode
+inoremap <c-d> <esc>ddi
+
+" move a line up or down
+nnoremap - ddp
+nnoremap _ ddkP
+
+" edit and source my vimrc file 
+nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+" }}}
