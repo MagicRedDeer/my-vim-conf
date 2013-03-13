@@ -134,12 +134,15 @@ Bundle 'ivanov/vim-ipython'
 " }}}
 
 " Setting gui font {{{ 
-colorscheme darkblack
+colorscheme default
 set guifont=Consolas:h10:cANSI
 set guioptions-=m
 set guioptions-=T
 if has('gui_running')
 	colorscheme desert
+	if has('gui_gnome')
+		set guifont=Monospace\ 8
+        endif
 endif
 " }}}
 
