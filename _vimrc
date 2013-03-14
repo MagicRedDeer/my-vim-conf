@@ -6,27 +6,27 @@ behave mswin
 
 set diffexpr=MyDiff()
 function! MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let eq = ''
+    if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+            let cmd = '""' . $VIMRUNTIME . '\diff"'
+            let eq = '"'
+        else
+            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
     else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        let cmd = $VIMRUNTIME . '\diff'
     endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 " }}}
 
@@ -121,14 +121,14 @@ Bundle 'greputils'
 Bundle 'ivanov/vim-ipython'
 
 "
- " Brief help
- " :BundleList          - list configured bundles
- " :BundleInstall(!)    - install(update) bundles
- " :BundleSearch(!) foo - search(or refresh cache first) for foo
- " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Bundle command are not allowed..
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
 " }}}
 
 " }}}
@@ -139,10 +139,10 @@ set guifont=Consolas:h10:cANSI
 set guioptions-=m
 set guioptions-=T
 if has('gui_running')
-	colorscheme desert
-	if has('gui_gnome')
-		set guifont=Monospace\ 8
-        endif
+    colorscheme desert
+    if has('gui_gnome')
+        set guifont=Monospace\ 8
+    endif
 endif
 " }}}
 
@@ -179,52 +179,73 @@ filetype plugin indent on
 
 " Python Fold and indent Settings {{{
 function! Set_Python_Settings()
-  " code folding settings 
-  setlocal foldmethod=indent
+    " code folding settings 
+    setlocal foldmethod=indent
 
-  "pep8 settings 
-  setlocal tabstop=8
-  setlocal expandtab
-  setlocal softtabstop=4
-  setlocal shiftwidth=4
-  setlocal textwidth=79
-  setlocal autoindent
+    "pep8 settings 
+    setlocal tabstop=8
+    setlocal expandtab
+    setlocal softtabstop=4
+    setlocal shiftwidth=4
+    setlocal textwidth=79
+    setlocal autoindent
 endfunction
 " }}}
+" Python Fold and indent Settings {{{
+function! Set_Vim_Settings()
+    " code folding settings 
+    echo "Switching to vim settings!"
+    setlocal foldmethod=marker
+    setlocal foldmarker={{{,}}}
+
+    "pep8 settings 
+    setlocal tabstop=8
+    setlocal expandtab
+    setlocal softtabstop=4
+    setlocal shiftwidth=4
+    setlocal textwidth=79
+    setlocal autoindent
+endfunction
+" }}}
+
 " C fold and indent Setting {{{
 function! Set_C_Settings()
-  " fold settings 
-  setlocal foldmethod=syntax
-  setlocal foldmarker={,}
+    " fold settings 
+    setlocal foldmethod=syntax
+    setlocal foldmarker={,}
 
-  "pep8 settings 
-  setlocal tabstop=8
-  setlocal expandtab
-  setlocal softtabstop=4
-  setlocal shiftwidth=4
-  setlocal textwidth=999
-  setlocal autoindent
+    "pep8 settings 
+    setlocal tabstop=8
+    setlocal expandtab
+    setlocal softtabstop=4
+    setlocal shiftwidth=4
+    setlocal textwidth=999
+    setlocal autoindent
 endfunction
 " }}}
+
 " Default fold and indent Settings {{{
 function! Set_Default_Settings()
-  " fold settings 
-  setlocal foldmethod&
-  setlocal foldmarker&
-  setlocal tabstop&
-  setlocal expandtab
-  setlocal softtabstop&
-  setlocal shiftwidth&
-  setlocal textwidth&
-  setlocal autoindent
+    " fold settings 
+    setlocal foldmethod&
+    setlocal foldmarker&
+    setlocal tabstop&
+    setlocal expandtab
+    setlocal softtabstop&
+    setlocal shiftwidth&
+    setlocal textwidth&
+    setlocal autoindent
 endfunction
 " }}}
+
 call Set_Default_Settings()
 augroup lang_settings
-	autocmd!
-	autocmd BufNewFile,BufEnter *.{py} call Set_Python_Settings()
-	autocmd BufNewFile,BufEnter *.{c,C,cpp,java,h,mel,php} call Set_C_Settings()
-	autocmd BufLeave *.{c,C,cpp,java,h,py} call Set_Default_Settings()
+    autocmd!
+    autocmd BufNewFile,BufEnter *.{py} :call Set_Python_Settings()
+    autocmd BufNewFile,BufEnter *.{c,C,cpp,java,h,mel,php} :call Set_C_Settings()
+    autocmd BufNewFile,BufEnter *.vim :call Set_Vim_Settings()
+    autocmd BufNewFile,BufEnter $MYVIMRC :call Set_Vim_Settings()
+    autocmd BufLeave *.{c,C,cpp,java,h,py,vim} :call Set_Default_Settings()
 augroup END
 " }}}
 
@@ -245,11 +266,11 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " }}}
 
 fun! RefreshAllBuffers()
-  set noconfirm
-  "!git pull
-  bufdo e!
-  set confirm
-  syn on
+    set noconfirm
+    "!git pull
+    bufdo e!
+    set confirm
+    syn on
 endfun
 
 nnoremap <leader>gr :call RefreshAllBuffers()<cr>
