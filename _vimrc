@@ -249,9 +249,10 @@ fun! RefreshAllBuffers()
   "!git pull
   bufdo e!
   set confirm
+  syn on
 endfun
 
-nnoremap <leader>gr call RefreshAllBuffers()
+nnoremap <leader>gr :call RefreshAllBuffers()<cr>
 
 " Ideas from LVSTHW @ steve losh {{{
 " echom ">^.^<"
