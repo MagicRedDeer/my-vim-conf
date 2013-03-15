@@ -93,7 +93,6 @@ Bundle 'bufexplorer.zip'
 Bundle 'bufkill.vim'
 Bundle 'YankRing.vim'
 Bundle 'surround.vim'
-Bundle 'snipMate'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'pyflakes.vim'
@@ -109,16 +108,20 @@ Bundle 'darkblack.vim'
 Bundle 'oceanblack.vim'
 Bundle 'pep8'
 Bundle 'Gundo'
+
 Bundle 'pytest.vim'
-Bundle 'PyDiction'
+Bundle 'Pydiction'
 let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
+Bundle 'pydoc.vim'
 
 Bundle 'lepture/vim-velocity.git'
 Bundle 'genutils'
 Bundle 'multvals.vim'
-Bundle 'greputils'
+Bundle 'EasyGrep'
 
 Bundle 'ivanov/vim-ipython'
+Bundle 'snipMate'
+Bundle 'SuperTab'
 
 "
 " Brief help
@@ -161,7 +164,6 @@ set undolevels =1000      " use many muchos levels of undo
 set hidden
 " }}}
 
-
 " Maps for switching windows {{{
 noremap <c-j> <c-w>j
 noremap <c-h> <c-w>h
@@ -194,7 +196,6 @@ endfunction
 " Python Fold and indent Settings {{{
 function! Set_Vim_Settings()
     " code folding settings 
-    echo "Switching to vim settings!"
     setlocal foldmethod=marker
     setlocal foldmarker={{{,}}}
 
@@ -241,11 +242,11 @@ endfunction
 call Set_Default_Settings()
 augroup lang_settings
     autocmd!
-    autocmd BufNewFile,BufEnter *.{py} :call Set_Python_Settings()
+    autocmd BufNewFile,BufEnter *.{py,pyw} :call Set_Python_Settings()
     autocmd BufNewFile,BufEnter *.{c,C,cpp,java,h,mel,php} :call Set_C_Settings()
     autocmd BufNewFile,BufEnter *.vim :call Set_Vim_Settings()
     autocmd BufNewFile,BufEnter $MYVIMRC :call Set_Vim_Settings()
-    autocmd BufLeave *.{c,C,cpp,java,h,py,vim} :call Set_Default_Settings()
+    autocmd BufLeave *.{c,C,cpp,java,h,py,pyw,vim} :call Set_Default_Settings()
 augroup END
 " }}}
 
@@ -265,6 +266,7 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 " }}}
 
+" Code for refreshing all buffers (esp. for after checkout or pull) {{{
 fun! RefreshAllBuffers()
     set noconfirm
     "!git pull
@@ -273,7 +275,8 @@ fun! RefreshAllBuffers()
     syn on
 endfun
 
-nnoremap <leader>gr :call RefreshAllBuffers()<cr>
+nnoremap <leader>rb :call RefreshAllBuffers()<cr>
+"}}}
 
 " Ideas from LVSTHW @ steve losh {{{
 " echom ">^.^<"
@@ -288,4 +291,31 @@ nnoremap _ ddkP
 " edit and source my vimrc file 
 nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Grep Operator case study "{{{
+
+" creating the mappings
+"nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
+"vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
+
+"function! s:GrepOperator(type)
+    "let saved_unnamed_register = @@
+
+    "" for visual mode send the selected range
+    "if a:type ==# 'v' || (a:type ==? 'v' && &grepprg ==# 'internal')
+        "normal! `<v`>y
+    "" for normal mode send the 'adjective'
+    "elseif a:type ==# 'char'
+        "normal! `[v`]y
+    "else
+        "return
+    "endif
+
+    "silent execute "grep! -R " . shellescape(@@) . " ."
+    "copen
+
+    "let @@ = saved_unnamed_register
+"endfunction
 " }}}
+" }}}
+
