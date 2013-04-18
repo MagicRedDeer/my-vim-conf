@@ -73,7 +73,7 @@ let Tlist_Use_Right_Window=1 " Make Tag list appear on the right side
 
 " sending buffer contents to maya
 Bundle 'Tail-Bundle'
-Bundle "Vimya"
+Bundle "talha81/vimya"
 " Settings for vimya {{{
 let vimyaPort = 7720
 nnoremap <leader>sm :py sendBufferToMaya ()<cr>
@@ -91,7 +91,7 @@ vnoremap <leader>vr :call tail#Refresh()<cr>
 
 Bundle 'bufexplorer.zip'
 Bundle 'bufkill.vim'
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim'
 Bundle 'surround.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
@@ -120,9 +120,22 @@ Bundle 'multvals.vim'
 Bundle 'EasyGrep'
 
 Bundle 'ivanov/vim-ipython'
-Bundle 'snipMate'
 Bundle 'SuperTab'
+"let g:SuperTabDefaultCompletionType = "context"
 
+" install snipmate dependancies 
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/snipmate-snippets"
+" install other snipmate
+Bundle "garbas/vim-snipmate"
+let g:snips_author = "Talha Ahmed"
+let g:snips_email  = "talha.ahmed@gmail.com"
+let g:snips_github = "github.com/talha81"
+Bundle "sontek/rope-vim"
+let ropevim_vim_completion=1
+let ropevim_extended_complete=1
+let ropevim_enable_shortcuts=1
 "
 " Brief help
 " :BundleList          - list configured bundles
@@ -263,7 +276,7 @@ set noequalalways
 " visualizing tab and space characters, lines that extend beyond the terminal
 " by a # at the end 
 set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%
 " }}}
 
 " Code for refreshing all buffers (esp. for after checkout or pull) {{{
