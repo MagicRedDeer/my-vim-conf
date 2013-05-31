@@ -119,7 +119,6 @@ Bundle 'genutils'
 Bundle 'multvals.vim'
 Bundle 'EasyGrep'
 
-Bundle 'ivanov/vim-ipython'
 Bundle 'SuperTab'
 "let g:SuperTabDefaultCompletionType = "context"
 
@@ -136,6 +135,12 @@ Bundle "sontek/rope-vim"
 let ropevim_vim_completion=1
 let ropevim_extended_complete=1
 let ropevim_enable_shortcuts=1
+
+" shells and stuff
+"Bundle 'Conque-Shell'
+Bundle 'ivanov/vim-ipython'
+"Bundle 'johndgiese/vipy'
+Bundle 'nathanaelkane/vim-indent-guides.git'
 "
 " Brief help
 " :BundleList          - list configured bundles
