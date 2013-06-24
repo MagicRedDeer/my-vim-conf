@@ -104,9 +104,10 @@ Bundle 'Gundo'
 Bundle 'TaskList.vim'
 Bundle 'CompleteHelper'
 Bundle 'CamelCaseComplete'
-Bundle 'SuperTab'
+Bundle 'ervandew/supertab'
 " Super Tab settings {{{
-"let g:SuperTabDefaultCompletionType = "context"
+    let g:SuperTabDefaultCompletionType = "context"
+    let g:SuperTabContextDefaultCompletionType = "<c-n>"
 " }}}
 Bundle 'camelcasemotion'
 Bundle 'surround.vim'
@@ -161,6 +162,7 @@ let g:snips_github = "github.com/talha81"
 
 "my Python plugins {{{
 Bundle 'Python-mode-klen'
+let g:pymode_rope_guess_project=0
 " Retiring other plugins in favour of python mode {{{
 "Bundle 'pytest.vim'
 "Bundle 'pydoc.vim'
