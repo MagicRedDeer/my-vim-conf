@@ -40,19 +40,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My Bundles should go here {{{
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
 
-" extended % matching for HTML, LATEX etc.
-Bundle 'matchit.zip'
-
-" automatically timestamp files
-Bundle 'timestamp.vim'
-
-" small buffer explorer 
+" small buffer explorer {{{
 Bundle 'minibufexpl.vim'
 " MiniBufExplorer Settings {{{
 let g:miniBufExplMapWindowNavVim = 1
@@ -64,84 +53,130 @@ nmap <M-j> :MBEbn<Enter>
 nmap <M-k> :MBEbp<Enter>
 " }}}
 "}}}
-
-" tag list plugin
-Bundle 'taglist.vim'
-" Taglist Settings {{{
-let Tlist_Use_Right_Window=1 " Make Tag list appear on the right side 
 "}}}
 
-" sending buffer contents to maya
+" tag list plugin {{{
+Bundle 'taglist.vim'
+"" Taglist Settings {{{
+let Tlist_Use_Right_Window=1 " Make Tag list appear on the right side 
+""}}}
+"}}}
+
+" sending buffer contents to maya {{{
 Bundle 'Tail-Bundle'
 Bundle "talha81/vimya"
+
 " Settings for vimya {{{
 let vimyaPort = 7720
 nnoremap <leader>sm :py sendBufferToMaya ()<cr>
 vnoremap <leader>sm :py sendBufferToMaya ()<cr>
 nnoremap <leader>sb :py sendBufferToMaya (True)<cr>
 vnoremap <leader>sb :py sendBufferToMaya (True)<cr>
-" Map my own additions to the plugin
+
+"" Map my own additions to the plugin
 nnoremap <leader>vt :py resetVimyaTail()<cr>
 nnoremap <leader>vl :py resetVimyaLog()<cr>
 vnoremap <leader>vt :py resetVimyaTail()<cr>
 vnoremap <leader>vl :py resetVimyaLog()<cr>
 nnoremap <leader>vr :call tail#Refresh()<cr>
 vnoremap <leader>vr :call tail#Refresh()<cr>
-" }}}
+"" }}}
 
+"""}}}
+
+" Use full editor and IDE addons {{{
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+
+" extended % matching for HTML, LATEX etc.
+Bundle 'matchit.zip'
+
+" automatically timestamp files
+Bundle 'timestamp.vim'
 Bundle 'bufexplorer.zip'
 Bundle 'bufkill.vim'
-"Bundle 'YankRing.vim'
-Bundle 'surround.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
-Bundle 'pyflakes.vim'
+Bundle 'Gundo'
+Bundle 'TaskList.vim'
 Bundle 'CompleteHelper'
 Bundle 'CamelCaseComplete'
+Bundle 'SuperTab'
+" Super Tab settings {{{
+"let g:SuperTabDefaultCompletionType = "context"
+" }}}
 Bundle 'camelcasemotion'
+Bundle 'surround.vim'
+Bundle 'EasyGrep'
 Bundle 'a.vim'
-Bundle 'c.vim'
-Bundle 'TaskList.vim'
 Bundle 'ack.vim'
+Bundle 'nathanaelkane/vim-indent-guides.git'
+Bundle 'genutils'
+Bundle 'multvals.vim'
+" Retired plugins {{{
+"Bundle 'YankRing.vim' "nice feature but it slows large deleting and yanking
+"}}}
+"}}}
+
+" apache velocity highlighting and stuff {{{
+Bundle 'lepture/vim-velocity.git'
+"}}}
+
+" some color schemes {{{
 Bundle 'win9xblueback.vim'
 Bundle 'darkblack.vim'
 Bundle 'oceanblack.vim'
-Bundle 'pep8'
-Bundle 'Gundo'
+"}}}
 
-Bundle 'pytest.vim'
-Bundle 'Pydiction'
-let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
-Bundle 'pydoc.vim'
+" c and c++ {{{
+Bundle 'c.vim'
+"}}}
 
-Bundle 'lepture/vim-velocity.git'
-Bundle 'genutils'
-Bundle 'multvals.vim'
-Bundle 'EasyGrep'
+" shells and stuff {{{
+Bundle 'Conque-Shell'
+Bundle 'ivanov/vim-ipython'
+"Bundle 'johndgiese/vipy'
+"}}}
 
-Bundle 'SuperTab'
-"let g:SuperTabDefaultCompletionType = "context"
-
-" install snipmate dependancies 
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
-" install other snipmate
-Bundle "garbas/vim-snipmate"
+" snipmate plugins {{{
+Bundle 'UltiSnips'
+Bundle 'snipmate-snippets'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snipmate-snippets"]
 let g:snips_author = "Talha Ahmed"
 let g:snips_email  = "talha.ahmed@gmail.com"
 let g:snips_github = "github.com/talha81"
-Bundle "sontek/rope-vim"
-let ropevim_vim_completion=1
-let ropevim_extended_complete=1
-let ropevim_enable_shortcuts=1
 
-" shells and stuff
-"Bundle 'Conque-Shell'
-Bundle 'ivanov/vim-ipython'
-"Bundle 'johndgiese/vipy'
-Bundle 'nathanaelkane/vim-indent-guides.git'
-"
+" Retired snipmate plugins {{{
+""" install snipmate dependancies 
+""Bundle "MarcWeber/vim-addon-mw-utils"
+""Bundle "tomtom/tlib_vim"
+""" install other snipmate
+""Bundle "garbas/vim-snipmate"
+"}}}
+
+" }}}
+
+"my Python plugins {{{
+Bundle 'Python-mode-klen'
+" Retiring other plugins in favour of python mode {{{
+"Bundle 'pytest.vim'
+"Bundle 'pydoc.vim'
+"Bundle "sontek/rope-vim"
+"let ropevim_vim_completion=1
+"let ropevim_extended_complete=1
+"let ropevim_enable_shortcuts=1
+"Bundle 'pyflakes.vim'
+"Bundle 'pep8'
+"Bundle 'Pydiction'
+"let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
+" }}}
+" }}}
+
+
+""
 " Brief help
 " :BundleList          - list configured bundles
 " :BundleInstall(!)    - install(update) bundles
@@ -211,7 +246,8 @@ function! Set_Python_Settings()
     setlocal autoindent
 endfunction
 " }}}
-" Python Fold and indent Settings {{{
+
+" Vim Fold and indent Settings {{{
 function! Set_Vim_Settings()
     " code folding settings 
     setlocal foldmethod=marker
