@@ -111,7 +111,6 @@ Bundle 'ervandew/supertab'
 " }}}
 Bundle 'camelcasemotion'
 Bundle 'surround.vim'
-Bundle 'EasyGrep'
 Bundle 'a.vim'
 Bundle 'ack.vim'
 Bundle 'nathanaelkane/vim-indent-guides.git'
@@ -161,11 +160,11 @@ let g:snips_github = "github.com/talha81"
 "}}}
 
 "my Python plugins {{{
-Bundle 'Python-mode-klen'
-let g:pymode_rope_guess_project=0
-let g:pymode_lint_cwindow=0
-let g:pymode_lint_mccabe_complexity=10
-let g:pymode_breakpoint=0
+"Bundle 'Python-mode-klen'
+"let g:pymode_rope_guess_project=0
+"let g:pymode_lint_cwindow=0
+"let g:pymode_lint_mccabe_complexity=10
+"let g:pymode_breakpoint=0
 " Retiring other plugins in favour of python mode {{{
 "Bundle 'pytest.vim'
 "Bundle 'pydoc.vim'
@@ -173,13 +172,16 @@ let g:pymode_breakpoint=0
 "let ropevim_vim_completion=1
 "let ropevim_extended_complete=1
 "let ropevim_enable_shortcuts=1
-"Bundle 'pyflakes.vim'
+Bundle 'pyflakes.vim'
+Bundle 'davidhalter/jedi-vim'
+let g:jedi#use_tabs_not_buffers = 1
 "Bundle 'pep8'
 "Bundle 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
 " }}}
 " }}}
 
+Bundle 'EasyGrep'
 
 ""
 " Brief help
