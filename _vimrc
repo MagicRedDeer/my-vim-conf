@@ -174,7 +174,7 @@ let g:snips_github = "github.com/talha81"
 "let ropevim_enable_shortcuts=1
 Bundle 'pyflakes.vim'
 Bundle 'davidhalter/jedi-vim'
-let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#use_tabs_not_buffers = 0
 "Bundle 'pep8'
 "Bundle 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
