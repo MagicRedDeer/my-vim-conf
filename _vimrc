@@ -158,11 +158,14 @@ let g:snips_github = "github.com/talha81"
 ""Bundle "garbas/vim-snipmate"
 "}}}
 
-" }}}
+"}}}
 
 "my Python plugins {{{
 Bundle 'Python-mode-klen'
 let g:pymode_rope_guess_project=0
+let g:pymode_lint_cwindow=0
+let g:pymode_lint_mccabe_complexity=10
+let g:pymode_breakpoint=0
 " Retiring other plugins in favour of python mode {{{
 "Bundle 'pytest.vim'
 "Bundle 'pydoc.vim'
@@ -193,7 +196,7 @@ let g:pymode_rope_guess_project=0
 
 " Setting gui font {{{ 
 colorscheme default
-set guifont=Consolas:h10:cANSI
+set guifont=Consolas:h8:cANSI
 set guioptions-=m
 set guioptions-=T
 if has('gui_running')
