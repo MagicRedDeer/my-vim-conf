@@ -258,6 +258,17 @@ set undolevels =1000      " use many muchos levels of undo
 set hidden
 " }}}
 
+" Maps for switching tabs {{{
+map <C-S-Tab> :tabprevious<CR>
+nmap <C-S-Tab> :tabprevious<CR>
+imap <C-S-Tab> <Esc>:tabprevious<CR>i
+
+map <C-Tab> :tabnext<CR>
+nmap <C-Tab> :tabnext<CR>
+imap <C-Tab> <Esc>:tabnext<CR>i
+"}}}
+
+
 " Maps for switching windows {{{
 noremap <c-j> <c-w>j
 noremap <c-h> <c-w>h
