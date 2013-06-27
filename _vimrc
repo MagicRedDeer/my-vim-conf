@@ -229,6 +229,12 @@ colorscheme default
 set guifont=Consolas:h8:cANSI
 set guioptions-=m
 set guioptions-=T
+set guioptions-=l
+set guioptions-=r
+set guioptions-=L
+set guioptions-=R
+set guioptions-=e
+set guioptions+=c
 if has('gui_running')
     colorscheme desert
     if has('gui_gnome')
@@ -238,7 +244,7 @@ endif
 " }}}
 
 " Show line numbers and disable wrapping by default{{{
-set number
+"set number
 set nowrap
 set shiftround
 " when wrapping is enabled do wrap friendly scrolling
