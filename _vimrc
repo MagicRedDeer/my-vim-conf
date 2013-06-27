@@ -174,7 +174,31 @@ let g:snips_github = "github.com/talha81"
 "let ropevim_enable_shortcuts=1
 Bundle 'pyflakes.vim'
 Bundle 'davidhalter/jedi-vim'
+" Jedi vim settings {{{
 let g:jedi#use_tabs_not_buffers = 0
+
+" for custom mappings on jedi vim {{{
+function! g:splitandgoto()
+	:rightbelow vsp
+	:call jedi#goto()
+endfunction
+function! g:splitandgetdefinition()
+	:rightbelow vsp
+	:call jedi#get_definition()
+endfunction
+function! g:map_jedi_settings()
+    nnoremap <buffer> <leader>D :call g:splitandgetdefinition()<cr>
+    nnoremap <buffer> <leader>G :call g:splitandgoto()<cr>
+endfunction
+augroup custom_jedi_mappings
+    autocmd!
+    autocmd BufNewFile,BufEnter *.{py,pyw} :call g:map_jedi_settings()
+augroup END
+"}}}
+"}}}
+
+
+
 "Bundle 'pep8'
 "Bundle 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
@@ -182,6 +206,10 @@ let g:jedi#use_tabs_not_buffers = 0
 " }}}
 
 Bundle 'EasyGrep'
+" Settings for Easy Grep {{{
+let EasyGrepWindow = 1
+let EasyGrepMode = 1
+" }}}
 
 ""
 " Brief help
