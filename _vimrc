@@ -136,8 +136,11 @@ Bundle 'c.vim'
 "}}}
 
 " shells and stuff {{{
-Bundle 'Conque-Shell'
-Bundle 'ivanov/vim-ipython'
+"Bundle 'Conque-Shell'
+Bundle 'talha81/Conque-Shell'
+let g:ConqueTerm_CWInsert = 1
+let g:ConqueTerm_InsertOnEnter = 1
+"Bundle 'ivanov/vim-ipython'
 "Bundle 'johndgiese/vipy'
 "}}}
 
