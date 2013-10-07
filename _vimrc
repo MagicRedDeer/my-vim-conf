@@ -180,6 +180,22 @@ Bundle 'davidhalter/jedi-vim'
 " Jedi vim settings {{{
 let g:jedi#use_tabs_not_buffers = 0
 
+Bundle "mattn/calendar-vim"
+Bundle "tpope/vim-repeat"
+Bundle "tpope/vim-speeddating"
+
+if !exists("g:speeddating_no_mappings") || !g:speeddating_no_mappings
+  nmap  <C-U>     <Plug>SpeedDatingUp
+  nmap  <C-D>     <Plug>SpeedDatingDown
+  xmap  <C-U>     <Plug>SpeedDatingUp
+  xmap  <C-D>     <Plug>SpeedDatingDown
+  nmap d<C-U>     <Plug>SpeedDatingNowUTC
+  nmap d<C-D>     <Plug>SpeedDatingNowLocal
+endif
+
+Bundle "jceb/vim-orgmode"
+let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
+
 " for custom mappings on jedi vim {{{
 function! g:splitandgoto()
 	:rightbelow vsp
