@@ -139,7 +139,7 @@ Bundle 'c.vim'
 "Bundle 'Conque-Shell'
 Bundle 'talha81/Conque-Shell'
 let g:ConqueTerm_CWInsert = 1
-let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_InsertOnEnter = 0
 "Bundle 'ivanov/vim-ipython'
 "Bundle 'johndgiese/vipy'
 "}}}
@@ -444,3 +444,4 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " }}}
 " }}}
 
+command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
