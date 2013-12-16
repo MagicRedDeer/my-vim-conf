@@ -42,7 +42,7 @@ Bundle 'gmarik/vundle'
 " My Bundles should go here {{{
 
 " small buffer explorer {{{
-Bundle 'minibufexpl.vim'
+Bundle 'fholgado/minibufexpl.vim'
 " MiniBufExplorer Settings {{{
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
@@ -56,9 +56,11 @@ nmap <M-k> :MBEbp<Enter>
 "}}}
 
 " tag list plugin {{{
-Bundle 'taglist.vim'
+Bundle 'majutsushi/tagbar'
+
 "" Taglist Settings {{{
-let Tlist_Use_Right_Window=1 " Make Tag list appear on the right side 
+"let Tlist_Use_Right_Window=1 " Make Tag list appear on the right side 
+"let g:tagbar_left = 1
 ""}}}
 "}}}
 
@@ -96,10 +98,11 @@ Bundle 'matchit.zip'
 
 " automatically timestamp files
 Bundle 'timestamp.vim'
-Bundle 'bufexplorer.zip'
-Bundle 'bufkill.vim'
-Bundle 'The-NERD-Commenter'
-Bundle 'The-NERD-tree'
+Bundle 'jlanzarotta/bufexplorer'
+Bundle 'mattdbridges/bufkill.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'Lokaltog/powerline'
 Bundle 'Gundo'
 Bundle 'TaskList.vim'
 Bundle 'CompleteHelper'
@@ -108,11 +111,13 @@ Bundle 'ervandew/supertab'
 " Super Tab settings {{{
     let g:SuperTabDefaultCompletionType = "context"
     let g:SuperTabContextDefaultCompletionType = "<c-n>"
+    let g:SuperTabNoCompleteAfter = ['^', '\s', ',', '\t' ]
+    let g:SuperTabMappingTabLiteral = '<c-tab>'
 " }}}
-Bundle 'camelcasemotion'
-Bundle 'surround.vim'
+Bundle 'bkad/CamelCaseMotion'
+Bundle 'tpope/vim-surround'
 Bundle 'a.vim'
-Bundle 'ack.vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'nathanaelkane/vim-indent-guides.git'
 Bundle 'genutils'
 Bundle 'multvals.vim'
@@ -132,21 +137,32 @@ Bundle 'oceanblack.vim'
 "}}}
 
 " c and c++ {{{
-Bundle 'c.vim'
+Bundle 'c.vim' 
+"if has('win32')
+    "Bundle 'https://bitbucket.org/Haroogan/vim-youcompleteme-for-windows.git'
+"else
+    "Bundle 'Valloric/YouCompleteMe'
+"endif
 "}}}
 
 " shells and stuff {{{
 "Bundle 'Conque-Shell'
 Bundle 'talha81/Conque-Shell'
 let g:ConqueTerm_CWInsert = 1
+let g:ConqueTerm_FastMode = 0
+let g:ConqueTerm_Color = 0
+let g:ConquerTerm_ColorMode = ''
 let g:ConqueTerm_InsertOnEnter = 0
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_ReadUnfocused = 1
 "Bundle 'ivanov/vim-ipython'
 "Bundle 'johndgiese/vipy'
 "}}}
 
 " snipmate plugins {{{
-Bundle 'UltiSnips'
-Bundle 'snipmate-snippets'
+Bundle 'SirVer/ultisnips'
+Bundle 'julienXX/snipmate-snippets'
+Bundle 'honza/vim-snippets'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snipmate-snippets"]
 let g:snips_author = "Talha Ahmed"
 let g:snips_email  = "talha.ahmed@gmail.com"
@@ -175,10 +191,31 @@ let g:snips_github = "github.com/talha81"
 "let ropevim_vim_completion=1
 "let ropevim_extended_complete=1
 "let ropevim_enable_shortcuts=1
-Bundle 'pyflakes.vim'
+Bundle 'scrooloose/syntastic'
 Bundle 'davidhalter/jedi-vim'
-" Jedi vim settings {{{
-let g:jedi#use_tabs_not_buffers = 0
+        " Jedi vim settings {{{
+        let g:jedi#use_tabs_not_buffers = 0
+
+
+        " for custom mappings on jedi vim {{{
+        function! g:splitandgoto()
+                :rightbelow vsp
+                :call jedi#goto()
+        endfunction
+        function! g:splitandgetdefinition()
+                :rightbelow vsp
+                :call jedi#get_definition()
+        endfunction
+        function! g:map_jedi_settings()
+            nnoremap <buffer> <leader>D :call g:splitandgetdefinition()<cr>
+            nnoremap <buffer> <leader>G :call g:splitandgoto()<cr>
+        endfunction
+        augroup custom_jedi_mappings
+            autocmd!
+            autocmd BufNewFile,BufEnter *.{py,pyw} :call g:map_jedi_settings()
+        augroup END
+        "}}}
+        "}}}
 
 Bundle "mattn/calendar-vim"
 Bundle "tpope/vim-repeat"
@@ -195,27 +232,6 @@ endif
 
 Bundle "jceb/vim-orgmode"
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
-
-" for custom mappings on jedi vim {{{
-function! g:splitandgoto()
-	:rightbelow vsp
-	:call jedi#goto()
-endfunction
-function! g:splitandgetdefinition()
-	:rightbelow vsp
-	:call jedi#get_definition()
-endfunction
-function! g:map_jedi_settings()
-    nnoremap <buffer> <leader>D :call g:splitandgetdefinition()<cr>
-    nnoremap <buffer> <leader>G :call g:splitandgoto()<cr>
-endfunction
-augroup custom_jedi_mappings
-    autocmd!
-    autocmd BufNewFile,BufEnter *.{py,pyw} :call g:map_jedi_settings()
-augroup END
-"}}}
-"}}}
-
 
 
 "Bundle 'pep8'
