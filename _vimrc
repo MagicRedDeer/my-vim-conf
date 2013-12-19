@@ -191,11 +191,24 @@ let g:snips_github = "github.com/talha81"
 "let ropevim_vim_completion=1
 "let ropevim_extended_complete=1
 "let ropevim_enable_shortcuts=1
+
 Bundle 'scrooloose/syntastic'
+"{{{ syntastic settings 
+if has('win32')
+    let $PATH='C:\Python27\Scripts;' . $PATH
+endif
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_check_on_wq = 0
+let g:syntastic_echo_current_error = 1
+let g:syntastic_warning_symbol = 'w>'
+let g:syntastic_enable_balloons = 1
+let g:syntastic_always_populate_loc_list = 1
+"}}}
+
+
 Bundle 'davidhalter/jedi-vim'
         " Jedi vim settings {{{
         let g:jedi#use_tabs_not_buffers = 0
-
 
         " for custom mappings on jedi vim {{{
         function! g:splitandgoto()
@@ -233,6 +246,8 @@ endif
 Bundle "jceb/vim-orgmode"
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
 
+Bundle "tpope/vim-unimpaired"
+
 
 "Bundle 'pep8'
 "Bundle 'Pydiction'
@@ -242,7 +257,7 @@ let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENE
 
 Bundle 'EasyGrep'
 " Settings for Easy Grep {{{
-let EasyGrepWindow = 1
+let EasyGrepWindow = 0
 let EasyGrepMode = 1
 " }}}
 
@@ -302,7 +317,6 @@ map <C-Tab> :tabnext<CR>
 nmap <C-Tab> :tabnext<CR>
 imap <C-Tab> <Esc>:tabnext<CR>i
 "}}}
-
 
 " Maps for switching windows {{{
 noremap <c-j> <c-w>j
