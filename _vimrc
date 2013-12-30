@@ -111,7 +111,6 @@ Bundle 'ervandew/supertab'
 " Super Tab settings {{{
     let g:SuperTabDefaultCompletionType = "context"
     let g:SuperTabContextDefaultCompletionType = "<c-n>"
-    let g:SuperTabNoCompleteAfter = ['^', '\s', ',', '\t' ]
     let g:SuperTabMappingTabLiteral = '<c-tab>'
 " }}}
 Bundle 'bkad/CamelCaseMotion'
@@ -269,7 +268,7 @@ let EasyGrepMode = 1
 " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+" NOTE: comments after Bundle command a ',',re not allowed..
 " }}}
 
 " }}}
@@ -290,6 +289,8 @@ if has('gui_running')
     if has('gui_gnome')
         set guifont=Monospace\ 8
     endif
+elseif !has('win32')
+    colorscheme darkblue
 endif
 " }}}
 
@@ -307,16 +308,6 @@ set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
 set hidden
 " }}}
-
-" Maps for switching tabs {{{
-map <C-S-Tab> :tabprevious<CR>
-nmap <C-S-Tab> :tabprevious<CR>
-imap <C-S-Tab> <Esc>:tabprevious<CR>i
-
-map <C-Tab> :tabnext<CR>
-nmap <C-Tab> :tabnext<CR>
-imap <C-Tab> <Esc>:tabnext<CR>i
-"}}}
 
 " Maps for switching windows {{{
 noremap <c-j> <c-w>j
