@@ -298,6 +298,7 @@ endif
 "set number
 set nowrap
 set shiftround
+set showcmd
 " when wrapping is enabled do wrap friendly scrolling
 nnoremap j gj
 nnoremap k gk
