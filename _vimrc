@@ -37,161 +37,124 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let vundle manage vundle 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-" My Bundles should go here {{{
+" My Plugins should go here
 
-" small buffer explorer {{{
-Bundle 'fholgado/minibufexpl.vim'
-" MiniBufExplorer Settings {{{
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
 " Maps for switching buffers {{{
-nmap <M-j> :MBEbn<Enter>
-nmap <M-k> :MBEbp<Enter>
-" }}}
-"}}}
+nmap <M-j> :bn<Enter>
+nmap <M-k> :bp<Enter>
 "}}}
 
 " tag list plugin {{{
-Bundle 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
+let g:tagbar_type_mel = {
+    \ 'ctagstype' : 'mel',
+    \ 'kinds' : [
+        \ 'g:global procedures:0:1',
+        \ 'l:procedures:0:1', 
+        \ 's:var string:1',
+        \ 'i:var integer:1',
+        \ 'f:var float:1',
+        \ 's:var string:1',
+        \ 'v:var vector:1' 
+        \ ]
+    \ }
+" }}}
 
-"" Taglist Settings {{{
-"let Tlist_Use_Right_Window=1 " Make Tag list appear on the right side 
-"let g:tagbar_left = 1
-""}}}
-"}}}
 
 " sending buffer contents to maya {{{
-Bundle 'Tail-Bundle'
-Bundle "talha81/vimya"
+Plugin 'Tail-Bundle'
+let g:Tail_Height = 15
+Plugin 'talha81/vimya'
 
 " Settings for vimya {{{
 let vimyaPort = 7720
-nnoremap <leader>sm :py sendBufferToMaya ()<cr>
-vnoremap <leader>sm :py sendBufferToMaya ()<cr>
-nnoremap <leader>sb :py sendBufferToMaya (True)<cr>
-vnoremap <leader>sb :py sendBufferToMaya (True)<cr>
-
-"" Map my own additions to the plugin
-nnoremap <leader>vt :py resetVimyaTail()<cr>
-nnoremap <leader>vl :py resetVimyaLog()<cr>
-vnoremap <leader>vt :py resetVimyaTail()<cr>
-vnoremap <leader>vl :py resetVimyaLog()<cr>
-nnoremap <leader>vr :call tail#Refresh()<cr>
-vnoremap <leader>vr :call tail#Refresh()<cr>
-"" }}}
+let vimyaTailCommand = 'STail'
+let vimyaSplitBelow = 1
+let vimyaRefreshWait = 2.0
+""" }}}
 
 """}}}
 
 " Use full editor and IDE addons {{{
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rstacruz/sparkup'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
 
 " extended % matching for HTML, LATEX etc.
-Bundle 'matchit.zip'
+Plugin 'matchit.zip'
 
 " automatically timestamp files
-Bundle 'timestamp.vim'
-Bundle 'jlanzarotta/bufexplorer'
-Bundle 'mattdbridges/bufkill.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Lokaltog/powerline'
-Bundle 'Gundo'
-Bundle 'TaskList.vim'
-Bundle 'CompleteHelper'
-Bundle 'CamelCaseComplete'
-Bundle 'ervandew/supertab'
+Plugin 'timestamp.vim'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'mattdbridges/bufkill.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Lokaltog/powerline'
+Plugin 'Gundo'
+Plugin 'TaskList.vim'
+Plugin 'CompleteHelper'
+Plugin 'CamelCaseComplete'
+Plugin 'ervandew/supertab'
 " Super Tab settings {{{
     let g:SuperTabDefaultCompletionType = "context"
     let g:SuperTabContextDefaultCompletionType = "<c-n>"
     let g:SuperTabMappingTabLiteral = '<c-tab>'
 " }}}
-Bundle 'bkad/CamelCaseMotion'
-Bundle 'tpope/vim-surround'
-Bundle 'a.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'nathanaelkane/vim-indent-guides.git'
-Bundle 'genutils'
-Bundle 'multvals.vim'
+Plugin 'bkad/CamelCaseMotion'
+Plugin 'tpope/vim-surround'
+Plugin 'a.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'nathanaelkane/vim-indent-guides.git'
+Plugin 'genutils'
+Plugin 'multvals.vim'
 " Retired plugins {{{
-"Bundle 'YankRing.vim' "nice feature but it slows large deleting and yanking
+"Plugin 'YankRing.vim' "nice feature but it slows large deleting and yanking
 "}}}
 "}}}
 
 " apache velocity highlighting and stuff {{{
-Bundle 'lepture/vim-velocity.git'
+Plugin 'lepture/vim-velocity.git'
 "}}}
 
 " some color schemes {{{
-Bundle 'win9xblueback.vim'
-Bundle 'darkblack.vim'
-Bundle 'oceanblack.vim'
+Plugin 'win9xblueback.vim'
+Plugin 'darkblack.vim'
+Plugin 'oceanblack.vim'
 "}}}
 
 " c and c++ {{{
-Bundle 'c.vim' 
-"if has('win32')
-    "Bundle 'https://bitbucket.org/Haroogan/vim-youcompleteme-for-windows.git'
-"else
-    "Bundle 'Valloric/YouCompleteMe'
-"endif
+Plugin 'c.vim' 
 "}}}
 
 " shells and stuff {{{
-"Bundle 'Conque-Shell'
-Bundle 'talha81/Conque-Shell'
+"Plugin 'Conque-Shell'
+Plugin 'talha81/Conque-Shell'
 let g:ConqueTerm_CWInsert = 1
 let g:ConqueTerm_FastMode = 0
-let g:ConqueTerm_Color = 0
+let g:ConqueTerm_Color = 1
 let g:ConquerTerm_ColorMode = ''
 let g:ConqueTerm_InsertOnEnter = 0
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_ReadUnfocused = 1
-"Bundle 'ivanov/vim-ipython'
-"Bundle 'johndgiese/vipy'
+"Plugin 'ivanov/vim-ipython'
+"Plugin 'johndgiese/vipy'
 "}}}
 
 " snipmate plugins {{{
-Bundle 'SirVer/ultisnips'
-Bundle 'julienXX/snipmate-snippets'
-Bundle 'honza/vim-snippets'
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "snipmate-snippets"]
+Plugin 'SirVer/ultisnips'
+"Plugin 'julienXX/snipmate-snippets'
+Plugin 'honza/vim-snippets'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+let g:UltiSnipsUsePythonVersion = 2
 let g:snips_author = "Talha Ahmed"
 let g:snips_email  = "talha.ahmed@gmail.com"
 let g:snips_github = "github.com/talha81"
 
-" Retired snipmate plugins {{{
-""" install snipmate dependancies 
-""Bundle "MarcWeber/vim-addon-mw-utils"
-""Bundle "tomtom/tlib_vim"
-""" install other snipmate
-""Bundle "garbas/vim-snipmate"
-"}}}
-
-"}}}
-
-"my Python plugins {{{
-"Bundle 'Python-mode-klen'
-"let g:pymode_rope_guess_project=0
-"let g:pymode_lint_cwindow=0
-"let g:pymode_lint_mccabe_complexity=10
-"let g:pymode_breakpoint=0
-" Retiring other plugins in favour of python mode {{{
-"Bundle 'pytest.vim'
-"Bundle 'pydoc.vim'
-"Bundle "sontek/rope-vim"
-"let ropevim_vim_completion=1
-"let ropevim_extended_complete=1
-"let ropevim_enable_shortcuts=1
-
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 "{{{ syntastic settings 
 if has('win32')
     let $PATH='C:\Python27\Scripts;' . $PATH
@@ -205,33 +168,38 @@ let g:syntastic_always_populate_loc_list = 1
 "}}}
 
 
-Bundle 'davidhalter/jedi-vim'
-        " Jedi vim settings {{{
-        let g:jedi#use_tabs_not_buffers = 0
+Plugin 'davidhalter/jedi-vim'
+" Jedi vim settings {{{
+let g:jedi#use_tabs_not_buffers = 0
+if has('win32')
+    let $PYTHONPATH='C:\Program Files\Autodesk\Maya2013\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
+    let $PYTHONPATH='C:\Python26\Lib\site-packages;' . $PYTHONPATH
+endif
 
-        " for custom mappings on jedi vim {{{
-        function! g:splitandgoto()
-                :rightbelow vsp
-                :call jedi#goto()
-        endfunction
-        function! g:splitandgetdefinition()
-                :rightbelow vsp
-                :call jedi#get_definition()
-        endfunction
-        function! g:map_jedi_settings()
-            nnoremap <buffer> <leader>D :call g:splitandgetdefinition()<cr>
-            nnoremap <buffer> <leader>G :call g:splitandgoto()<cr>
-        endfunction
-        augroup custom_jedi_mappings
-            autocmd!
-            autocmd BufNewFile,BufEnter *.{py,pyw} :call g:map_jedi_settings()
-        augroup END
-        "}}}
-        "}}}
+" for custom mappings on jedi vim {{{
+function! g:Splitandgoto()
+        :rightbelow vsp
+        :call jedi#goto_assignments()
+endfunction
+function! g:Splitandgetdefinition()
+        :rightbelow vsp
+        :call jedi#goto_definitions()
+endfunction
+function! g:Map_jedi_settings()
+    nnoremap <buffer> <leader>D :call g:Splitandgetdefinition()<cr>
+    nnoremap <buffer> <leader>G :call g:Splitandgoto()<cr>
+endfunction
+augroup custom_jedi_mappings
+    autocmd!
+    autocmd BufNewFile,BufEnter *.{py,pyw} :call g:Map_jedi_settings()
+augroup END
+"}}}
+"}}}
 
-Bundle "mattn/calendar-vim"
-Bundle "tpope/vim-repeat"
-Bundle "tpope/vim-speeddating"
+Plugin 'mattn/calendar-vim'
+"Plugin 'itchyny/calendar.vim'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-speeddating'
 
 if !exists("g:speeddating_no_mappings") || !g:speeddating_no_mappings
   nmap  <C-U>     <Plug>SpeedDatingUp
@@ -242,19 +210,20 @@ if !exists("g:speeddating_no_mappings") || !g:speeddating_no_mappings
   nmap d<C-D>     <Plug>SpeedDatingNowLocal
 endif
 
-Bundle "jceb/vim-orgmode"
+Plugin 'jceb/vim-orgmode'
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
+let g:org_agenda_files = ['~/diary/**/**/*.md']
 
-Bundle "tpope/vim-unimpaired"
+Plugin 'tpope/vim-unimpaired'
 
 
-"Bundle 'pep8'
-"Bundle 'Pydiction'
+"Plugin 'pep8'
+"Plugin 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
 " }}}
 " }}}
 
-Bundle 'EasyGrep'
+Plugin 'EasyGrep'
 " Settings for Easy Grep {{{
 let EasyGrepWindow = 0
 let EasyGrepMode = 1
@@ -262,13 +231,13 @@ let EasyGrepMode = 1
 
 ""
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList          - list configured bundles
+" :PluginInstall(!)    - install(update) bundles
+" :PluginSearch(!) foo - search(or refresh cache first) for foo
+" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command a ',',re not allowed..
+" NOTE: comments after Plugin command a ',',re not allowed..
 " }}}
 
 " }}}
@@ -298,7 +267,6 @@ endif
 "set number
 set nowrap
 set shiftround
-set showcmd
 " when wrapping is enabled do wrap friendly scrolling
 nnoremap j gj
 nnoremap k gk
@@ -406,6 +374,18 @@ command! GoHome execute 'cd ' . homedir
 set noequalalways
 " }}}
 
+" encoding settings {{{
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  "setglobal bomb
+  set fileencodings=ucs-bom,utf-8,latin1
+endif
+" }}}
+
 " Editing behaviour {{{ 
 " visualizing tab and space characters, lines that extend beyond the terminal
 " by a # at the end 
@@ -414,23 +394,27 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%
 " }}}
 
 " Code for refreshing all buffers (esp. for after checkout or pull) {{{
+
+function! RefreshCurrentBuffer()
+    let k = &l:buftype
+    if k==''
+        execute 'e!'
+    endif
+endfun
+
 fun! RefreshAllBuffers()
+    let bn = bufnr('%')
     set noconfirm
-    "!git pull
-    bufdo e!
+    bufdo call RefreshCurrentBuffer()
     set confirm
+    execute 'b ' . bn
     syn on
 endfun
 
 nnoremap <leader>rb :call RefreshAllBuffers()<cr>
 "}}}
 
-" Ideas from LVSTHW @ steve losh {{{
-" echom ">^.^<"
-
-" Delete a line in insert mode
-inoremap <c-d> <esc>ddi
-
+" {{{
 " move a line up or down
 nnoremap - ddp
 nnoremap _ ddkP
@@ -439,31 +423,5 @@ nnoremap _ ddkP
 nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Grep Operator case study "{{{
-
-" creating the mappings
-"nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
-"vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
-
-"function! s:GrepOperator(type)
-    "let saved_unnamed_register = @@
-
-    "" for visual mode send the selected range
-    "if a:type ==# 'v' || (a:type ==? 'v' && &grepprg ==# 'internal')
-        "normal! `<v`>y
-    "" for normal mode send the 'adjective'
-    "elseif a:type ==# 'char'
-        "normal! `[v`]y
-    "else
-        "return
-    "endif
-
-    "silent execute "grep! -R " . shellescape(@@) . " ."
-    "copen
-
-    "let @@ = saved_unnamed_register
-"endfunction
-" }}}
-" }}}
-
 command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+" }}}
