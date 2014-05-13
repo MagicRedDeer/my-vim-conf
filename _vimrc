@@ -73,9 +73,14 @@ let vimyaPort = 7720
 let vimyaTailCommand = 'STail'
 let vimyaSplitBelow = 1
 let vimyaRefreshWait = 2.0
-""" }}}
-
-"""}}}
+nnoremap <leader>sr :py vimyaRefreshLog ()<cr>
+nnoremap <leader>st :py vimyaOpenLog ()<cr>
+nnoremap <leader>sl :py vimyaResetLog ()<cr>
+vnoremap <leader>sr :py vimyaRefreshLog ()<cr>
+vnoremap <leader>st :py vimyaOpenLog ()<cr>
+vnoremap <leader>sl :py vimyaResetLog ()<cr>
+"}}}
+"}}}
 
 " Use full editor and IDE addons {{{
 Plugin 'tpope/vim-fugitive'
