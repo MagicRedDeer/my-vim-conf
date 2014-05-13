@@ -99,7 +99,8 @@ Plugin 'mattdbridges/bufkill.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
-set laststatus=2
+set laststatus=1
+let g:airline_theme='ubaryd'
 Plugin 'Gundo'
 Plugin 'TaskList.vim'
 Plugin 'CompleteHelper'
