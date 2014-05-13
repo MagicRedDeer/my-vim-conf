@@ -32,11 +32,11 @@ endfunction
 
 " Vundle Settings {{{
 set nocompatible
-filetype off 
+filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let vundle manage vundle 
+" let vundle manage vundle
 Plugin 'gmarik/vundle'
 
 " My Plugins should go here
@@ -52,21 +52,20 @@ let g:tagbar_type_mel = {
     \ 'ctagstype' : 'mel',
     \ 'kinds' : [
         \ 'g:global procedures:0:1',
-        \ 'l:procedures:0:1', 
+        \ 'l:procedures:0:1',
         \ 's:var string:1',
         \ 'i:var integer:1',
         \ 'f:var float:1',
         \ 's:var string:1',
-        \ 'v:var vector:1' 
+        \ 'v:var vector:1'
         \ ]
     \ }
 " }}}
 
-
 " sending buffer contents to maya {{{
 Plugin 'Tail-Bundle'
 let g:Tail_Height = 15
-Plugin 'talha81/vimya'
+Plugin 'https://bitbucket.org/goeb/vimya' , {'name': 'vimya', 'pinned':1}
 
 " Settings for vimya {{{
 let vimyaPort = 7720
@@ -79,8 +78,8 @@ nnoremap <leader>sl :py vimyaResetLog ()<cr>
 vnoremap <leader>sr :py vimyaRefreshLog ()<cr>
 vnoremap <leader>st :py vimyaOpenLog ()<cr>
 vnoremap <leader>sl :py vimyaResetLog ()<cr>
-"}}}
-"}}}
+" }}}
+" }}}
 
 " Use full editor and IDE addons {{{
 Plugin 'tpope/vim-fugitive'
@@ -134,7 +133,7 @@ Plugin 'oceanblack.vim'
 "}}}
 
 " c and c++ {{{
-Plugin 'c.vim' 
+Plugin 'c.vim'
 "}}}
 
 " shells and stuff {{{
@@ -162,7 +161,7 @@ let g:snips_email  = "talha.ahmed@gmail.com"
 let g:snips_github = "github.com/talha81"
 
 Plugin 'scrooloose/syntastic'
-"{{{ syntastic settings 
+"{{{ syntastic settings
 if has('win32')
     let $PATH='C:\Python27\Scripts;' . $PATH
 endif
@@ -178,6 +177,8 @@ let g:syntastic_always_populate_loc_list = 1
 Plugin 'davidhalter/jedi-vim'
 " Jedi vim settings {{{
 let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#auto_close_doc = 0
+let g:jed#popup_on_dot = 0
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2013\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python26\Lib\site-packages;' . $PYTHONPATH
@@ -226,7 +227,7 @@ Plugin 'tpope/vim-unimpaired'
 
 "Plugin 'pep8'
 "Plugin 'Pydiction'
-"let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict' 
+"let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict'
 " }}}
 " }}}
 
@@ -249,7 +250,7 @@ let EasyGrepMode = 1
 
 " }}}
 
-" Setting gui font {{{ 
+" Setting gui font {{{
 colorscheme default
 set guifont=Consolas:h8:cANSI
 set guioptions-=m
@@ -297,15 +298,15 @@ syntax on                           " syntax highlighing
 filetype on                          " try to detect filetypes
 "}}}
 
-" Fold and indent Settings " {{{ 
-filetype plugin indent on 
+" Fold and indent Settings " {{{
+filetype plugin indent on
 
 " Python Fold and indent Settings {{{
 function! Set_Python_Settings()
-    " code folding settings 
+    " code folding settings
     setlocal foldmethod=indent
 
-    "pep8 settings 
+    "pep8 settings
     setlocal tabstop=8
     setlocal expandtab
     setlocal softtabstop=4
@@ -317,11 +318,11 @@ endfunction
 
 " Vim Fold and indent Settings {{{
 function! Set_Vim_Settings()
-    " code folding settings 
+    " code folding settings
     setlocal foldmethod=marker
     setlocal foldmarker={{{,}}}
 
-    "pep8 settings 
+    "pep8 settings
     setlocal tabstop=8
     setlocal expandtab
     setlocal softtabstop=4
@@ -333,11 +334,11 @@ endfunction
 
 " C fold and indent Setting {{{
 function! Set_C_Settings()
-    " fold settings 
+    " fold settings
     setlocal foldmethod=syntax
     setlocal foldmarker={,}
 
-    "pep8 settings 
+    "pep8 settings
     setlocal tabstop=8
     setlocal expandtab
     setlocal softtabstop=4
@@ -349,7 +350,7 @@ endfunction
 
 " Default fold and indent Settings {{{
 function! Set_Default_Settings()
-    " fold settings 
+    " fold settings
     setlocal foldmethod&
     setlocal foldmarker&
     setlocal tabstop&
@@ -393,9 +394,9 @@ if has("multi_byte")
 endif
 " }}}
 
-" Editing behaviour {{{ 
+" Editing behaviour {{{
 " visualizing tab and space characters, lines that extend beyond the terminal
-" by a # at the end 
+" by a # at the end
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%
 " }}}
@@ -426,7 +427,7 @@ nnoremap <leader>rb :call RefreshAllBuffers()<cr>
 nnoremap - ddp
 nnoremap _ ddkP
 
-" edit and source my vimrc file 
+" edit and source my vimrc file
 nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
