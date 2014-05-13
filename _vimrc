@@ -178,7 +178,7 @@ Plugin 'davidhalter/jedi-vim'
 " Jedi vim settings {{{
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#auto_close_doc = 0
-let g:jed#popup_on_dot = 0
+let g:jedi#popup_on_dot = 0
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2013\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python26\Lib\site-packages;' . $PYTHONPATH
