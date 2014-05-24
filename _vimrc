@@ -65,12 +65,13 @@ let g:tagbar_type_mel = {
 " sending buffer contents to maya {{{
 Plugin 'Tail-Bundle'
 let g:Tail_Height = 15
-Plugin 'https://bitbucket.org/goeb/vimya' , {'name': 'vimya', 'pinned':1}
+Plugin 'https://bitbucket.org/goeb/vimya'
 
 " Settings for vimya {{{
 let vimyaPort = 7720
 let vimyaTailCommand = 'STail'
 let vimyaSplitBelow = 1
+let vimyaForceRefresh = 1
 let vimyaRefreshWait = 2.0
 nnoremap <leader>sr :py vimyaRefreshLog ()<cr>
 nnoremap <leader>st :py vimyaOpenLog ()<cr>
