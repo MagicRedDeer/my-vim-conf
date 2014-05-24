@@ -79,6 +79,8 @@ nnoremap <leader>sl :py vimyaResetLog ()<cr>
 vnoremap <leader>sr :py vimyaRefreshLog ()<cr>
 vnoremap <leader>st :py vimyaOpenLog ()<cr>
 vnoremap <leader>sl :py vimyaResetLog ()<cr>
+vnoremap <leader>su :VimyaSend undo()<cr>
+vnoremap <leader>sU :VimyaSend redo()<cr>
 " }}}
 " }}}
 
