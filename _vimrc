@@ -162,6 +162,7 @@ let g:UltiSnipsUsePythonVersion = 2
 let g:snips_author = "Talha Ahmed"
 let g:snips_email  = "talha.ahmed@gmail.com"
 let g:snips_github = "github.com/talha81"
+""" }}}
 
 Plugin 'scrooloose/syntastic'
 "{{{ syntastic settings
@@ -225,8 +226,14 @@ Plugin 'jceb/vim-orgmode'
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
 let g:org_agenda_files = ['~/diary/**/**/*.md']
 
-Plugin 'tpope/vim-unimpaired'
 
+" documentation and spread sheets {{{
+Plugin 'Rykka/riv.vim'
+Plugin 'chrisbra/csv.vim'
+Plugin 'VisIncr'
+" }}}
+
+Plugin 'tpope/vim-unimpaired'
 
 "Plugin 'pep8'
 "Plugin 'Pydiction'
