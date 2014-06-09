@@ -1,34 +1,205 @@
-" Default General Settings {{{
+" must be at start
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 
-set diffexpr=MyDiff()
-function! MyDiff()
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    let eq = ''
-    if $VIMRUNTIME =~ ' '
-        if &sh =~ '\<cmd'
-            let cmd = '""' . $VIMRUNTIME . '\diff"'
-            let eq = '"'
-        else
-            let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-        endif
-    else
-        let cmd = $VIMRUNTIME . '\diff'
-    endif
-    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+
+" Encoding settings {{{
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  "setglobal bomb
+  set fileencodings=ucs-bom,utf-8,latin1
+endif
+" }}}
+
+
+" Custom Functions {{{
+" filetype dependent indent and folding settings {{{
+function! Set_Python_Settings()
+    " code folding settings
+    setlocal foldmethod=indent
+
+    "pep8 settings
+    setlocal tabstop=8
+    setlocal expandtab
+    setlocal softtabstop=4
+    setlocal shiftwidth=4
+    setlocal textwidth=79
+    setlocal autoindent
+
+    setlocal shiftround
+endfunction
+
+function! Set_Vim_Settings()
+    " code folding settings
+    setlocal foldmethod=marker
+    setlocal foldmarker={{{,}}}
+
+    "pep8 settings
+    setlocal tabstop=8
+    setlocal expandtab
+    setlocal softtabstop=4
+    setlocal shiftwidth=4
+    setlocal textwidth=79
+    setlocal autoindent
 endfunction
 " }}}
+
+" Code for refreshing all buffers (esp. for after checkout or pull) {{{
+function! RefreshCurrentBuffer()
+    let k = &l:buftype
+    if k==''
+        execute 'e!'
+    endif
+endfun
+
+function! RefreshAllBuffers()
+    let bn = bufnr('%')
+    set noconfirm
+    bufdo call RefreshCurrentBuffer()
+    set confirm
+    execute 'b ' . bn
+    syn on
+endfun
+" }}}
+" }}}
+
+
+" Custom commands {{{
+" convert text to pdf and view in vim
+let g:homedir = "~/vim-home"
+if has("win32")
+    let g:homedir = "D:\\talha.ahmed\\workspace\\vim-home"
+endif
+command! GoHome execute 'cd ' . homedir
+
+command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+" }}}
+
+
+" Custom AutoCommands {{{
+augroup lang_settings
+    autocmd!
+    autocmd BufNewFile,BufEnter *.{py,pyw} :call Set_Python_Settings()
+    autocmd BufNewFile,BufEnter *.vim :call Set_Vim_Settings()
+    autocmd BufNewFile,BufEnter $MYVIMRC :call Set_Vim_Settings()
+augroup END
+augroup vimrcEx
+    autocmd!
+    autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+augroup END
+" }}}
+
+
+" Custom Maps {{{
+
+" Don't use Ex mode, use Q for formatting
+noremap Q gq
+
+" Edit and source my vimrc file
+let $MYVIMRC='C:\Users\talha.ahmed\_vimrc_new'
+nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" when wrapping is enabled do wrap friendly scrolling
+nnoremap j gj
+nnoremap k gk
+
+" Maps for switching windows 
+noremap <c-j> <c-w>j
+noremap <c-h> <c-w>h
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+
+" Map for refreshing all open buffers
+nnoremap <leader>rb :call RefreshAllBuffers()<cr>
+
+" move a line up or down
+nnoremap - ddp
+nnoremap _ ddkP
+
+" Maps for switching buffers
+nnoremap <M-j> :bn<Enter>
+nnoremap <M-k> :bp<Enter>
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" from mswin.vim {{{
+" backspace in Visual mode deletes selection
+vnoremap <BS> d
+
+" CTRL-X and SHIFT-Del are Cut
+vnoremap <C-X> "+x
+vnoremap <S-Del> "+x
+
+" CTRL-C and CTRL-Insert are Copy
+vnoremap <C-C> "+y
+vnoremap <C-Insert> "+y
+
+" CTRL-V and SHIFT-Insert are Paste
+map <C-V>               "+gP
+map <S-Insert>          "+gP
+
+cmap <C-V>		<C-R>+
+cmap <S-Insert>		<C-R>+
+
+" Pasting blockwise and linewise selections is not possible in Insert and
+" Visual mode without the +virtualedit feature.  They are pasted as if they
+" were characterwise instead.
+" Uses the paste.vim autoload script.
+" Use CTRL-G u to have CTRL-Z only undo the paste.
+
+exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
+
+imap <S-Insert>		<C-V>
+vmap <S-Insert>		<C-V>
+
+" Use CTRL-Q to do what CTRL-V used to do
+noremap <C-Q>		<C-V>
+
+" Use CTRL-S for saving, also in Insert mode
+noremap <C-S>		:update<CR>
+vnoremap <C-S>		<C-C>:update<CR>
+inoremap <C-S>		<C-O>:update<CR>
+
+" Alt-Space is System menu
+if has("gui")
+  noremap <M-Space> :simalt ~<CR>
+  inoremap <M-Space> <C-O>:simalt ~<CR>
+  cnoremap <M-Space> <C-C>:simalt ~<CR>
+endif
+
+" CTRL-Tab is Next window
+noremap <C-Tab> <C-W>w
+inoremap <C-Tab> <C-O><C-W>w
+cnoremap <C-Tab> <C-C><C-W>w
+onoremap <C-Tab> <C-C><C-W>w
+
+" CTRL-F4 is Close window
+noremap <C-F4> <C-W>c
+inoremap <C-F4> <C-O><C-W>c
+cnoremap <C-F4> <C-C><C-W>c
+onoremap <C-F4> <C-C><C-W>c
+" }}}
+
+" CTRL-Shift-A is Select all
+noremap <M-a> gggH<C-O>G
+inoremap <M-a> <C-O>gg<C-O>gH<C-O>G
+cnoremap <M-a> <C-C>gggH<C-O>G
+onoremap <M-a> <C-C>gggH<C-O>G
+snoremap <M-a> <C-C>gggH<C-O>G
+xnoremap <M-a> <C-C>ggVG
+
+" }}}
+
 
 " Vundle Settings {{{
 set nocompatible
@@ -40,11 +211,6 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 " My Plugins should go here
-
-" Maps for switching buffers {{{
-nmap <M-j> :bn<Enter>
-nmap <M-k> :bp<Enter>
-"}}}
 
 " tag list plugin {{{
 Plugin 'majutsushi/tagbar'
@@ -142,12 +308,12 @@ Plugin 'c.vim'
 " shells and stuff {{{
 "Plugin 'Conque-Shell'
 Plugin 'talha81/Conque-Shell'
-let g:ConqueTerm_CWInsert = 1
-let g:ConqueTerm_FastMode = 0
+let g:ConqueTerm_CWInsert = 0
+let g:ConqueTerm_FastMode = 1
 let g:ConqueTerm_Color = 1
 let g:ConquerTerm_ColorMode = ''
 let g:ConqueTerm_InsertOnEnter = 0
-let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_CloseOnEnd = 0
 let g:ConqueTerm_ReadUnfocused = 1
 "Plugin 'ivanov/vim-ipython'
 "Plugin 'johndgiese/vipy'
@@ -211,16 +377,18 @@ augroup END
 Plugin 'mattn/calendar-vim'
 "Plugin 'itchyny/calendar.vim'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-speeddating'
 
 if !exists("g:speeddating_no_mappings") || !g:speeddating_no_mappings
-  nmap  <C-U>     <Plug>SpeedDatingUp
-  nmap  <C-D>     <Plug>SpeedDatingDown
-  xmap  <C-U>     <Plug>SpeedDatingUp
-  xmap  <C-D>     <Plug>SpeedDatingDown
-  nmap d<C-U>     <Plug>SpeedDatingNowUTC
-  nmap d<C-D>     <Plug>SpeedDatingNowLocal
+  nmap  <M-u>     <Plug>SpeedDatingUp
+  nmap  <M-d>     <Plug>SpeedDatingDown
+  xmap  <M-u>     <Plug>SpeedDatingUp
+  xmap  <M-d>     <Plug>SpeedDatingDown
+  nmap d<M-u>     <Plug>SpeedDatingNowUTC
+  nmap d<M-d>     <Plug>SpeedDatingNowLocal
+  let g:speeddating_no_mappings = 1
 endif
+Plugin 'tpope/vim-speeddating'
+
 
 Plugin 'jceb/vim-orgmode'
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
@@ -238,8 +406,6 @@ Plugin 'tpope/vim-unimpaired'
 "Plugin 'pep8'
 "Plugin 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict'
-" }}}
-" }}}
 
 Plugin 'EasyGrep'
 " Settings for Easy Grep {{{
@@ -258,9 +424,62 @@ let EasyGrepMode = 1
 " NOTE: comments after Plugin command a ',',re not allowed..
 " }}}
 
+
+" General Settings {{{
+filetype on
+syntax on
+filetype plugin indent on
+if has("win32")
+    behave mswin
+endif
 " }}}
 
-" Setting gui font {{{
+
+" Editing Options {{{
+
+" Allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+set whichwrap+=<,>,[,]
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" Default options for indenting
+set tabstop=8
+set expandtab
+set softtabstop=4
+set shiftwidth=4
+set textwidth=78
+set autoindent
+set shiftround
+
+" Default options for folding
+set foldmethod=manual
+
+" }}}
+
+
+" History and undo settings  {{{
+set backup
+set undofile
+set history =1000         " remember more commands and search history
+set undolevels =1000      " use many muchos levels of undo
+set hidden
+" }}}
+
+
+" Some display settings {{{
+set ruler               " show the cursor position all the time
+set nowrap              " Dont wrap from screen end
+set nonumber            " show display settings
+set showcmd             " display incomplete commands
+set incsearch           " do incremental searching
+set hlsearch            " highlighting matching search results
+set list                " visualizing tabs, spaces, trails etc.
+set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%
+
+" Setting gui options and fonts {{{
 colorscheme default
 set guifont=Consolas:h8:cANSI
 set guioptions-=m
@@ -271,6 +490,9 @@ set guioptions-=L
 set guioptions-=R
 set guioptions-=e
 set guioptions+=c
+if !has("unix")
+  set guioptions-=a
+endif
 if has('gui_running')
     colorscheme desert
     if has('gui_gnome')
@@ -281,165 +503,15 @@ elseif !has('win32')
 endif
 " }}}
 
-" Show line numbers and disable wrapping by default{{{
-"set number
-set nowrap
-set shiftround
-" when wrapping is enabled do wrap friendly scrolling
-nnoremap j gj
-nnoremap k gk
 " }}}
 
-" History and undo settings  {{{
-set history =1000         " remember more commands and search history
-set undolevels =1000      " use many muchos levels of undo
-set hidden
-" }}}
 
-" Maps for switching windows {{{
-noremap <c-j> <c-w>j
-noremap <c-h> <c-w>h
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-" }}}
-
-" Syntax and Highlighting Setting "{{{
-syntax on                           " syntax highlighing
-filetype on                          " try to detect filetypes
-"}}}
-
-" Fold and indent Settings " {{{
-filetype plugin indent on
-
-" Python Fold and indent Settings {{{
-function! Set_Python_Settings()
-    " code folding settings
-    setlocal foldmethod=indent
-
-    "pep8 settings
-    setlocal tabstop=8
-    setlocal expandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth=79
-    setlocal autoindent
-endfunction
-" }}}
-
-" Vim Fold and indent Settings {{{
-function! Set_Vim_Settings()
-    " code folding settings
-    setlocal foldmethod=marker
-    setlocal foldmarker={{{,}}}
-
-    "pep8 settings
-    setlocal tabstop=8
-    setlocal expandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth=79
-    setlocal autoindent
-endfunction
-" }}}
-
-" C fold and indent Setting {{{
-function! Set_C_Settings()
-    " fold settings
-    setlocal foldmethod=syntax
-    setlocal foldmarker={,}
-
-    "pep8 settings
-    setlocal tabstop=8
-    setlocal expandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth=999
-    setlocal autoindent
-endfunction
-" }}}
-
-" Default fold and indent Settings {{{
-function! Set_Default_Settings()
-    " fold settings
-    setlocal foldmethod&
-    setlocal foldmarker&
-    setlocal tabstop&
-    setlocal expandtab
-    setlocal softtabstop&
-    setlocal shiftwidth&
-    setlocal textwidth&
-    setlocal autoindent
-endfunction
-" }}}
-
-call Set_Default_Settings()
-augroup lang_settings
-    autocmd!
-    autocmd BufNewFile,BufEnter *.{py,pyw} :call Set_Python_Settings()
-    autocmd BufNewFile,BufEnter *.{c,C,cpp,java,h,mel,php} :call Set_C_Settings()
-    autocmd BufNewFile,BufEnter *.vim :call Set_Vim_Settings()
-    autocmd BufNewFile,BufEnter $MYVIMRC :call Set_Vim_Settings()
-    autocmd BufLeave *.{c,C,cpp,java,h,py,pyw,vim} :call Set_Default_Settings()
-augroup END
-" }}}
-
-" Change the default working directory {{{
-let g:homedir = "D:\\talha.ahmed\\workspace\\vim-home"
-command! GoHome execute 'cd ' . homedir
-" }}}
-
-" Settings for split {{{
+" Settings for split and Tabs {{{
 set noequalalways
+set nosplitbelow
 " }}}
 
-" encoding settings {{{
-if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1
-endif
-" }}}
 
-" Editing behaviour {{{
-" visualizing tab and space characters, lines that extend beyond the terminal
-" by a # at the end
-set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%
-" }}}
-
-" Code for refreshing all buffers (esp. for after checkout or pull) {{{
-
-function! RefreshCurrentBuffer()
-    let k = &l:buftype
-    if k==''
-        execute 'e!'
-    endif
-endfun
-
-fun! RefreshAllBuffers()
-    let bn = bufnr('%')
-    set noconfirm
-    bufdo call RefreshCurrentBuffer()
-    set confirm
-    execute 'b ' . bn
-    syn on
-endfun
-
-nnoremap <leader>rb :call RefreshAllBuffers()<cr>
-"}}}
-
-" {{{
-" move a line up or down
-nnoremap - ddp
-nnoremap _ ddkP
-
-" edit and source my vimrc file
-nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+" MODELINE {{{
+" vim:tw=78:ts=8:sr:sw=4:sts=4:et:ft=vim:norl:fdm=marker:fmr&:
 " }}}
