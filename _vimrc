@@ -102,7 +102,6 @@ augroup END
 noremap Q gq
 
 " Edit and source my vimrc file
-let $MYVIMRC='C:\Users\talha.ahmed\_vimrc_new'
 nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
