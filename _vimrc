@@ -64,6 +64,30 @@ function! RefreshAllBuffers()
     syn on
 endfun
 " }}}
+
+" Assigning diff expression for GNU diff utils {{{
+if has('win32')
+  set diffexpr=MyDiff()
+  function! MyDiff()
+    let opt = '-a --binary '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    let diff = '"C:\Program Files (x86)\GnuWin32\bin\diff.exe"'
+    if &sh =~ '\<cmd'
+      silent execute '!' . diff . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . ''
+    else
+      silent execute '!'. diff .' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+    endif
+  endfunction
+endif
+"}}}
+
 " }}}
 
 
