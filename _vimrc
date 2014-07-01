@@ -96,8 +96,8 @@ endif
 let g:homedir = "~/vim-home"
 if has("win32")
     let g:homedir = "D:\\talha.ahmed\\workspace\\vim-home"
+    command! GoHome execute 'cd ' . homedir
 endif
-command! GoHome execute 'cd ' . homedir
 
 command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 " }}}
@@ -522,7 +522,7 @@ if has('gui_running')
         set guifont=Monospace\ 8
     endif
 elseif !has('win32')
-    colorscheme darkblue
+    colorscheme delek
 endif
 " }}}
 
