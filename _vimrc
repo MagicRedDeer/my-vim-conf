@@ -332,7 +332,7 @@ Plugin 'c.vim'
 "Plugin 'Conque-Shell'
 Plugin 'talha81/Conque-Shell'
 let g:ConqueTerm_CWInsert = 0
-let g:ConqueTerm_FastMode = 1
+let g:ConqueTerm_FastMode = 0
 let g:ConqueTerm_Color = 0
 let g:ConqueTerm_ColorMode = ''
 let g:ConqueTerm_InsertOnEnter = 0
@@ -374,7 +374,7 @@ let g:jedi#auto_close_doc = 0
 let g:jedi#popup_on_dot = 0
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2013\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
-    let $PYTHONPATH='C:\Python26\Lib\site-packages;' . $PYTHONPATH
+    let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
 endif
 
 " for custom mappings on jedi vim {{{
