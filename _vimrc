@@ -375,6 +375,7 @@ let g:jedi#popup_on_dot = 0
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2013\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
+    let $PYTHONPATH='R:\Pipe_Repo\Users\Hussain\utilities\TACTIC;' . $PYTHONPATH
 endif
 
 " for custom mappings on jedi vim {{{
@@ -532,6 +533,7 @@ endif
 " Settings for split and Tabs {{{
 set noequalalways
 set nosplitbelow
+set equalalways
 " }}}
 
 
