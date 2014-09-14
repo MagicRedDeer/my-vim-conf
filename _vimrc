@@ -194,7 +194,7 @@ vnoremap <C-S>		<C-C>:update<CR>
 inoremap <C-S>		<C-O>:update<CR>
 
 " Alt-Space is System menu
-if has("gui")
+if has('gui_running')
   noremap <M-Space> :simalt ~<CR>
   inoremap <M-Space> <C-O>:simalt ~<CR>
   cnoremap <M-Space> <C-C>:simalt ~<CR>
@@ -213,14 +213,13 @@ cnoremap <C-F4> <C-C><C-W>c
 onoremap <C-F4> <C-C><C-W>c
 " }}}
 
-" CTRL-Shift-A is Select all
+" Meta-A is Select all
 noremap <M-a> gggH<C-O>G
 inoremap <M-a> <C-O>gg<C-O>gH<C-O>G
 cnoremap <M-a> <C-C>gggH<C-O>G
 onoremap <M-a> <C-C>gggH<C-O>G
 snoremap <M-a> <C-C>gggH<C-O>G
 xnoremap <M-a> <C-C>ggVG
-
 " }}}
 
 
@@ -291,7 +290,11 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 set laststatus=1
-let g:airline_theme='ubaryd'
+if has('gui_running')
+    let g:airline_theme='ubaryd'
+else
+    let g:airline_theme='jellybeans'
+endif
 Plugin 'Gundo'
 Plugin 'TaskList.vim'
 Plugin 'CompleteHelper'
@@ -341,6 +344,43 @@ let g:ConqueTerm_ReadUnfocused = 0
 "Plugin 'ivanov/vim-ipython'
 "Plugin 'johndgiese/vipy'
 "}}}
+
+" Adding Support for octave and matlab {{{
+
+" Adding support for octave from http://wiki.octave.org/Vim {{{
+Plugin 'octave.vim'
+augroup octaveautocommands
+    au!
+    au! BufRead,BufNewFile *.oct set filetype=octave
+    if exists("+omnifunc")
+    " Use keywords from Octave syntax language file for autocomplete
+    autocmd Filetype octave
+    \ if &omnifunc == "" |
+    \ setlocal omnifunc=syntaxcomplete#Complete |
+    \ endif
+    endif 
+    autocmd FileType octave setlocal keywordprg=info\ octave\ --vi-keys\ --index-search
+    autocmd FileType octave map <buffer> <f5> ggOpkg load all<esc>Gopause<esc>:w<cr>:!octave -qf %<cr>ddggdd:w<cr>
+    " extending matchit functionality
+    let s:conditionalEnd = '\(([^()]*\)\@!\<end\>\([^()]*)\)\@!'
+    autocmd FileType octave let b:match_words = '\<if\>\|\<while\>\|\<for\>\|\<switch\>:' .
+        \ s:conditionalEnd . ',\<if\>:\<elseif\>:\<else\>:' . s:conditionalEnd
+augroup END
+" }}}
+
+" Adding support for matlab{{{
+Plugin 'mlint.vim'
+if has('win32')
+    let mlint_hover = 0
+endif
+Plugin 'elmanuelito/vim-matlab-behave'
+augroup matlab
+    autocmd!
+    autocmd FileType octave setlocal keywordprg=info\ octave\ --vi-keys\ --index-search
+augroup END
+" }}}
+
+" }}}
 
 " snipmate plugins {{{
 Plugin 'SirVer/ultisnips'
@@ -524,6 +564,8 @@ if has('gui_running')
     endif
 elseif !has('win32')
     colorscheme delek
+else
+    colorscheme elflord
 endif
 " }}}
 
