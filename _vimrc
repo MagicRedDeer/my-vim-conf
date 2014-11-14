@@ -412,6 +412,7 @@ Plugin 'davidhalter/jedi-vim'
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#auto_close_doc = 0
 let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 0
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2013\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
@@ -460,6 +461,7 @@ let g:org_agenda_files = ['~/diary/**/**/*.md']
 
 
 " documentation and spread sheets {{{
+Plugin 'clickable.vim'
 Plugin 'Rykka/riv.vim'
 Plugin 'chrisbra/csv.vim'
 Plugin 'VisIncr'
