@@ -416,8 +416,8 @@ let g:jedi#show_call_signatures = 0
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2015\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
-    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src\client' . $PYTHONPATH
-    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src\client;' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src;' . $PYTHONPATH
 endif
 
 " for custom mappings on jedi vim {{{
