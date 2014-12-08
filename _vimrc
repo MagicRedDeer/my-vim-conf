@@ -414,9 +414,10 @@ let g:jedi#auto_close_doc = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 if has('win32')
-    let $PYTHONPATH='C:\Program Files\Autodesk\Maya2013\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
+    let $PYTHONPATH='C:\Program Files\Autodesk\Maya2015\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
-    let $PYTHONPATH='R:\Pipe_Repo\Users\Hussain\utilities\TACTIC;' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src\client' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src' . $PYTHONPATH
 endif
 
 " for custom mappings on jedi vim {{{
@@ -477,6 +478,14 @@ Plugin 'EasyGrep'
 " Settings for Easy Grep {{{
 let EasyGrepWindow = 0
 let EasyGrepMode = 1
+
+" }}}
+
+" Session management {{{
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
+Plugin 'mhinz/vim-startify'
+let g:startify_session_dir = '~/vimfiles/sessions'
 " }}}
 
 ""
