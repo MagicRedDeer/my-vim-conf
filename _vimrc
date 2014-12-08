@@ -484,6 +484,7 @@ let EasyGrepMode = 1
 " Session management {{{
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
+let g:session_autosave = 'no'
 Plugin 'mhinz/vim-startify'
 let g:startify_session_dir = '~/vimfiles/sessions'
 " }}}
