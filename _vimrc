@@ -37,7 +37,6 @@ function! Set_Vim_Settings()
     setlocal foldmethod=marker
     setlocal foldmarker={{{,}}}
 
-    "pep8 settings
     setlocal tabstop=8
     setlocal expandtab
     setlocal softtabstop=4
@@ -51,7 +50,6 @@ function! Set_Mel_Settings()
     setlocal foldmethod=marker
     setlocal foldmarker={,}
 
-    "pep8 settings
     setlocal tabstop=8
     setlocal noexpandtab
     setlocal softtabstop=8
