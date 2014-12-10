@@ -45,6 +45,20 @@ function! Set_Vim_Settings()
     setlocal textwidth=79
     setlocal autoindent
 endfunction
+
+function! Set_Mel_Settings()
+    " code folding settings
+    setlocal foldmethod=marker
+    setlocal foldmarker={,}
+
+    "pep8 settings
+    setlocal tabstop=8
+    setlocal noexpandtab
+    setlocal softtabstop=8
+    setlocal shiftwidth=8
+    setlocal textwidth=79
+    setlocal autoindent
+endfunction
 " }}}
 
 " Code for refreshing all buffers (esp. for after checkout or pull) {{{
@@ -107,6 +121,7 @@ command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -cs
 augroup lang_settings
     autocmd!
     autocmd BufNewFile,BufEnter *.{py,pyw} :call Set_Python_Settings()
+    autocmd BufNewFile,BufEnter *.{mel,ma} :call Set_Mel_Settings()
     autocmd BufNewFile,BufEnter *.vim :call Set_Vim_Settings()
     autocmd BufNewFile,BufEnter $MYVIMRC :call Set_Vim_Settings()
 augroup END
