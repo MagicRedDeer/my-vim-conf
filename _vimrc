@@ -156,8 +156,8 @@ noremap <c-l> <c-w>l
 nnoremap <leader>rb :call RefreshAllBuffers()<cr>
 
 " move a line up or down
-nnoremap - ddp
-nnoremap _ ddkP
+nnoremap - "tdd"tp
+nnoremap _ "tddk"tP
 
 " Maps for switching buffers
 nnoremap <M-j> :bn<Enter>
