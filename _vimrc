@@ -37,8 +37,8 @@ function! Set_Vim_Settings()
     setlocal foldmethod=marker
     setlocal foldmarker={{{,}}}
 
-    setlocal tabstop=8
-    setlocal expandtab
+    setlocal tabstop=4
+    setlocal noexpandtab
     setlocal softtabstop=4
     setlocal shiftwidth=4
     setlocal textwidth=79
@@ -50,10 +50,10 @@ function! Set_Mel_Settings()
     setlocal foldmethod=marker
     setlocal foldmarker={,}
 
-    setlocal tabstop=8
+    setlocal tabstop=4
     setlocal noexpandtab
-    setlocal softtabstop=8
-    setlocal shiftwidth=8
+    setlocal softtabstop=4
+    setlocal shiftwidth=4
     setlocal textwidth=79
     setlocal autoindent
 endfunction
