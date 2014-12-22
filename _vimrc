@@ -22,7 +22,7 @@ function! Set_Python_Settings()
     setlocal foldmethod=indent
 
     "pep8 settings
-    setlocal tabstop=8
+    setlocal tabstop=4
     setlocal expandtab
     setlocal softtabstop=4
     setlocal shiftwidth=4
@@ -475,6 +475,7 @@ let g:org_agenda_files = ['~/diary/**/**/*.md']
 
 
 " documentation and spread sheets {{{
+Plugin 'Rykka/os.vim'
 Plugin 'clickable.vim'
 Plugin 'Rykka/riv.vim'
 Plugin 'chrisbra/csv.vim'
