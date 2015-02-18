@@ -410,8 +410,10 @@ Plugin 'scrooloose/syntastic'
 "{{{ syntastic settings
 if has('win32')
     let $PATH='C:\Python27\Scripts;' . $PATH
+    let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
 endif
 let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_check_on_wq = 0
 let g:syntastic_echo_current_error = 1
 let g:syntastic_warning_symbol = 'w>'
@@ -431,6 +433,7 @@ if has('win32')
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src\client;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src;' . $PYTHONPATH
+    let $PYTHONPATH='C:\Program Files\Nuke9.0v4\plugins;' . $PYTHONPATH
 endif
 
 " for custom mappings on jedi vim {{{
@@ -487,6 +490,19 @@ Plugin 'tpope/vim-unimpaired'
 "Plugin 'pep8'
 "Plugin 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict'
+
+" javascript specific {{{
+Plugin 'pangloss/vim-javascript'
+if has('win32')
+    let $PATH='C:\Program Files\nodejs\;' . $PATH
+    let $PATH='C:\Program Files\nodejs\node_mo;' . $PATH
+endif
+Plugin 'Shutnik/jshint2.vim'
+let jshint2_read = 1
+let jshint2_save = 1
+let jshint2_close = 0
+let jshint2_confirm = 0
+" }}}
 
 Plugin 'EasyGrep'
 " Settings for Easy Grep {{{
