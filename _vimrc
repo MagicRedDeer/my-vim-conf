@@ -51,6 +51,19 @@ function! Set_JS_Settings()
     setlocal foldmarker={,}
 
     setlocal tabstop=4
+    setlocal expandtab
+    setlocal softtabstop=4
+    setlocal shiftwidth=4
+    setlocal textwidth&
+    setlocal autoindent
+endfunction
+
+function! Set_ML_Settings()
+    " code folding settings
+    "setlocal foldmethod=marker
+    "setlocal foldmarker={,}
+
+    setlocal tabstop=4
     setlocal noexpandtab
     setlocal softtabstop=4
     setlocal shiftwidth=4
@@ -132,6 +145,7 @@ command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -cs
 augroup lang_settings
     autocmd!
     autocmd BufNewFile,BufEnter *.{py,pyw} :call Set_Python_Settings()
+    autocmd BufNewFile,BufEnter *.{htm,html,xhtml,xml} :call Set_ML_Settings()
     autocmd BufNewFile,BufEnter *.{js,jsx} :call Set_JS_Settings()
     autocmd BufNewFile,BufEnter *.{mel,ma} :call Set_Mel_Settings()
     autocmd BufNewFile,BufEnter *.vim :call Set_Vim_Settings()
@@ -566,7 +580,7 @@ if has('mouse')
 endif
 
 " Default options for indenting
-set tabstop=8
+set tabstop=4
 set expandtab
 set softtabstop=4
 set shiftwidth=4
