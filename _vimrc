@@ -137,7 +137,25 @@ if has("win32")
     command! GoHome execute 'cd ' . homedir
 endif
 
+
 command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
+function! PythonIndentationFixer(from, tonum)
+	let from = a:from+0
+	let tonum = a:tonum+0
+	let &l:sw=from
+	let &l:sts=from
+	let &l:ts=from
+	let &l:et=0
+	retab!
+	let &l:sw=tonum
+	let &l:sts=tonum
+	let &l:ts=tonum
+	let &l:et=1
+	retab!
+endfunction
+
+command! -nargs=+ PyFixIndent call PythonIndentationFixer(<f-args>)
 " }}}
 
 
@@ -315,6 +333,7 @@ vnoremap <leader>sU :VimyaSend redo()<cr>
 
 " Use full editor and IDE addons {{{
 Plugin 'tpope/vim-fugitive'
+Plugin 'http://repo.or.cz/vcscommand.git'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rstacruz/sparkup'
 Plugin 'L9'
@@ -458,6 +477,7 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2015\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
+    let $PYTHONPATH='C:\Program Files\Nuke9.0v4\pythonextensions\site-packages;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src\client;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src;' . $PYTHONPATH
