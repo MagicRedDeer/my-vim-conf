@@ -610,6 +610,7 @@ set shiftround
 
 " Default options for folding
 set foldmethod=manual
+set foldlevelstart=99
 
 " }}}
 
