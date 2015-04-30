@@ -479,8 +479,8 @@ if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2015\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files\Nuke9.0v4\pythonextensions\site-packages;' . $PYTHONPATH
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
-    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src\client;' . $PYTHONPATH
-    let $PYTHONPATH='D:\talha.ahmed\workspace\repos\southpaw-tactic\src;' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src\client;' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files\Nuke9.0v4\plugins;' . $PYTHONPATH
 endif
 
@@ -534,6 +534,8 @@ Plugin 'VisIncr'
 " }}}
 
 Plugin 'tpope/vim-unimpaired'
+
+Plugin 'cohama/lexima.vim'
 
 "Plugin 'pep8'
 "Plugin 'Pydiction'
