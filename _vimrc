@@ -666,7 +666,6 @@ endif
 
 
 " Settings for split and Tabs {{{
-set noequalalways
 set nosplitbelow
 set equalalways
 " }}}
