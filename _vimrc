@@ -481,6 +481,8 @@ if has('win32')
     let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src\client;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src;' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_maya;' . $PYTHONPATH
+    let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_maya\tactic;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files\Nuke9.0v4\plugins;' . $PYTHONPATH
 endif
 
@@ -503,6 +505,8 @@ augroup custom_jedi_mappings
 augroup END
 "}}}
 "}}}
+
+Plugin 'joonty/vdebug.git'
 
 Plugin 'mattn/calendar-vim'
 "Plugin 'itchyny/calendar.vim'
