@@ -345,10 +345,11 @@ Plugin 'matchit.zip'
 " automatically timestamp files
 Plugin 'timestamp.vim'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'mattdbridges/bufkill.vim'
+Plugin 'qpkorr/vim-bufkill'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
+
 set laststatus=1
 if has('gui_running')
     let g:airline_theme='ubaryd'
@@ -572,6 +573,10 @@ let g:session_autosave = 'no'
 Plugin 'mhinz/vim-startify'
 let g:startify_session_dir = '~/vimfiles/sessions'
 " }}}
+
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'mattn/emmet-vim'
+Plugin 'skammer/vim-css-color'
 
 ""
 " Brief help
