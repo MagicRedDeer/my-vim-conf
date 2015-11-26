@@ -485,6 +485,8 @@ if has('win32')
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_maya;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_maya\tactic;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files\Nuke9.0v4\plugins;' . $PYTHONPATH
+    let $PYTHONPATH='C:\Program Files (x86)\Google\google_appengine\lib' . $PYTHONPATH
+    let $PYTHONPATH='C:\Program Files (x86)\Google\google_appengine' . $PYTHONPATH
 endif
 
 " for custom mappings on jedi vim {{{
