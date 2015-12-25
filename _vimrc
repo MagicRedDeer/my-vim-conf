@@ -283,6 +283,17 @@ xnoremap <M-a> <C-C>ggVG
 
 
 " Vundle Settings {{{
+
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme) 
+    echo "Installing Vundle.."
+    echo ""
+    execute "silent !mkdir -p " . expand("~/.vim/bundle")
+    execute "silent !git clone https://github.com/VundleVim/Vundle.vim " .  expand('~/.vim/bundle/vundle')
+    let iCanHazVundle=0
+endif
+
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
