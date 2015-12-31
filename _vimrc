@@ -64,7 +64,7 @@ function! Set_ML_Settings()
     "setlocal foldmarker={,}
 
     setlocal tabstop=4
-    setlocal noexpandtab
+    setlocal expandtab
     setlocal softtabstop=4
     setlocal shiftwidth=4
     setlocal textwidth=0
