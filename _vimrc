@@ -378,6 +378,9 @@ Plugin 'ervandew/supertab'
     let g:SuperTabMappingTabLiteral = '<c-tab>'
 " }}}
 Plugin 'bkad/CamelCaseMotion'
+" CamelCaseMotion Settings {{{
+call camelcasemotion#CreateMotionMappings(',')
+"}}}
 Plugin 'tpope/vim-surround'
 Plugin 'a.vim'
 Plugin 'mileszs/ack.vim'
