@@ -379,7 +379,7 @@ Plugin 'ervandew/supertab'
 " }}}
 Plugin 'bkad/CamelCaseMotion'
 " CamelCaseMotion Settings {{{
-call camelcasemotion#CreateMotionMappings(',')
+call camelcasemotion#CreateMotionMappings('<leader>')
 "}}}
 Plugin 'tpope/vim-surround'
 Plugin 'a.vim'
