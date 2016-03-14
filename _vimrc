@@ -359,7 +359,8 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'qpkorr/vim-bufkill'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 set laststatus=1
 if has('gui_running')
@@ -558,6 +559,9 @@ Plugin 'VisIncr'
 Plugin 'tpope/vim-unimpaired'
 
 Plugin 'cohama/lexima.vim'
+let g:lexima_enable_basic_rules = 1
+let g:lexima_enable_newline_rules = 0
+let g:lexima_enable_endwise_rules = 0
 
 "Plugin 'pep8'
 "Plugin 'Pydiction'
