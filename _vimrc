@@ -405,6 +405,14 @@ Plugin 'oceanblack.vim'
 
 " c and c++ {{{
 Plugin 'c.vim'
+Plugin 'Rip-Rip/clang_complete'
+"{{{
+if has('win32')
+    let g:clang_library_path='C:\Program Files\LLVM\bin'
+else
+    let g:clang_library_path='/usr/lib'
+endif
+"}}}
 "}}}
 
 " shells and stuff {{{
@@ -475,13 +483,14 @@ if has('win32')
     let $PATH='C:\Python27\Scripts;' . $PATH
     let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
 endif
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['pyflakes', 'pylint']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_check_on_wq = 0
 let g:syntastic_echo_current_error = 1
 let g:syntastic_warning_symbol = 'w>'
 let g:syntastic_enable_balloons = 1
 let g:syntastic_always_populate_loc_list = 1
+syn match pythonEscape	"\\['\"]"
 "}}}
 
 
@@ -504,6 +513,7 @@ if has('win32')
     let $PYTHONPATH='C:\Program Files (x86)\Google\google_appengine;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2;' . $PYTHONPATH
 endif
+
 
 " for custom mappings on jedi vim {{{
 function! g:Splitandgoto()
