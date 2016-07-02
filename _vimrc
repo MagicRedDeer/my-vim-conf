@@ -300,7 +300,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let vundle manage vundle
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " My Plugins should go here
 
@@ -483,7 +483,7 @@ if has('win32')
     let $PATH='C:\Python27\Scripts;' . $PATH
     let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
 endif
-let g:syntastic_python_checkers = ['pyflakes', 'pylint']
+let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_check_on_wq = 0
 let g:syntastic_echo_current_error = 1
