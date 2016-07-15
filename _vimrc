@@ -349,6 +349,8 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rstacruz/sparkup'
 Plugin 'L9'
 Plugin 'FuzzyFinder'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/unite-outline'
 
 " extended % matching for HTML, LATEX etc.
 Plugin 'matchit.zip'
@@ -403,9 +405,10 @@ Plugin 'darkblack.vim'
 Plugin 'oceanblack.vim'
 "}}}
 
-" c and c++ {{{
+" c, c# and c++ {{{
 Plugin 'c.vim'
 Plugin 'Rip-Rip/clang_complete'
+Plugin 'OmniSharp/omnisharp-vim'
 "{{{
 if has('win32')
     let g:clang_library_path='C:\Program Files\LLVM\bin'
