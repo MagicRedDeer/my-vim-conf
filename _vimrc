@@ -285,27 +285,31 @@ xnoremap <M-a> <C-C>ggVG
 " Vundle Settings {{{
 
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+let vundle_readme=expand('~/vim-plug/README.md')
 if !filereadable(vundle_readme) 
-    echo "Installing Vundle.."
+    echo "Installing vim-plug.."
     echo ""
-    execute "silent !mkdir -p " . expand("~/.vim/bundle")
-    execute "silent !git clone https://github.com/VundleVim/Vundle.vim " .  expand('~/.vim/bundle/vundle')
+    execute "silent !git clone https://github.com/junegunn/vim-plug " .  expand('~/vim-plug')
+    execute "silent !mkdir -p " . expand("~/vimfiles/autoload")
+    execute "silent !mklink /h " . expand("~/vimfiles/autoload/plug.vim") . " " . expand ("~/vim-plug/plug.vim")
+    execute "silent source " . expand("~/vimfiles/autoload/plug.vim")
     let iCanHazVundle=0
 endif
 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
+call plug#begin('~/.vim/bundle')
 
 " let vundle manage vundle
-Plugin 'VundleVim/Vundle.vim'
+"Plug 'VundleVim/Vundle.vim'
+"Plug 'junegunn/vim-plug'
 
-" My Plugins should go here
+" My Plugs should go here
 
 " tag list plugin {{{
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 let g:tagbar_type_mel = {
     \ 'ctagstype' : 'mel',
     \ 'kinds' : [
@@ -321,9 +325,9 @@ let g:tagbar_type_mel = {
 " }}}
 
 " sending buffer contents to maya {{{
-Plugin 'Tail-Bundle'
+Plug 'Tail-Bundle'
 let g:Tail_Height = 15
-Plugin 'https://bitbucket.org/goeb/vimya'
+Plug 'https://bitbucket.org/goeb/vimya'
 
 " Settings for vimya {{{
 let vimyaPort = 7720
@@ -343,26 +347,26 @@ vnoremap <leader>sU :VimyaSend redo()<cr>
 " }}}
 
 " Use full editor and IDE addons {{{
-Plugin 'tpope/vim-fugitive'
-Plugin 'http://repo.or.cz/vcscommand.git'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'rstacruz/sparkup'
-Plugin 'L9'
-Plugin 'FuzzyFinder'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/unite-outline'
+Plug 'tpope/vim-fugitive'
+Plug 'http://repo.or.cz/vcscommand.git'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'rstacruz/sparkup'
+Plug 'L9'
+Plug 'FuzzyFinder'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
 
 " extended % matching for HTML, LATEX etc.
-Plugin 'matchit.zip'
+Plug 'matchit.zip'
 
 " automatically timestamp files
-Plugin 'timestamp.vim'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'qpkorr/vim-bufkill'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'timestamp.vim'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'qpkorr/vim-bufkill'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 set laststatus=1
 if has('gui_running')
@@ -370,45 +374,42 @@ if has('gui_running')
 else
     let g:airline_theme='jellybeans'
 endif
-Plugin 'Gundo'
-Plugin 'TaskList.vim'
-Plugin 'CompleteHelper'
-Plugin 'CamelCaseComplete'
-Plugin 'ervandew/supertab'
+Plug 'Gundo'
+Plug 'TaskList.vim'
+Plug 'CompleteHelper'
+Plug 'CamelCaseComplete'
+Plug 'ervandew/supertab'
 " Super Tab settings {{{
     let g:SuperTabDefaultCompletionType = "context"
     let g:SuperTabContextDefaultCompletionType = "<c-n>"
     let g:SuperTabMappingTabLiteral = '<c-tab>'
 " }}}
-Plugin 'bkad/CamelCaseMotion'
-" CamelCaseMotion Settings {{{
-call camelcasemotion#CreateMotionMappings('<leader>')
-"}}}
-Plugin 'tpope/vim-surround'
-Plugin 'a.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'nathanaelkane/vim-indent-guides.git'
-Plugin 'genutils'
-Plugin 'multvals.vim'
+Plug 'bkad/CamelCaseMotion'
+Plug 'tpope/vim-surround'
+Plug 'a.vim'
+Plug 'mileszs/ack.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'genutils'
+Plug 'multvals.vim'
 " Retired plugins {{{
-"Plugin 'YankRing.vim' "nice feature but it slows large deleting and yanking
+"Plug 'YankRing.vim' "nice feature but it slows large deleting and yanking
 "}}}
 "}}}
 
 " apache velocity highlighting and stuff {{{
-Plugin 'lepture/vim-velocity.git'
+Plug 'lepture/vim-velocity'
 "}}}
 
 " some color schemes {{{
-Plugin 'win9xblueback.vim'
-Plugin 'darkblack.vim'
-Plugin 'oceanblack.vim'
+Plug 'win9xblueback.vim'
+Plug 'darkblack.vim'
+Plug 'oceanblack.vim'
 "}}}
 
 " c, c# and c++ {{{
-Plugin 'c.vim'
-Plugin 'Rip-Rip/clang_complete'
-Plugin 'OmniSharp/omnisharp-vim'
+Plug 'c.vim'
+Plug 'Rip-Rip/clang_complete'
+Plug 'OmniSharp/omnisharp-vim'
 "{{{
 if has('win32')
     let g:clang_library_path='C:\Program Files\LLVM\bin'
@@ -419,8 +420,8 @@ endif
 "}}}
 
 " shells and stuff {{{
-"Plugin 'Conque-Shell'
-Plugin 'talha81/Conque-Shell'
+"Plug 'Conque-Shell'
+Plug 'talha81/Conque-Shell'
 let g:ConqueTerm_CWInsert = 0
 let g:ConqueTerm_FastMode = 0
 let g:ConqueTerm_Color = 0
@@ -428,14 +429,14 @@ let g:ConqueTerm_ColorMode = ''
 let g:ConqueTerm_InsertOnEnter = 0
 let g:ConqueTerm_CloseOnEnd = 0
 let g:ConqueTerm_ReadUnfocused = 0
-"Plugin 'ivanov/vim-ipython'
-"Plugin 'johndgiese/vipy'
+"Plug 'ivanov/vim-ipython'
+"Plug 'johndgiese/vipy'
 "}}}
 
 " Adding Support for octave and matlab {{{
 
 " Adding support for octave from http://wiki.octave.org/Vim {{{
-Plugin 'octave.vim'
+Plug 'octave.vim'
 augroup octaveautocommands
     au!
     au! BufRead,BufNewFile *.oct set filetype=octave
@@ -456,11 +457,11 @@ augroup END
 " }}}
 
 " Adding support for matlab{{{
-Plugin 'mlint.vim'
+Plug 'mlint.vim'
 if has('win32')
     let mlint_hover = 0
 endif
-Plugin 'elmanuelito/vim-matlab-behave'
+Plug 'elmanuelito/vim-matlab-behave'
 augroup matlab
     autocmd!
     autocmd FileType octave setlocal keywordprg=info\ octave\ --vi-keys\ --index-search
@@ -470,9 +471,9 @@ augroup END
 " }}}
 
 " snipmate plugins {{{
-Plugin 'SirVer/ultisnips'
-"Plugin 'julienXX/snipmate-snippets'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+"Plug 'julienXX/snipmate-snippets'
+Plug 'honza/vim-snippets'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsUsePythonVersion = 2
 let g:snips_author = "Talha Ahmed"
@@ -480,7 +481,7 @@ let g:snips_email  = "talha.ahmed@gmail.com"
 let g:snips_github = "github.com/talha81"
 """ }}}
 
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 "{{{ syntastic settings
 if has('win32')
     let $PATH='C:\Python27\Scripts;' . $PATH
@@ -497,7 +498,7 @@ syn match pythonEscape	"\\['\"]"
 "}}}
 
 
-Plugin 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 " Jedi vim settings {{{
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#auto_close_doc = 0
@@ -538,11 +539,11 @@ augroup END
 "}}}
 "}}}
 
-Plugin 'joonty/vdebug.git'
+Plug 'joonty/vdebug'
 
-Plugin 'mattn/calendar-vim'
-"Plugin 'itchyny/calendar.vim'
-Plugin 'tpope/vim-repeat'
+Plug 'mattn/calendar-vim'
+"Plug 'itchyny/calendar.vim'
+Plug 'tpope/vim-repeat'
 
 if !exists("g:speeddating_no_mappings") || !g:speeddating_no_mappings
   nmap  <M-u>     <Plug>SpeedDatingUp
@@ -553,47 +554,47 @@ if !exists("g:speeddating_no_mappings") || !g:speeddating_no_mappings
   nmap d<M-d>     <Plug>SpeedDatingNowLocal
   let g:speeddating_no_mappings = 1
 endif
-Plugin 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating'
 
 
-Plugin 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode'
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
 let g:org_agenda_files = ['~/diary/**/**/*.md']
 
 
 " documentation and spread sheets {{{
-Plugin 'Rykka/os.vim'
-Plugin 'clickable.vim'
-Plugin 'Rykka/riv.vim'
-Plugin 'chrisbra/csv.vim'
-Plugin 'VisIncr'
+Plug 'Rykka/os.vim'
+Plug 'clickable.vim'
+Plug 'Rykka/riv.vim'
+Plug 'chrisbra/csv.vim'
+Plug 'VisIncr'
 " }}}
 
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 
-Plugin 'cohama/lexima.vim'
+Plug 'cohama/lexima.vim'
 let g:lexima_enable_basic_rules = 1
 let g:lexima_enable_newline_rules = 0
 let g:lexima_enable_endwise_rules = 0
 
-"Plugin 'pep8'
-"Plugin 'Pydiction'
+"Plug 'pep8'
+"Plug 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict'
 
 " javascript specific {{{
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 if has('win32')
     let $PATH='C:\Program Files\nodejs\;' . $PATH
     let $PATH='C:\Program Files\nodejs\node_mo;' . $PATH
 endif
-Plugin 'Shutnik/jshint2.vim'
+Plug 'Shutnik/jshint2.vim'
 let jshint2_read = 1
 let jshint2_save = 1
 let jshint2_close = 0
 let jshint2_confirm = 0
 " }}}
 
-Plugin 'EasyGrep'
+Plug 'EasyGrep'
 " Settings for Easy Grep {{{
 let EasyGrepWindow = 0
 let EasyGrepMode = 1
@@ -601,28 +602,33 @@ let EasyGrepMode = 1
 " }}}
 
 " Session management {{{
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 let g:session_autosave = 'no'
-Plugin 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 let g:startify_session_dir = '~/vimfiles/sessions'
 " }}}
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'mattn/emmet-vim'
-Plugin 'skammer/vim-css-color'
+Plug 'altercation/vim-colors-solarized'
+Plug 'mattn/emmet-vim'
+Plug 'skammer/vim-css-color'
+
+call plug#end()
 
 ""
 " Brief help
-" :PluginList          - list configured bundles
-" :PluginInstall(!)    - install(update) bundles
-" :PluginSearch(!) foo - search(or refresh cache first) for foo
-" :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PlugList          - list configured bundles
+" :PlugInstall(!)    - install(update) bundles
+" :PlugSearch(!) foo - search(or refresh cache first) for foo
+" :PlugClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin command a ',',re not allowed..
+" NOTE: comments after Plug command a ',',re not allowed..
 " }}}
 
+" CamelCaseMotion Settings {{{
+call camelcasemotion#CreateMotionMappings('<leader>')
+"}}}
 
 " General Settings {{{
 filetype on
