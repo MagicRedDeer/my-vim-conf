@@ -349,7 +349,7 @@ vnoremap <leader>sU :VimyaSend redo()<cr>
 " Use full editor and IDE addons {{{
 Plug 'tpope/vim-fugitive'
 Plug 'http://repo.or.cz/vcscommand.git'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 Plug 'rstacruz/sparkup'
 Plug 'L9'
 Plug 'FuzzyFinder'
@@ -564,7 +564,7 @@ let g:org_agenda_files = ['~/diary/**/**/*.md']
 
 " documentation and spread sheets {{{
 Plug 'Rykka/os.vim'
-Plug 'clickable.vim'
+"Plug 'clickable.vim'
 Plug 'Rykka/riv.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'VisIncr'
@@ -718,6 +718,9 @@ endif
 set nosplitbelow
 set equalalways
 " }}}
+
+set columns=999
+set lines=999
 
 
 " MODELINE {{{
