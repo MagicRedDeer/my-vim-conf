@@ -19,7 +19,9 @@ endif
 " filetype dependent indent and folding settings {{{
 function! Set_Python_Settings()
     " code folding settings
-    setlocal foldmethod=indent
+    "setlocal foldmethod=indent
+    "setlocal foldcolumn=1
+    setlocal foldignore=
 
     "pep8 settings
     setlocal tabstop=4
@@ -517,6 +519,7 @@ if has('win32')
     let $PYTHONPATH='C:\Program Files (x86)\Google\google_appengine;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2;' . $PYTHONPATH
 endif
+Plug 'tmhedberg/SimpylFold'
 
 
 " for custom mappings on jedi vim {{{
