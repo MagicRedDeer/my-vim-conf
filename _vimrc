@@ -746,6 +746,7 @@ set equalalways
 if has('gui_running')
     set columns=999
     set lines=999
+    set colorcolumn=80
 else
     augroup nonGuiCommands
         autocmd!
@@ -755,5 +756,5 @@ endif
 
 
 " MODELINE {{{
-" vim:tw=78:ts=8:sr:sw=4:sts=4:et:ft=vim:norl:fdm=marker:fmr&:
+"vim:tw=78:ts=8:sr:sw=4:sts=4:et:ft=vim:norl:fdm=marker:fmr&:
 " }}}
