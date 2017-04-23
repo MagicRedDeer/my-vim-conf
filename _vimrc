@@ -136,8 +136,8 @@ endif
 let g:homedir = "~/vim-home"
 if has("win32")
     let g:homedir = "D:\\talha.ahmed\\workspace\\vim-home"
-    command! GoHome execute 'cd ' . homedir
 endif
+command! GoHome execute 'cd ' . homedir
 
 
 command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
@@ -286,23 +286,40 @@ xnoremap <M-a> <C-C>ggVG
 
 " Vundle Settings {{{
 
-let iCanHazVundle=1
-let vundle_readme=expand('~/vim-plug/README.md')
-if !filereadable(vundle_readme) 
+let freshPlugInstall = 0
+let vimfiles_dir = ".vim"
+if has('win32')
+    let vimfiles_dir  = "vimfiles"
+endif
+
+
+let vundle_readme=expand('~/repos/vim-plug/README.md')
+if !filereadable(vundle_readme)
     echo "Installing vim-plug.."
     echo ""
-    execute "silent !git clone https://github.com/junegunn/vim-plug " .  expand('~/vim-plug')
-    execute "silent !mkdir -p " . expand("~/vimfiles/autoload")
-    execute "silent !mklink /h " . expand("~/vimfiles/autoload/plug.vim") . " " . expand ("~/vim-plug/plug.vim")
-    execute "silent source " . expand("~/vimfiles/autoload/plug.vim")
-    let iCanHazVundle=0
+
+    let mkdir_flags = " -p "
+    let link_cmd =  "silent !ln " . expand("~/repos/vim-plug/plug.vim") . " " . expand("~/" . vimfiles_dir  . "/autoload/plug.vim")
+    if has('win32')
+        let mkdir_flags = ""
+        let link_cmd = "silent !mklink /h " . expand("~/" . vimfiles_dir  . "/autoload/plug.vim") . " " . expand ("~/repos/vim-plug/plug.vim")
+    endif
+
+    execute "silent !git clone https://github.com/junegunn/vim-plug " .  expand('~/repos/vim-plug')
+    execute "silent !mkdir " . mkdir_flags . expand("~/" . vimfiles_dir .  "/autoload")
+    execute "silent !mkdir " . mkdir_flags . expand("~/" . vimfiles_dir .  "/bundle")
+    execute link_cmd
+    execute "silent source " . expand("~/" . vimfiles_dir . "/autoload/plug.vim")
+
+    let freshPlugInstall = 1
 endif
 
 set nocompatible
 filetype off
+execute "set rtp+=~/" . vimfiles_dir
 "set rtp+=~/.vim/bundle/vundle/
 "call vundle#rc()
-call plug#begin('~/.vim/bundle')
+call plug#begin("~/" . vimfiles_dir . "/bundle")
 
 " let vundle manage vundle
 "Plug 'VundleVim/Vundle.vim'
@@ -618,6 +635,10 @@ Plug 'skammer/vim-css-color'
 
 call plug#end()
 
+if freshPlugInstall == 1
+    execute "PlugInstall"
+endif 
+
 ""
 " Brief help
 " :PlugList          - list configured bundles
@@ -722,8 +743,15 @@ set nosplitbelow
 set equalalways
 " }}}
 
-set columns=999
-set lines=999
+if has('gui_running')
+    set columns=999
+    set lines=999
+else
+    augroup nonGuiCommands
+        autocmd!
+        autocmd InsertLeave,InsertEnter * set cul!
+    augroup END
+endif
 
 
 " MODELINE {{{
