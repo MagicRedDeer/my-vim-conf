@@ -288,10 +288,6 @@ xnoremap <M-a> <C-C>ggVG
 
 let freshPlugInstall = 0
 let vimfiles_dir = ".vim"
-if has('win32')
-    let vimfiles_dir  = "vimfiles"
-endif
-
 
 let vundle_readme=expand('~/repos/vim-plug/README.md')
 if !filereadable(vundle_readme)
@@ -636,8 +632,8 @@ Plug 'skammer/vim-css-color'
 
 call plug#end()
 
-if freshPlugInstall == 1
-    execute "PlugInstall"
+if ( freshPlugInstall == 1)
+	execute "PlugInstall"
 endif 
 
 ""
