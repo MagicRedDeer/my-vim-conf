@@ -740,6 +740,8 @@ set nosplitbelow
 set equalalways
 " }}}
 
+
+"Columns and lines{{{
 if has('gui_running')
     set columns=999
     set lines=999
@@ -747,9 +749,10 @@ if has('gui_running')
 else
     augroup nonGuiCommands
         autocmd!
-        autocmd InsertLeave,InsertEnter * set cul!
+        autocmd InsertLeave,InsertEnter * set cursorline!
     augroup END
 endif
+"}}}
 
 
 " MODELINE {{{
