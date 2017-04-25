@@ -523,6 +523,7 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#auto_close_doc = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
+let g:jedi#force_py_version = 2
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2015\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files\Nuke9.0v4\pythonextensions\site-packages;' . $PYTHONPATH
