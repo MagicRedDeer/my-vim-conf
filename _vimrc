@@ -1,6 +1,6 @@
 " must be at start
 set nocompatible
-
+u
 
 " Encoding settings {{{
 if has("multi_byte")
@@ -289,8 +289,8 @@ xnoremap <M-a> <C-C>ggVG
 let freshPlugInstall = 0
 let vimfiles_dir = ".vim"
 
-let vundle_readme=expand('~/repos/vim-plug/README.md')
-if !filereadable(vundle_readme)
+let plugfile=expand("~/" . vimfiles_dir . "/autoload/plug.vim")
+if !filereadable(plugfile)
     echo "Installing vim-plug.."
     echo ""
 
@@ -313,7 +313,6 @@ endif
 set nocompatible
 filetype off
 execute "set rtp+=~/" . vimfiles_dir
-"set rtp+=~/.vim/bundle/vundle/
 "call vundle#rc()
 call plug#begin("~/" . vimfiles_dir . "/bundle")
 
@@ -368,6 +367,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'rstacruz/sparkup'
 Plug 'L9'
 Plug 'FuzzyFinder'
+Plug 'Shougo/denite.nvim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 
