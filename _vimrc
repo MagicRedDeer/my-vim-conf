@@ -1,6 +1,5 @@
 " must be at start
 set nocompatible
-u
 
 " Encoding settings {{{
 if has("multi_byte")
