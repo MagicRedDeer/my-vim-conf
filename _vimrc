@@ -428,7 +428,7 @@ Plug 'OmniSharp/omnisharp-vim'
 if has('win32')
     let g:clang_library_path='C:\Program Files\LLVM\bin'
 else
-    let g:clang_library_path='/usr/lib'
+    let g:clang_library_path='/usr/lib/x86_64-linux-gnu/'
 endif
 "}}}
 "}}}
@@ -750,6 +750,20 @@ else
         autocmd!
         autocmd InsertLeave,InsertEnter * set cursorline!
     augroup END
+endif
+"}}}
+
+"{{{ nvim specific settings
+if has('nvim')
+    :tnoremap <Esc><Esc> <C-\><C-n>
+    :tnoremap <C-k> <C-\><C-n><C-w>k
+    :tnoremap <C-l> <C-\><C-n><C-w>l
+    :tnoremap <C-h> <C-\><C-n><C-w>h
+    :tnoremap <C-j> <C-\><C-n><C-w>j
+    augroup terminalau
+        autocmd!
+        autocmd BufEnter term://* startinsert
+    augroup end
 endif
 "}}}
 
