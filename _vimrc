@@ -753,13 +753,14 @@ else
 endif
 "}}}
 
-"{{{ nvim specific settings
+"{{{ nvim terminal settings
 if has('nvim')
     :tnoremap <Esc><Esc> <C-\><C-n>
     :tnoremap <C-k> <C-\><C-n><C-w>k
     :tnoremap <C-l> <C-\><C-n><C-w>l
     :tnoremap <C-h> <C-\><C-n><C-w>h
     :tnoremap <C-j> <C-\><C-n><C-w>j
+    :tnoremap <C-w> <C-\><C-n><C-w>
     augroup terminalau
         autocmd!
         autocmd BufEnter term://* startinsert
