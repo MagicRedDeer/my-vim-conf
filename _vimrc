@@ -34,7 +34,6 @@ function! Set_Python_Settings()
 endfunction
 
 function! Set_Vim_Settings()
-    " code folding settings
     setlocal foldmethod=marker
     setlocal foldmarker={{{,}}}
 
@@ -364,7 +363,23 @@ Plug 'easymotion/vim-easymotion'
 Plug 'rstacruz/sparkup'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
-Plug 'Shougo/denite.nvim'
+if has('nvim')
+    Plug 'Shougo/denite.nvim',  { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/denite.nvim'
+endif
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/neocomplete.vim'
+    let g:neocomplete#enable_at_startup = 1
+	let g:neocomplete#enable_camelcase = 1
+endif
+if has('win64')
+    Plug 'Shougo/vimproc.vim', {'do': 'make -f make_mingw64.mak'}
+else
+    Plug 'Shougo/vimproc.vim', {'do': 'make'}
+endif
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 
@@ -432,7 +447,6 @@ endif
 "}}}
 
 " shells and stuff {{{
-"Plug 'Conque-Shell'
 Plug 'talha81/Conque-Shell'
 let g:ConqueTerm_CWInsert = 0
 let g:ConqueTerm_FastMode = 0
@@ -441,8 +455,6 @@ let g:ConqueTerm_ColorMode = ''
 let g:ConqueTerm_InsertOnEnter = 0
 let g:ConqueTerm_CloseOnEnd = 0
 let g:ConqueTerm_ReadUnfocused = 0
-"Plug 'ivanov/vim-ipython'
-"Plug 'johndgiese/vipy'
 "}}}
 
 " Adding Support for octave and matlab {{{
@@ -486,6 +498,7 @@ augroup END
 Plug 'SirVer/ultisnips'
 "Plug 'julienXX/snipmate-snippets'
 Plug 'honza/vim-snippets'
+let g:UltiSnipsSnippetDir=expand('~/' . vimfiles_dir . '/UltiSnips')
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsUsePythonVersion = 2
 let g:snips_author = "Talha Ahmed"
@@ -626,17 +639,30 @@ augroup phpSyntaxOverride
     autocmd FileType php call PhpSyntaxOverride()
 augroup END
 "}}}
+
 Plug 'docteurklein/php-getter-setter.vim'
 " php getter setter both mapping{{{
 augroup phpsetter
     autocmd!
     autocmd FileType php map <buffer> <leader>pb <Plug>PhpgetsetInsertBothGetterSetter
-    autocmd FileType php map <buffer> <leader>ps <Plug>PhpgetsetInsertBothGetterSetter
-    autocmd FileType php map <buffer> <leader>pg <Plug>PhpgetsetInsertBothGetterSetter
+    autocmd FileType php map <buffer> <leader>ps <Plug>PhpgetsetInsertSetter
+    autocmd FileType php map <buffer> <leader>pg <Plug>PhpgetsetInsertGetter
 augroup end
 "}}}
 
 Plug 'shawncplus/phpcomplete.vim'
+Plug 'rayburgemeestre/phpfolding.vim'
+Plug 'vim-php/vim-php-refactoring'
+Plug 'vim-php/tagbar-phpctags.vim'
+Plug 'vim-php/vim-create'
+Plug 'vim-php/vim-composer'
+let g:composer_cmd = 'composer'
+
+Plug 'wdalmut/vim-phpunit'
+if has('nvim')
+    Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+endif
+"Plug 'padawan-php/padawan.vim'
 "}}}
 
 Plug 'vim-scripts/EasyGrep'
@@ -649,9 +675,10 @@ let EasyGrepMode = 1
 " Session management {{{
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+let g:session_directory = expand('~/' . vimfiles_dir . '/sessions')
 let g:session_autosave = 'no'
 Plug 'mhinz/vim-startify'
-let g:startify_session_dir = '~/vimfiles/sessions'
+let g:startify_session_dir = g:session_directory
 " }}}
 
 Plug 'altercation/vim-colors-solarized'
@@ -777,7 +804,7 @@ else
 endif
 "}}}
 
-"{{{ nvim terminal settings
+"{{{ nvim specific settings
 if has('nvim')
     :tnoremap <Esc><Esc> <C-\><C-n>
     :tnoremap <C-k> <C-\><C-n><C-w>k
@@ -789,7 +816,9 @@ if has('nvim')
         autocmd!
         autocmd BufEnter term://* startinsert
     augroup end
+    call deoplete#enable()
 endif
+
 "}}}
 
 if ( freshPlugInstall == 1)
