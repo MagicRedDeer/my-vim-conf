@@ -661,8 +661,9 @@ let g:composer_cmd = 'composer'
 Plug 'wdalmut/vim-phpunit'
 if has('nvim')
     Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+else 
+    Plug 'padawan-php/padawan.vim'
 endif
-"Plug 'padawan-php/padawan.vim'
 "}}}
 
 Plug 'vim-scripts/EasyGrep'
