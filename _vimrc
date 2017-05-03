@@ -142,18 +142,18 @@ command! GoHome execute 'cd ' . homedir
 command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
 function! PythonIndentationFixer(from, tonum)
-	let from = a:from+0
-	let tonum = a:tonum+0
-	let &l:sw=from
-	let &l:sts=from
-	let &l:ts=from
-	let &l:et=0
-	retab!
-	let &l:sw=tonum
-	let &l:sts=tonum
-	let &l:ts=tonum
-	let &l:et=1
-	retab!
+    let from = a:from+0
+    let tonum = a:tonum+0
+    let &l:sw=from
+    let &l:sts=from
+    let &l:ts=from
+    let &l:et=0
+    retab!
+    let &l:sw=tonum
+    let &l:sts=tonum
+    let &l:ts=tonum
+    let &l:et=1
+    retab!
 endfunction
 
 command! -nargs=+ PyFixIndent call PythonIndentationFixer(<f-args>)
@@ -230,8 +230,8 @@ vnoremap <C-Insert> "+y
 map <C-V>               "+gP
 map <S-Insert>          "+gP
 
-cmap <C-V>		<C-R>+
-cmap <S-Insert>		<C-R>+
+cmap <C-V>      <C-R>+
+cmap <S-Insert>     <C-R>+
 
 " Pasting blockwise and linewise selections is not possible in Insert and
 " Visual mode without the +virtualedit feature.  They are pasted as if they
@@ -242,16 +242,16 @@ cmap <S-Insert>		<C-R>+
 exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
 
-imap <S-Insert>		<C-V>
-vmap <S-Insert>		<C-V>
+imap <S-Insert>     <C-V>
+vmap <S-Insert>     <C-V>
 
 " Use CTRL-Q to do what CTRL-V used to do
-noremap <C-Q>		<C-V>
+noremap <C-Q>       <C-V>
 
 " Use CTRL-S for saving, also in Insert mode
-noremap <C-S>		:update<CR>
-vnoremap <C-S>		<C-C>:update<CR>
-inoremap <C-S>		<C-O>:update<CR>
+noremap <C-S>       :update<CR>
+vnoremap <C-S>      <C-C>:update<CR>
+inoremap <C-S>      <C-O>:update<CR>
 
 " Alt-Space is System menu
 if has('gui_running')
@@ -287,6 +287,7 @@ xnoremap <M-a> <C-C>ggVG
 
 let freshPlugInstall = 0
 let vimfiles_dir = ".vim"
+let bundles_dir = expand("~/" . vimfiles_dir . "/bundle")
 
 let plugfile=expand("~/" . vimfiles_dir . "/autoload/plug.vim")
 if !filereadable(plugfile)
@@ -294,30 +295,27 @@ if !filereadable(plugfile)
     echo ""
 
     let mkdir_flags = " -p "
-    let link_cmd =  "silent !ln " . expand("~/repos/vim-plug/plug.vim") . " " . expand("~/" . vimfiles_dir  . "/autoload/plug.vim")
+    let link_cmd =  "silent !ln " .  expand(bundles_dir . "/vim-plug/plug.vim") . " " .  expand("~/" . vimfiles_dir  . "/autoload/plug.vim")
     if has('win32')
         let mkdir_flags = ""
-        let link_cmd = "silent !mklink /h " . expand("~/" . vimfiles_dir  . "/autoload/plug.vim") . " " . expand ("~/repos/vim-plug/plug.vim")
+        let link_cmd = "silent !mklink /h " .  expand("~/" . vimfiles_dir  .  "/autoload/plug.vim") . " " .  expand(bundles_dir .  "/vim-plug/plug.vim")
     endif
 
-    execute "silent !git clone https://github.com/junegunn/vim-plug " .  expand('~/repos/vim-plug')
+    execute "silent !mkdir " . mkdir_flags . bundles_dir
+    execute "silent !git clone https://github.com/junegunn/vim-plug " .  bundles_dir . "/vim-plug"
     execute "silent !mkdir " . mkdir_flags . expand("~/" . vimfiles_dir .  "/autoload")
-    execute "silent !mkdir " . mkdir_flags . expand("~/" . vimfiles_dir .  "/bundle")
     execute link_cmd
-    execute "silent source " . expand("~/" . vimfiles_dir . "/autoload/plug.vim")
+    execute "silent source " . expand("~/" . vimfiles_dir .  "/autoload/plug.vim")
 
     let freshPlugInstall = 1
 endif
 
 set nocompatible
 filetype off
-execute "set rtp+=~/" . vimfiles_dir
-"call vundle#rc()
-call plug#begin("~/" . vimfiles_dir . "/bundle")
+execute "set rtp+=" . expand("~/" . vimfiles_dir)
+call plug#begin(bundles_dir)
 
-" let vundle manage vundle
-"Plug 'VundleVim/Vundle.vim'
-"Plug 'junegunn/vim-plug'
+Plug 'junegunn/vim-plug'
 
 " My Plugs should go here
 
@@ -338,7 +336,7 @@ let g:tagbar_type_mel = {
 " }}}
 
 " sending buffer contents to maya {{{
-Plug 'Tail-Bundle'
+Plug 'vim-scripts/Tail-Bundle'
 let g:Tail_Height = 15
 Plug 'https://bitbucket.org/goeb/vimya'
 
@@ -364,17 +362,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'http://repo.or.cz/vcscommand.git'
 Plug 'easymotion/vim-easymotion'
 Plug 'rstacruz/sparkup'
-Plug 'L9'
-Plug 'FuzzyFinder'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/FuzzyFinder'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 
 " extended % matching for HTML, LATEX etc.
-Plug 'matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 
 " automatically timestamp files
-Plug 'timestamp.vim'
+Plug 'vim-scripts/timestamp.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'qpkorr/vim-bufkill'
 Plug 'scrooloose/nerdcommenter'
@@ -388,10 +386,10 @@ if has('gui_running')
 else
     let g:airline_theme='jellybeans'
 endif
-Plug 'Gundo'
-Plug 'TaskList.vim'
-Plug 'CompleteHelper'
-Plug 'CamelCaseComplete'
+Plug 'vim-scripts/Gundo'
+Plug 'vim-scripts/TaskList.vim'
+Plug 'vim-scripts/CompleteHelper'
+Plug 'vim-scripts/CamelCaseComplete'
 Plug 'ervandew/supertab'
 " Super Tab settings {{{
     let g:SuperTabDefaultCompletionType = "context"
@@ -400,11 +398,11 @@ Plug 'ervandew/supertab'
 " }}}
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
-Plug 'a.vim'
+Plug 'vim-scripts/a.vim'
 Plug 'mileszs/ack.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'genutils'
-Plug 'multvals.vim'
+Plug 'vim-scripts/genutils'
+Plug 'vim-scripts/multvals.vim'
 " Retired plugins {{{
 "Plug 'YankRing.vim' "nice feature but it slows large deleting and yanking
 "}}}
@@ -415,13 +413,13 @@ Plug 'lepture/vim-velocity'
 "}}}
 
 " some color schemes {{{
-Plug 'win9xblueback.vim'
-Plug 'darkblack.vim'
-Plug 'oceanblack.vim'
+Plug 'vim-scripts/win9xblueback.vim'
+Plug 'vim-scripts/darkblack.vim'
+Plug 'vim-scripts/oceanblack.vim'
 "}}}
 
 " c, c# and c++ {{{
-Plug 'c.vim'
+Plug 'vim-scripts/c.vim'
 Plug 'Rip-Rip/clang_complete'
 Plug 'OmniSharp/omnisharp-vim'
 "{{{
@@ -450,7 +448,7 @@ let g:ConqueTerm_ReadUnfocused = 0
 " Adding Support for octave and matlab {{{
 
 " Adding support for octave from http://wiki.octave.org/Vim {{{
-Plug 'octave.vim'
+Plug 'vim-scripts/octave.vim'
 augroup octaveautocommands
     au!
     au! BufRead,BufNewFile *.oct set filetype=octave
@@ -471,7 +469,7 @@ augroup END
 " }}}
 
 " Adding support for matlab{{{
-Plug 'mlint.vim'
+Plug 'vim-scripts/mlint.vim'
 if has('win32')
     let mlint_hover = 0
 endif
@@ -508,7 +506,7 @@ let g:syntastic_echo_current_error = 1
 let g:syntastic_warning_symbol = 'w>'
 let g:syntastic_enable_balloons = 1
 let g:syntastic_always_populate_loc_list = 1
-syn match pythonEscape	"\\['\"]"
+syn match pythonEscape  "\\['\"]"
 "}}}
 
 
@@ -583,7 +581,7 @@ Plug 'Rykka/os.vim'
 "Plug 'clickable.vim'
 Plug 'Rykka/riv.vim'
 Plug 'chrisbra/csv.vim'
-Plug 'VisIncr'
+Plug 'vim-scripts/VisIncr'
 " }}}
 
 Plug 'tpope/vim-unimpaired'
@@ -596,6 +594,11 @@ let g:lexima_enable_endwise_rules = 0
 "Plug 'pep8'
 "Plug 'Pydiction'
 "let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict'
+
+"For HTML {{{
+Plug 'mattn/emmet-vim'
+Plug 'othree/html5.vim'
+"}}}
 
 " javascript specific {{{
 Plug 'pangloss/vim-javascript'
@@ -610,7 +613,33 @@ let jshint2_close = 0
 let jshint2_confirm = 0
 " }}}
 
-Plug 'EasyGrep'
+" PHP things {{{
+" Plug 'joonty/vdebug' -- has already been included above
+Plug 'StanAngeloff/php.vim'
+" php.vim syntax override {{{
+function! PhpSyntaxOverride()
+    hi! def link phpDocTags  phpDefine
+    hi! def link phpDocParam phpType
+endfunction
+augroup phpSyntaxOverride
+    autocmd!
+    autocmd FileType php call PhpSyntaxOverride()
+augroup END
+"}}}
+Plug 'docteurklein/php-getter-setter.vim'
+" php getter setter both mapping{{{
+augroup phpsetter
+    autocmd!
+    autocmd FileType php map <buffer> <leader>pb <Plug>PhpgetsetInsertBothGetterSetter
+    autocmd FileType php map <buffer> <leader>ps <Plug>PhpgetsetInsertBothGetterSetter
+    autocmd FileType php map <buffer> <leader>pg <Plug>PhpgetsetInsertBothGetterSetter
+augroup end
+"}}}
+
+Plug 'shawncplus/phpcomplete.vim'
+"}}}
+
+Plug 'vim-scripts/EasyGrep'
 " Settings for Easy Grep {{{
 let EasyGrepWindow = 0
 let EasyGrepMode = 1
@@ -626,14 +655,13 @@ let g:startify_session_dir = '~/vimfiles/sessions'
 " }}}
 
 Plug 'altercation/vim-colors-solarized'
-Plug 'mattn/emmet-vim'
 Plug 'skammer/vim-css-color'
 
 call plug#end()
 
-if ( freshPlugInstall == 1)
-	execute "PlugInstall"
-endif 
+" CamelCaseMotion Settings {{{
+call camelcasemotion#CreateMotionMappings('<leader>')
+"}}}
 
 ""
 " Brief help
@@ -645,10 +673,6 @@ endif
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Plug command a ',',re not allowed..
 " }}}
-
-" CamelCaseMotion Settings {{{
-call camelcasemotion#CreateMotionMappings('<leader>')
-"}}}
 
 " General Settings {{{
 filetype on
@@ -767,6 +791,10 @@ if has('nvim')
     augroup end
 endif
 "}}}
+
+if ( freshPlugInstall == 1)
+    execute 'PlugInstall'
+endif
 
 
 " MODELINE {{{
