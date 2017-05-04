@@ -661,9 +661,10 @@ let g:composer_cmd = 'composer'
 Plug 'wdalmut/vim-phpunit'
 if has('nvim')
     Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-else 
-    Plug 'padawan-php/padawan.vim'
 endif
+Plug 'padawan-php/padawan.vim'
+let g:padawan#cli='padawan'
+let g:padawan#composer_command='composer'
 "}}}
 
 Plug 'vim-scripts/EasyGrep'
@@ -684,6 +685,10 @@ let g:startify_session_dir = g:session_directory
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'skammer/vim-css-color'
+
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neco-syntax'
 
 call plug#end()
 
