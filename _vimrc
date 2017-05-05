@@ -1,3 +1,15 @@
+" *Global Dependencies*
+" Python2 (~2.7)
+" Python3 (~3.5)
+" lua (~53) (for neocomplete)
+" npm (and nodejs)
+" gcc, g++ or mingw (on windows) (for vimproc)
+" node and tern (for js completion)
+" php, composer and padawan (for php completion)
+" clang or llvm (for c variants)
+" neovim + neovim python connectors (for deoplete)
+" ctags and phpctags
+
 " must be at start
 set nocompatible
 
@@ -38,7 +50,7 @@ function! Set_Vim_Settings()
     setlocal foldmarker={{{,}}}
 
     setlocal tabstop=4
-    setlocal noexpandtab
+    setlocal expandtab
     setlocal softtabstop=4
     setlocal shiftwidth=4
     setlocal textwidth=79
@@ -370,10 +382,16 @@ else
 endif
 if has('nvim')
     Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/neco-vim'
+    Plug 'Shougo/neoinclude.vim'
+    Plug 'Shougo/neco-syntax'
+    Plug 'Shougo/neomru.vim'
+    Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
+    Plug 'zchee/deoplete-clang'
 else
     Plug 'Shougo/neocomplete.vim'
     let g:neocomplete#enable_at_startup = 1
-	let g:neocomplete#enable_camelcase = 1
+    let g:neocomplete#enable_camelcase = 1
 endif
 if has('win64')
     Plug 'Shougo/vimproc.vim', {'do': 'make -f make_mingw64.mak'}
@@ -624,6 +642,7 @@ let jshint2_read = 1
 let jshint2_save = 1
 let jshint2_close = 0
 let jshint2_confirm = 0
+Plug 'ternjs/tern_for_vim'
 " }}}
 
 " PHP things {{{
@@ -650,7 +669,7 @@ augroup phpsetter
 augroup end
 "}}}
 
-Plug 'shawncplus/phpcomplete.vim'
+"Plug 'shawncplus/phpcomplete.vim'
 Plug 'rayburgemeestre/phpfolding.vim'
 Plug 'vim-php/vim-php-refactoring'
 Plug 'vim-php/tagbar-phpctags.vim'
@@ -685,10 +704,6 @@ let g:startify_session_dir = g:session_directory
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'skammer/vim-css-color'
-
-Plug 'Shougo/neco-vim'
-Plug 'Shougo/neoinclude.vim'
-Plug 'Shougo/neco-syntax'
 
 call plug#end()
 
@@ -782,7 +797,7 @@ if has('gui_running')
         set guifont=Monospace\ 8
     endif
 elseif !has('win32')
-    colorscheme delek
+    colorscheme slate
 else
     colorscheme elflord
 endif
@@ -794,6 +809,8 @@ endif
 " Settings for split and Tabs {{{
 set nosplitbelow
 set equalalways
+set path+=**
+set wildmenu
 " }}}
 
 
