@@ -144,4 +144,3 @@ if has('nvim')
 endif
 
 "}}}
-
