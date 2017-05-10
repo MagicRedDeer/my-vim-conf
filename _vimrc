@@ -520,6 +520,7 @@ if has('win32')
 endif
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_php_checkers = ['phpcs']
 let g:syntastic_check_on_wq = 0
 let g:syntastic_echo_current_error = 1
 let g:syntastic_warning_symbol = 'w>'
@@ -658,10 +659,14 @@ augroup phpsetter
 augroup end
 "}}}
 
-"Plug 'shawncplus/phpcomplete.vim'
+Plug 'shawncplus/phpcomplete.vim'
+let g:phpcomplete_parse_docblock_comments=1
+let g:phpcomplete_cache_taglists=1
+let g:phpcomplete_complete_for_unknown_classes=1
 Plug 'rayburgemeestre/phpfolding.vim'
 Plug 'vim-php/vim-php-refactoring'
 Plug 'vim-php/tagbar-phpctags.vim'
+let g:tagbar_phpctags_bin='phpctags'
 Plug 'vim-php/vim-create'
 Plug 'vim-php/vim-composer'
 let g:composer_cmd = 'composer'
@@ -670,9 +675,13 @@ Plug 'wdalmut/vim-phpunit'
 if has('nvim')
     Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 endif
-Plug 'padawan-php/padawan.vim'
-let g:padawan#cli='padawan'
-let g:padawan#composer_command='composer'
+
+"Plug 'padawan-php/padawan.vim'
+"let g:padawan#cli='padawan'
+"let g:padawan#composer_command='composer'
+
+Plug 'dsawardekar/wordpress.vim'
+
 "}}}
 
 Plug 'vim-scripts/EasyGrep'
@@ -787,9 +796,9 @@ if has('gui_running')
         set guifont=Monospace\ 8
     endif
 elseif !has('win32')
-    colorscheme slate
+    colorscheme desert
 else
-    colorscheme elflord
+    colorscheme slate
 endif
 " }}}
 
