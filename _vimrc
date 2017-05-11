@@ -594,6 +594,7 @@ Plug 'jceb/vim-orgmode'
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
 let g:org_agenda_files = ['~/diary/**/**/*.md']
 
+Plug 'godlygeek/tabular'
 
 " documentation and spread sheets {{{
 Plug 'Rykka/os.vim'
