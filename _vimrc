@@ -753,6 +753,7 @@ set undofile
 set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
 set hidden
+set visualbell
 " }}}
 
 
