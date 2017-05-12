@@ -162,12 +162,11 @@ command! -nargs=+ PyFixIndent call PythonIndentationFixer(<f-args>)
 " Custom AutoCommands {{{
 augroup lang_settings
     autocmd!
-    autocmd BufNewFile,BufEnter *.{py,pyw} :call Set_Python_Settings()
-    autocmd BufNewFile,BufEnter *.{htm,html,xhtml,xml} :call Set_ML_Settings()
-    autocmd BufNewFile,BufEnter *.{js,jsx} :call Set_JS_Settings()
-    autocmd BufNewFile,BufEnter *.{mel,ma} :call Set_Mel_Settings()
-    autocmd BufNewFile,BufEnter *.vim :call Set_Vim_Settings()
-    autocmd BufNewFile,BufEnter $MYVIMRC :call Set_Vim_Settings()
+    autocmd FileType python :call Set_Python_Settings()
+    autocmd FileType html :call Set_ML_Settings()
+    autocmd FileType javascript :call Set_JS_Settings()
+    autocmd BufEnter,BufRead *.{mel,ma} :call Set_Mel_Settings()
+    autocmd FileType vim :call Set_Vim_Settings()
 augroup END
 augroup vimrcEx
     autocmd!
@@ -722,6 +721,7 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 " NOTE: comments after Plug command a ',',re not allowed..
 " }}}
 
+
 " General Settings {{{
 filetype on
 syntax on
@@ -849,5 +849,3 @@ endif
 
 
 " MODELINE {{{
-"vim:tw=78:ts=8:sr:sw=4:sts=4:et:ft=vim:norl:fdm=marker:fmr&:
-" }}}
