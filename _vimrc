@@ -636,7 +636,6 @@ Plug 'ternjs/tern_for_vim'
 " }}}
 
 " PHP things {{{
-" Plug 'joonty/vdebug' -- has already been included above
 Plug 'StanAngeloff/php.vim'
 " php.vim syntax override {{{
 function! PhpSyntaxOverride()
@@ -663,7 +662,7 @@ Plug 'shawncplus/phpcomplete.vim'
 let g:phpcomplete_parse_docblock_comments=1
 let g:phpcomplete_cache_taglists=1
 let g:phpcomplete_complete_for_unknown_classes=1
-Plug 'rayburgemeestre/phpfolding.vim'
+Plug 'swekaj/php-foldexpr.vim'
 Plug 'vim-php/vim-php-refactoring'
 Plug 'vim-php/tagbar-phpctags.vim'
 let g:tagbar_phpctags_bin='phpctags'
@@ -676,10 +675,13 @@ if has('nvim')
     Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
 endif
 
-"Plug 'padawan-php/padawan.vim'
-"let g:padawan#cli='padawan'
-"let g:padawan#composer_command='composer'
-
+Plug 'tobyS/vmustache'
+Plug 'tobyS/pdv'
+let g:pdv_template_dir = bundles_dir . "/pdv/templates_snip"
+augroup pdv_config
+    autocmd!
+    autocmd FileType php nnoremap <buffer> <leader>d :call pdv#DocumentWithSnip()<CR>
+augroup end
 Plug 'dsawardekar/wordpress.vim'
 
 "}}}
