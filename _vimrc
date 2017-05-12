@@ -777,7 +777,7 @@ set list                " visualizing tabs, spaces, trails etc.
 set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%
 
 " Setting gui options and fonts {{{
-colorscheme default
+colorscheme desert 
 set guifont=Consolas:h8:cANSI
 set guioptions-=m
 set guioptions-=T
@@ -795,9 +795,7 @@ if has('gui_running')
     if has('gui_gnome')
         set guifont=Monospace\ 8
     endif
-elseif !has('win32')
-    colorscheme desert
-else
+elseif has('win32')
     colorscheme slate
 endif
 " }}}
