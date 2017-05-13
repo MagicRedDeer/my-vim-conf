@@ -847,5 +847,7 @@ if ( freshPlugInstall == 1)
     execute 'PlugInstall'
 endif
 
+source ~/_local.vim
+
 
 " MODELINE {{{
