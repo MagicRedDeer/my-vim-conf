@@ -676,6 +676,7 @@ let g:phpcomplete_cache_taglists=1
 let g:phpcomplete_complete_for_unknown_classes=1
 Plug 'swekaj/php-foldexpr.vim'
 Plug 'vim-php/vim-php-refactoring'
+let g:php_refactor_command='refactor'
 Plug 'vim-php/tagbar-phpctags.vim'
 let g:tagbar_phpctags_bin='phpctags'
 Plug 'vim-php/vim-create'
@@ -711,7 +712,7 @@ Plug 'xolox/vim-session'
 let g:session_directory = expand('~/' . vimfiles_dir . '/sessions')
 let g:session_autosave = 'no'
 Plug 'mhinz/vim-startify'
-let g:startify_session_dir = g:session_directory
+let g:startify_session_dir= g:session_directory
 " }}}
 
 Plug 'altercation/vim-colors-solarized'
