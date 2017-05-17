@@ -357,6 +357,7 @@ vnoremap <leader>sU :VimyaSend redo()<cr>
 
 " Use full editor and IDE addons {{{
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'http://repo.or.cz/vcscommand.git'
 Plug 'easymotion/vim-easymotion'
 Plug 'rstacruz/sparkup'
@@ -511,22 +512,34 @@ let g:snips_email  = "talha.ahmed@gmail.com"
 let g:snips_github = "github.com/talha81"
 """ }}}
 
-Plug 'scrooloose/syntastic'
-"{{{ syntastic settings
-if has('win32')
-    let $PATH='C:\Python27\Scripts;' . $PATH
-    let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
-endif
-let g:syntastic_python_checkers = ['pyflakes']
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_php_checkers = ['phpcs']
-let g:syntastic_check_on_wq = 0
-let g:syntastic_echo_current_error = 1
-let g:syntastic_warning_symbol = 'w>'
-let g:syntastic_enable_balloons = 1
-let g:syntastic_always_populate_loc_list = 1
-syn match pythonEscape  "\\['\"]"
+"{{{ Linting management
+if has('nvim') ||or  version >= 800
+    Plug 'w0rp/ale'
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_lint_on_enter = 0
+    let g:ale_open_list = 0
+    let g:ale_keep_list_window_open = 0
+elseif
+    Plug 'scrooloose/syntastic'
+    "{{{ syntastic settings
+    if has('win32')
+        let $PATH='C:\Python27\Scripts;' . $PATH
+        let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
+    endif
+    let g:syntastic_python_checkers = ['pyflakes', 'pylint']
+    let g:syntastic_javascript_checkers = ['jshint']
+    let g:syntastic_php_checkers = ['php', 'phpcs']
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_echo_current_error = 1
+    let g:syntastic_warning_symbol = 'w>'
+    let g:syntastic_enable_balloons = 1
+    let g:syntastic_always_populate_loc_list = 1
+    syn match pythonEscape  "\\['\"]"
+    "}}}
+end
 "}}}
+
+
 
 
 Plug 'davidhalter/jedi-vim'
