@@ -513,12 +513,16 @@ let g:snips_github = "github.com/talha81"
 """ }}}
 
 "{{{ Linting management
-if has('nvim') ||or  version >= 800
+if has('nvim') || version >= 800
     Plug 'w0rp/ale'
     let g:ale_lint_on_text_changed = 'never'
+    let g:ale_lint_on_insert_leave = 1
     let g:ale_lint_on_enter = 0
     let g:ale_open_list = 0
     let g:ale_keep_list_window_open = 0
+    let g:ali_lint_delay = 1000
+    let g:ale_linters = {'php': ['phpmd', 'phpcs']}
+    let g:ale_php_phpmd_ruleset = 'cleancode'
 elseif
     Plug 'scrooloose/syntastic'
     "{{{ syntastic settings
@@ -718,6 +722,11 @@ let g:startify_session_dir= g:session_directory
 Plug 'altercation/vim-colors-solarized'
 Plug 'skammer/vim-css-color'
 
+let $LPLUG = expand('~/_local_plug.vim')
+if filereadable($LPLUG)
+    source $LPLUG
+endif
+
 call plug#end()
 
 " CamelCaseMotion Settings {{{
@@ -861,7 +870,9 @@ if ( freshPlugInstall == 1)
     execute 'PlugInstall'
 endif
 
-source ~/_local.vim
-
+let $LOCALVIM = expand('~/_local.vim')
+if filereadable($LOCALVIM)
+    source $LOCALVIM
+endif
 
 " MODELINE {{{
