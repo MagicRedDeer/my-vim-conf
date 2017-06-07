@@ -370,10 +370,6 @@ else
 endif
 if has('nvim')
     Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neco-vim'
-    Plug 'Shougo/neoinclude.vim'
-    Plug 'Shougo/neco-syntax'
-    Plug 'Shougo/neomru.vim'
     Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
     Plug 'zchee/deoplete-clang'
 else
@@ -386,6 +382,10 @@ if has('win64')
 else
     Plug 'Shougo/vimproc.vim', {'do': 'make'}
 endif
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neomru.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 
