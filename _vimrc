@@ -523,7 +523,7 @@ if has('nvim') || version >= 800
     let g:ali_lint_delay = 1000
     let g:ale_linters = {'php': ['phpmd', 'phpcs']}
     let g:ale_php_phpmd_ruleset = 'cleancode'
-elseif
+else
     Plug 'scrooloose/syntastic'
     "{{{ syntastic settings
     if has('win32')
@@ -641,7 +641,7 @@ Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
 if has('win32')
     let $PATH='C:\Program Files\nodejs\;' . $PATH
-    let $PATH='C:\Program Files\nodejs\node_mo;' . $PATH
+    let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
 endif
 Plug 'Shutnik/jshint2.vim'
 let jshint2_read = 1
@@ -668,9 +668,9 @@ Plug 'docteurklein/php-getter-setter.vim'
 " php getter setter both mapping{{{
 augroup phpsetter
     autocmd!
-    autocmd FileType php map <buffer> <leader>pb <Plug>PhpgetsetInsertBothGetterSetter
-    autocmd FileType php map <buffer> <leader>ps <Plug>PhpgetsetInsertSetter
-    autocmd FileType php map <buffer> <leader>pg <Plug>PhpgetsetInsertGetter
+    autocmd FileType php nnoremap <buffer> <leader>pb <Plug>PhpgetsetInsertBothGetterSetter
+    autocmd FileType php nnoremap <buffer> <leader>ps <Plug>PhpgetsetInsertSetter
+    autocmd FileType php nnoremap <buffer> <leader>pg <Plug>PhpgetsetInsertGetter
 augroup end
 "}}}
 
@@ -699,6 +699,8 @@ augroup pdv_config
     autocmd!
     autocmd FileType php nnoremap <buffer> <leader>d :call pdv#DocumentWithSnip()<CR>
 augroup end
+
+Plug 'tyru/open-browser.vim'
 Plug 'dsawardekar/wordpress.vim'
 
 "}}}
