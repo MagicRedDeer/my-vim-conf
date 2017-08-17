@@ -281,6 +281,26 @@ xnoremap <M-a> <C-C>ggVG
 " }}}
 
 
+function! EscapePath(path, ...)
+
+    let win32 = 1
+    if a:0 > 0 
+        if a:1 != 'win32'
+            let win32 = 0
+        endif
+    elseif !has('win32')
+        let win32 = 0
+    endif
+
+    if win32
+        return ('"' . a:path . '"')
+    else
+        return substitute(a:path, ' ', '\\ ', '')
+    endif
+
+endfunction
+
+
 " Vundle Settings {{{
 
 let freshPlugInstall = 0
@@ -293,24 +313,25 @@ if !filereadable(plugfile)
     echo ""
 
     let mkdir_flags = " -p "
-    let link_cmd =  "silent !ln " .  expand(bundles_dir . "/vim-plug/plug.vim") . " " .  expand("~/" . vimfiles_dir  . "/autoload/plug.vim")
+    let link_cmd =  "silent !ln " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim")) . " " .  EscapePath(expand("~/" . vimfiles_dir  .  "/autoload/plug.vim"))
     if has('win32')
         let mkdir_flags = ""
-        let link_cmd = "silent !mklink /h " .  expand("~/" . vimfiles_dir  .  "/autoload/plug.vim") . " " .  expand(bundles_dir .  "/vim-plug/plug.vim")
+        let link_cmd = "silent !mklink /h " .  EscapePath(expand("~/" .  vimfiles_dir  .  "/autoload/plug.vim")) . " " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim"))
     endif
 
-    execute "silent !mkdir " . mkdir_flags . bundles_dir
-    execute "silent !git clone https://github.com/junegunn/vim-plug " .  bundles_dir . "/vim-plug"
-    execute "silent !mkdir " . mkdir_flags . expand("~/" . vimfiles_dir .  "/autoload")
+    execute "silent !mkdir " . mkdir_flags . EscapePath(bundles_dir)
+    execute "silent !git clone https://github.com/junegunn/vim-plug " . EscapePath(bundles_dir . "/vim-plug")
+    execute "silent !mkdir " . mkdir_flags . EscapePath(expand("~/" . vimfiles_dir . "/autoload"))
     execute link_cmd
-    execute "silent source " . expand("~/" . vimfiles_dir .  "/autoload/plug.vim")
+    execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
 
     let freshPlugInstall = 1
 endif
 
 set nocompatible
 filetype off
-execute "set rtp+=" . expand("~/" . vimfiles_dir)
+execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
+
 call plug#begin(bundles_dir)
 
 Plug 'junegunn/vim-plug'
