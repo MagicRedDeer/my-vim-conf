@@ -856,6 +856,7 @@ set nosplitbelow
 set equalalways
 set path+=**
 set wildmenu
+set complete-=u
 " }}}
 
 
