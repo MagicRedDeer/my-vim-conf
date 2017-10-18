@@ -522,9 +522,9 @@ augroup END
 " }}}
 
 " snipmate plugins {{{
+Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 "Plug 'julienXX/snipmate-snippets'
-Plug 'honza/vim-snippets'
 let g:UltiSnipsSnippetDir=expand('~/' . vimfiles_dir . '/UltiSnips')
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsUsePythonVersion = 2
@@ -542,7 +542,15 @@ if has('nvim') || version >= 800
     let g:ale_open_list = 0
     let g:ale_keep_list_window_open = 0
     let g:ali_lint_delay = 1000
-    let g:ale_linters = {'php': ['phpmd', 'phpcs']}
+    let g:ale_linters = {
+                \ 'php': ['phpmd', 'phpcs'],
+                \ 'python': ['flake8'],
+                \ 'javascript': ['eslint'],
+                \ }
+    let g:ale_fixers = {
+                \ 'python': ['autopep8', 'yapf'],
+                \ 'javascript': ['eslint']
+                \ }
     let g:ale_php_phpmd_ruleset = 'cleancode'
 else
     Plug 'scrooloose/syntastic'
@@ -656,20 +664,27 @@ let g:lexima_enable_endwise_rules = 0
 "For HTML {{{
 Plug 'mattn/emmet-vim'
 Plug 'othree/html5.vim'
+Plug 'valloric/MatchTagAlways'
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'javascript.jsx': 1
+    \}
 "}}}
 
 " javascript specific {{{
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 if has('win32')
     let $PATH='C:\Program Files\nodejs\;' . $PATH
     let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
 endif
-Plug 'Shutnik/jshint2.vim'
-let jshint2_read = 1
-let jshint2_save = 1
-let jshint2_close = 0
-let jshint2_confirm = 0
-Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install tern' }
 " }}}
 
 " PHP things {{{
