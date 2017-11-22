@@ -429,7 +429,6 @@ else
     let g:airline_theme='jellybeans'
 endif
 Plug 'vim-scripts/Gundo'
-Plug 'vim-scripts/TaskList.vim'
 Plug 'vim-scripts/CompleteHelper'
 Plug 'vim-scripts/CamelCaseComplete'
 Plug 'ervandew/supertab'
@@ -648,6 +647,11 @@ Plug 'Rykka/os.vim'
 Plug 'Rykka/riv.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'vim-scripts/VisIncr'
+" {{{ markdown support
+Plug 'gabrielelana/vim-markdown'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+" }}}
 " }}}
 
 Plug 'tpope/vim-unimpaired'
