@@ -16,6 +16,20 @@ endif
 
 " Custom Functions {{{
 " filetype dependent indent and folding settings {{{
+
+function! Set_YAML_Settings()
+    setlocal foldignore=#
+
+    setlocal tabstop=2
+    setlocal expandtab
+    setlocal softtabstop=2
+    setlocal shiftwidth=2
+    setlocal textwidth=79
+    setlocal autoindent
+
+    setlocal shiftround
+endfunction
+
 function! Set_Python_Settings()
     " code folding settings
     "setlocal foldmethod=indent
@@ -167,6 +181,7 @@ augroup lang_settings
     autocmd FileType javascript :call Set_JS_Settings()
     autocmd BufEnter,BufRead *.{mel,ma} :call Set_Mel_Settings()
     autocmd FileType vim :call Set_Vim_Settings()
+    autocmd FileType yaml :call Set_YAML_Settings()
 augroup END
 augroup vimrcEx
     autocmd!
@@ -584,7 +599,7 @@ let g:jedi#force_py_version = 2
 if has('win32')
     let $PYTHONPATH='C:\Program Files\Autodesk\Maya2015\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files\Nuke9.0v4\pythonextensions\site-packages;' . $PYTHONPATH
-    let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
+    "let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src\client;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_maya;' . $PYTHONPATH
