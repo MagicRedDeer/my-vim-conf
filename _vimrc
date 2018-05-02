@@ -586,7 +586,10 @@ else
 end
 "}}}
 
-
+"{{{ parenthesis highlighting
+Plugin 'luochen1990/rainbow'
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+"}}}
 
 
 Plug 'davidhalter/jedi-vim'
@@ -840,7 +843,9 @@ set foldlevelstart=99
 
 " History and undo settings  {{{
 set backup
+set backupdir =$temp
 set undofile
+set undodir =$temp
 set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
 set hidden
