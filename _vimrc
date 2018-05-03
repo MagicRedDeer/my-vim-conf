@@ -296,6 +296,7 @@ xnoremap <M-a> <C-C>ggVG
 " }}}
 
 
+" {{{
 function! EscapePath(path, ...)
 
     let win32 = 1
@@ -314,6 +315,7 @@ function! EscapePath(path, ...)
     endif
 
 endfunction
+"
 
 
 " Vundle Settings {{{
@@ -400,30 +402,37 @@ Plug 'rstacruz/sparkup'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
 if has('nvim')
-    Plug 'Shougo/denite.nvim',  { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/denite.nvim',  { 'do': ':UpdateRemotePlugins' }
 else
-    Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  let python3_host_prog='c:\Program Files\Python35\python.exe'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
-    Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
-    Plug 'zchee/deoplete-clang'
-else
-    Plug 'Shougo/neocomplete.vim'
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_camelcase = 1
-endif
+let g:deoplete#enable_at_startup = 1
+"if has('nvim')
+    "Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
+    "Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
+    "Plug 'zchee/deoplete-clang'
+"else
+    "Plug 'Shougo/neocomplete.vim'
+    "let g:neocomplete#enable_at_startup = 1
+    "let g:neocomplete#enable_camelcase = 1
+"endif
 if has('win64')
     Plug 'Shougo/vimproc.vim', {'do': 'make -f make_mingw64.mak'}
 else
     Plug 'Shougo/vimproc.vim', {'do': 'make'}
 endif
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
+Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-jedi'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neomru.vim'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
 
 " extended % matching for HTML, LATEX etc.
 Plug 'vim-scripts/matchit.zip'
@@ -587,7 +596,7 @@ end
 "}}}
 
 "{{{ parenthesis highlighting
-Plugin 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 "}}}
 
