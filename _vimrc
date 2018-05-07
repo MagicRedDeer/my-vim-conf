@@ -140,6 +140,27 @@ if has('win32')
 endif
 "}}}
 
+" {{{
+function! EscapePath(path, ...)
+
+    let win32 = 1
+    if a:0 > 0 
+        if a:1 != 'win32'
+            let win32 = 0
+        endif
+    elseif !has('win32')
+        let win32 = 0
+    endif
+
+    if win32
+        return ('"' . a:path . '"')
+    else
+        return substitute(a:path, ' ', '\\ ', '')
+    endif
+
+endfunction
+" }}}
+
 " }}}
 
 
@@ -296,26 +317,7 @@ xnoremap <M-a> <C-C>ggVG
 " }}}
 
 
-" {{{
-function! EscapePath(path, ...)
-
-    let win32 = 1
-    if a:0 > 0 
-        if a:1 != 'win32'
-            let win32 = 0
-        endif
-    elseif !has('win32')
-        let win32 = 0
-    endif
-
-    if win32
-        return ('"' . a:path . '"')
-    else
-        return substitute(a:path, ' ', '\\ ', '')
-    endif
-
-endfunction
-"
+" {{{ Plugins and Settings
 
 
 " Vundle Settings {{{
@@ -353,7 +355,7 @@ call plug#begin(bundles_dir)
 
 Plug 'junegunn/vim-plug'
 
-" My Plugs should go here
+" My Plugs go here
 
 " tag list plugin {{{
 Plug 'majutsushi/tagbar'
@@ -412,15 +414,6 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 let g:deoplete#enable_at_startup = 1
-"if has('nvim')
-    "Plug 'Shougo/deoplete.nvim',  { 'do': ':UpdateRemotePlugins' }
-    "Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
-    "Plug 'zchee/deoplete-clang'
-"else
-    "Plug 'Shougo/neocomplete.vim'
-    "let g:neocomplete#enable_at_startup = 1
-    "let g:neocomplete#enable_camelcase = 1
-"endif
 if has('win64')
     Plug 'Shougo/vimproc.vim', {'do': 'make -f make_mingw64.mak'}
 else
@@ -429,6 +422,8 @@ endif
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install tern' }
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
+let g:deoplete#sources#jedi#server_timeout = 30
+let g:deoplete#sources#jedi#show_docstring = 1
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
@@ -470,6 +465,7 @@ Plug 'vim-scripts/genutils'
 Plug 'vim-scripts/multvals.vim'
 " Retired plugins {{{
 "Plug 'YankRing.vim' "nice feature but it slows large deleting and yanking
+"Plug 'Shougo/neocomplete' " Let go in favour of deoplete (nvim and vim8)
 "}}}
 "}}}
 
@@ -481,6 +477,7 @@ Plug 'lepture/vim-velocity'
 Plug 'vim-scripts/win9xblueback.vim'
 Plug 'vim-scripts/darkblack.vim'
 Plug 'vim-scripts/oceanblack.vim'
+Plug 'altercation/vim-colors-solarized'
 "}}}
 
 " c, c# and c++ {{{
@@ -595,11 +592,6 @@ else
 end
 "}}}
 
-"{{{ parenthesis highlighting
-Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-"}}}
-
 
 Plug 'davidhalter/jedi-vim'
 " Jedi vim settings {{{
@@ -609,9 +601,8 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 let g:jedi#force_py_version = 2
 if has('win32')
-    let $PYTHONPATH='C:\Program Files\Autodesk\Maya2015\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
+    let $PYTHONPATH='C:\Program Files\Autodesk\Maya2016\devkit\other\pymel\extras\completion\py;' . $PYTHONPATH
     let $PYTHONPATH='C:\Program Files\Nuke9.0v4\pythonextensions\site-packages;' . $PYTHONPATH
-    "let $PYTHONPATH='C:\Python27\Lib\site-packages;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src\client;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_common\southpaw-tactic\src;' . $PYTHONPATH
     let $PYTHONPATH='D:\talha.ahmed\workspace\pyenv_maya;' . $PYTHONPATH
@@ -703,6 +694,7 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'javascript.jsx': 1
     \}
+Plug 'skammer/vim-css-color'
 "}}}
 
 " javascript specific {{{
@@ -773,6 +765,7 @@ Plug 'dsawardekar/wordpress.vim'
 "}}}
 
 Plug 'vim-scripts/EasyGrep'
+
 " Settings for Easy Grep {{{
 let EasyGrepWindow = 0
 let EasyGrepMode = 1
@@ -787,9 +780,6 @@ let g:session_autosave = 'no'
 Plug 'mhinz/vim-startify'
 let g:startify_session_dir= g:session_directory
 " }}}
-
-Plug 'altercation/vim-colors-solarized'
-Plug 'skammer/vim-css-color'
 
 let $LPLUG = expand('~/_local_plug.vim')
 if filereadable($LPLUG)
@@ -921,6 +911,7 @@ else
 endif
 "}}}
 
+
 "{{{ nvim specific settings
 if has('nvim')
     :tnoremap <Esc><Esc> <C-\><C-n>
@@ -938,6 +929,8 @@ endif
 
 "}}}
 
+
+" {{{ Installation and Local Settings
 if ( freshPlugInstall == 1)
     execute 'PlugInstall'
 endif
@@ -946,5 +939,7 @@ let $LOCALVIM = expand('~/_local.vim')
 if filereadable($LOCALVIM)
     source $LOCALVIM
 endif
+"}}}
 
-" MODELINE {{{
+
+" }}}
