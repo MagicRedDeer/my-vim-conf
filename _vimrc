@@ -376,7 +376,7 @@ let g:tagbar_type_mel = {
 " sending buffer contents to maya {{{
 Plug 'vim-scripts/Tail-Bundle'
 let g:Tail_Height = 15
-Plug 'https://bitbucket.org/goeb/vimya'
+Plug 'https://gitlab.com/goeb/vimya.git'
 
 " Settings for vimya {{{
 let vimyaPort = 7720
@@ -384,14 +384,14 @@ let vimyaTailCommand = 'STail'
 let vimyaSplitBelow = 1
 let vimyaForceRefresh = 1
 let vimyaRefreshWait = 2.0
+
 nnoremap <leader>sr :py vimyaRefreshLog ()<cr>
 nnoremap <leader>st :py vimyaOpenLog ()<cr>
 nnoremap <leader>sl :py vimyaResetLog ()<cr>
-vnoremap <leader>sr :py vimyaRefreshLog ()<cr>
-vnoremap <leader>st :py vimyaOpenLog ()<cr>
-vnoremap <leader>sl :py vimyaResetLog ()<cr>
-vnoremap <leader>su :VimyaSend undo()<cr>
-vnoremap <leader>sU :VimyaSend redo()<cr>
+nnoremap <leader>sw :VimyaWhatIs <cr>
+nnoremap <leader>su :VimyaSend undo()<cr>
+nnoremap <leader>sU :VimyaSend redo()<cr>
+
 " }}}
 " }}}
 
@@ -440,6 +440,14 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
 
 set laststatus=1
 if has('gui_running')
