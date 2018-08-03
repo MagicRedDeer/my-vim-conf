@@ -320,7 +320,7 @@ xnoremap <M-a> <C-C>ggVG
 " {{{ Plugins and Settings
 
 
-" Vundle Settings {{{
+" VimPlug Settings {{{
 
 let freshPlugInstall = 0
 let vimfiles_dir = ".vim"
@@ -385,12 +385,12 @@ let vimyaSplitBelow = 1
 let vimyaForceRefresh = 1
 let vimyaRefreshWait = 2.0
 
-nnoremap <leader>sr :py vimyaRefreshLog ()<cr>
-nnoremap <leader>st :py vimyaOpenLog ()<cr>
-nnoremap <leader>sl :py vimyaResetLog ()<cr>
-nnoremap <leader>sw :VimyaWhatIs <cr>
-nnoremap <leader>su :VimyaSend undo()<cr>
-nnoremap <leader>sU :VimyaSend redo()<cr>
+nnoremap <leader>mr :py vimyaRefreshLog ()<cr>
+nnoremap <leader>mt :py vimyaOpenLog ()<cr>
+nnoremap <leader>ml :py vimyaResetLog ()<cr>
+nnoremap <leader>mw :VimyaWhatIs <cr>
+nnoremap <leader>mu :VimyaSend undo()<cr>
+nnoremap <leader>mU :VimyaSend redo()<cr>
 
 " }}}
 " }}}
@@ -449,7 +449,7 @@ let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
-set laststatus=1
+set laststatus=2
 if has('gui_running')
     let g:airline_theme='ubaryd'
 else
@@ -465,6 +465,9 @@ Plug 'ervandew/supertab'
     let g:SuperTabMappingTabLiteral = '<c-tab>'
 " }}}
 Plug 'bkad/CamelCaseMotion'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/a.vim'
 Plug 'mileszs/ack.vim'
@@ -687,9 +690,15 @@ let g:lexima_enable_basic_rules = 1
 let g:lexima_enable_newline_rules = 0
 let g:lexima_enable_endwise_rules = 0
 
-"Plug 'pep8'
-"Plug 'Pydiction'
-"let g:pydiction_location = '.vim/bundle/PyDiction/complete-dict'
+"For SQL {{{
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dadbod'
+let g:dadbod_manage_dbext = 1
+Plug 'vim-scripts/SQLUtilities'
+Plug 'jonathanfilip/vim-dbext'
+let g:dbext_default_SQLSRV_bin = 'sqlcmd'
+let g:dbext_default_SQLSRV_cmd_options = '-w 10000 -r -b '
+"}}}
 
 "For HTML {{{
 Plug 'mattn/emmet-vim'
@@ -908,9 +917,11 @@ set complete-=u
 
 "Columns and lines{{{
 if has('gui_running')
-    set columns=999
-    set lines=999
-    set colorcolumn=80
+    if has('win32')
+        simalt ~x
+    else
+        simalt <F10>
+    endif
 else
     augroup nonGuiCommands
         autocmd!
@@ -934,7 +945,6 @@ if has('nvim')
     augroup end
     call deoplete#enable()
 endif
-
 "}}}
 
 
