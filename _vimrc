@@ -558,7 +558,6 @@ Plug 'SirVer/ultisnips'
 "Plug 'julienXX/snipmate-snippets'
 let g:UltiSnipsSnippetDir=expand('~/' . vimfiles_dir . '/UltiSnips')
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
-let g:UltiSnipsUsePythonVersion = 2
 let g:snips_author = "Talha Ahmed"
 let g:snips_email  = "talha.ahmed@gmail.com"
 let g:snips_github = "github.com/talha81"
@@ -860,8 +859,16 @@ set foldlevelstart=99
 " History and undo settings  {{{
 set backup
 set backupdir =$temp
+if has('unix')
+    set backupdir =~/.backup/
+    execute "silent !mkdir -p " . EscapePath(expand("~/.backup"))
+endif
 set undofile
 set undodir =$temp
+if has('unix')
+    set undodir =~/.undo/
+    execute "silent !mkdir -p " . EscapePath(expand("~/.undo"))
+endif
 set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
 set hidden
