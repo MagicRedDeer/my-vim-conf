@@ -520,6 +520,13 @@ let g:ycm_filetype_blacklist = {
       \ 'text' : 1,
       \ 'tex' : 1,
       \}
+" YCM mappings {{{
+nmap <leader>yy :YcmForceCompileAndDiagnostics<cr>
+nmap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<cr>
+nmap <leader>yd :YcmCompleter GoToDefinition<cr>
+nmap <leader>yc :YcmCompleter GoToDeclaration<cr>
+nmap <leader>yt :YcmCompleter GetType<cr>
+" }}}
 " }}}
 
 " SpeedDating Settings {{{
@@ -859,6 +866,8 @@ set modeline
 set modelines=5
 " }}}
 
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Commands                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1004,14 +1013,6 @@ xnoremap <M-a> <C-C>ggVG
 vnoremap > ><CR>gv
 vnoremap < <<CR>gv
 
-" }}}
-
-" YCM {{{
-nmap <leader>yy :YcmForceCompileAndDiagnostics<cr>
-nmap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<cr>
-nmap <leader>yd :YcmCompleter GoToDefinition<cr>
-nmap <leader>yc :YcmCompleter GoToDeclaration<cr>
-nmap <leader>yt :YcmCompleter GetType<cr>
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
