@@ -142,5 +142,4 @@ if has('nvim')
         autocmd BufEnter term://* startinsert
     augroup end
 endif
-
 "}}}

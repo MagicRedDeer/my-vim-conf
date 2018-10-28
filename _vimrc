@@ -1,6 +1,22 @@
 " must be at start
 set nocompatible
 
+
+" OS Detector {{{
+if !exists("g:os")
+    if has("win64") || has("win32") || has("win16")
+        let g:os = "Windows"
+    elseif  has('win32unix')
+        let g:os = "Cygwin"
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+        " Darwin and Linux most common values for OSX and GNU/Linux
+    endif
+endif
+
+" }}}
+
+
 " Encoding settings {{{
 if has("multi_byte")
   if &termencoding == ""
@@ -322,7 +338,7 @@ xnoremap <M-a> <C-C>ggVG
 
 " VimPlug Settings {{{
 
-let freshPlugInstall = 0
+let g:freshPlugInstall = 0
 let vimfiles_dir = ".vim"
 let bundles_dir = expand("~/" . vimfiles_dir . "/bundle")
 
@@ -344,7 +360,7 @@ if !filereadable(plugfile)
     execute link_cmd
     execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
 
-    let freshPlugInstall = 1
+    let g:freshPlugInstall = 1
 endif
 
 set nocompatible
@@ -358,7 +374,7 @@ Plug 'junegunn/vim-plug'
 " My Plugs go here
 
 " tag list plugin {{{
-Plug 'majutsushi/tagbar'
+Plug 'demelev/tagbar'
 let g:tagbar_type_mel = {
     \ 'ctagstype' : 'mel',
     \ 'kinds' : [
@@ -474,10 +490,6 @@ Plug 'mileszs/ack.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-scripts/genutils'
 Plug 'vim-scripts/multvals.vim'
-" Retired plugins {{{
-"Plug 'YankRing.vim' "nice feature but it slows large deleting and yanking
-"Plug 'Shougo/neocomplete' " Let go in favour of deoplete (nvim and vim8)
-"}}}
 "}}}
 
 " apache velocity highlighting and stuff {{{
@@ -489,11 +501,17 @@ Plug 'vim-scripts/win9xblueback.vim'
 Plug 'vim-scripts/darkblack.vim'
 Plug 'vim-scripts/oceanblack.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'flazz/vim-colorschemes'
 "}}}
 
 " c, c# and c++ {{{
 Plug 'vim-scripts/c.vim'
 Plug 'Rip-Rip/clang_complete'
+" cpp/h switch
+Plug 'derekwyatt/vim-fswitch'
+" creates C++ class method implementations
+Plug 'derekwyatt/vim-protodef'
+
 "{{{
 if has('win32')
     let g:clang_library_path='C:\Program Files\LLVM\bin'
@@ -672,16 +690,19 @@ Plug 'jceb/vim-orgmode'
 let g:org_todo_keywords = ['TODO', 'RUNNING', 'TESTING', 'SUPERVISING', 'REOPENED', '|', 'DONE', 'DELEGATED', 'CANCELLED']
 let g:org_agenda_files = ['~/diary/**/**/*.md']
 
+" Todo plugin
+Plug 'neochrome/todo.vim'
+Plug 'vim-scripts/TaskList.vim'
+
 Plug 'godlygeek/tabular'
 
 " documentation and spread sheets {{{
 Plug 'Rykka/os.vim'
-"Plug 'clickable.vim'
 Plug 'Rykka/riv.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'vim-scripts/VisIncr'
 " {{{ markdown support
-Plug 'gabrielelana/vim-markdown'
+Plug 'tpope/vim-markdown'
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
 " }}}
@@ -796,9 +817,9 @@ let EasyGrepMode = 1
 " Session management {{{
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'mhinz/vim-startify'
 let g:session_directory = expand('~/' . vimfiles_dir . '/sessions')
 let g:session_autosave = 'no'
-Plug 'mhinz/vim-startify'
 let g:startify_session_dir= g:session_directory
 " }}}
 
@@ -858,6 +879,11 @@ set shiftround
 set foldmethod=manual
 set foldlevelstart=99
 
+set visualbell
+if has('virtualedit')
+    set virtualedit=all
+endif
+
 " }}}
 
 
@@ -877,10 +903,6 @@ endif
 set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
 set hidden
-set visualbell
-if has('virtualedit')
-    set virtualedit=all
-endif
 " }}}
 
 
@@ -922,7 +944,8 @@ endif
 
 
 " Settings for split and Tabs {{{
-set nosplitbelow
+set splitbelow
+set splitright " and right
 set equalalways
 set path+=**
 set wildmenu
@@ -964,7 +987,7 @@ endif
 
 
 " {{{ Installation and Local Settings
-if ( freshPlugInstall == 1)
+if ( g:freshPlugInstall == 1)
     execute 'PlugInstall'
 endif
 
@@ -976,3 +999,4 @@ endif
 
 
 " }}}
+" vim: foldmethod=marker
