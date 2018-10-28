@@ -494,7 +494,6 @@ Plug 'altercation/vim-colors-solarized'
 " c, c# and c++ {{{
 Plug 'vim-scripts/c.vim'
 Plug 'Rip-Rip/clang_complete'
-Plug 'OmniSharp/omnisharp-vim'
 "{{{
 if has('win32')
     let g:clang_library_path='C:\Program Files\LLVM\bin'
@@ -503,6 +502,13 @@ else
 endif
 "}}}
 "}}}
+
+" C# stuff {{{
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'OrangeT/vim-csharp'
+Plug 'dimixar/deoplete-omnisharp'
+set completeopt-=preview
+" }}}
 
 " shells and stuff {{{
 Plug 'talha81/Conque-Shell'
@@ -555,7 +561,6 @@ augroup END
 " snipmate plugins {{{
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-"Plug 'julienXX/snipmate-snippets'
 let g:UltiSnipsSnippetDir=expand('~/' . vimfiles_dir . '/UltiSnips')
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:snips_author = "Talha Ahmed"
@@ -873,6 +878,9 @@ set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
 set hidden
 set visualbell
+if has('virtualedit')
+    set virtualedit=all
+endif
 " }}}
 
 
@@ -918,7 +926,7 @@ set nosplitbelow
 set equalalways
 set path+=**
 set wildmenu
-set complete-=u
+set complete-=u,t
 " }}}
 
 
