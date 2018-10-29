@@ -413,7 +413,7 @@ nnoremap <leader>mU :VimyaSend redo()<cr>
 
 " Use full editor and IDE addons {{{
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'http://repo.or.cz/vcscommand.git'
 Plug 'easymotion/vim-easymotion'
 Plug 'rstacruz/sparkup'
@@ -426,7 +426,7 @@ else
   Plug 'Shougo/denite.nvim'
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
-  let python3_host_prog='c:\Program Files\Python35\python.exe'
+  let g:python3_host_prog='c:\Program Files\Python35\python.exe'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 let g:deoplete#enable_at_startup = 1
@@ -502,6 +502,7 @@ Plug 'vim-scripts/darkblack.vim'
 Plug 'vim-scripts/oceanblack.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
+Plug 'croaker/mustang-vim'
 "}}}
 
 " c, c# and c++ {{{
@@ -523,8 +524,11 @@ endif
 
 " C# stuff {{{
 Plug 'OmniSharp/omnisharp-vim'
+let g:omnicomplete_fetch_full_documentation = 1
+let g:OmniSharp_typeLookupInPreview = 1
 Plug 'OrangeT/vim-csharp'
 Plug 'dimixar/deoplete-omnisharp'
+Plug 'cyansprite/deoplete-omnisharp'
 set completeopt-=preview
 " }}}
 
@@ -572,7 +576,7 @@ augroup matlab
     autocmd!
     autocmd FileType octave setlocal keywordprg=info\ octave\ --vi-keys\ --index-search
 augroup END
-" }}}
+" }}
 
 " }}}
 
@@ -997,6 +1001,7 @@ if filereadable($LOCALVIM)
 endif
 "}}}
 
+set complete-=t
 
 " }}}
 " vim: foldmethod=marker
