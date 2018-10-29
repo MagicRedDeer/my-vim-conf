@@ -139,6 +139,7 @@ function! IndentationFixer(from, tonum)
     retab!
 endfunction
 
+" Refreshing {{{
 function! RefreshCurrentBuffer()
     let k = &l:buftype
     if k==''
@@ -154,6 +155,7 @@ function! RefreshAllBuffers()
     execute 'b ' . bn
     syn on
 endfun
+" }}}
 
 " Assigning diff expression for GNU diff utils {{{
 if has('win32')
@@ -868,9 +870,9 @@ set modelines=5
 
 " }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                Commands                                 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                       Auto Commands and Commands                       "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{
 
 " Commands {{{
