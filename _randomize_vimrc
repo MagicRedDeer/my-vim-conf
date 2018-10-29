@@ -49,6 +49,26 @@ endif
 " =========================================================================
 " {{{
 "
+function! EscapePath(path, ...)  "{{{
+
+    let win32 = 1
+
+    if a:0 > 0 
+        if a:1 != 'win32'
+            let win32 = 0
+        endif
+    elseif !has('win32')
+        let win32 = 0
+    endif
+
+    if win32
+        return ('"' . a:path . '"')
+    else
+        return substitute(a:path, ' ', '\\ ', '')
+    endif
+
+endfunction
+" }}}
 
 " Download VimPlug {{{
 let g:freshPlugInstall = 0
@@ -142,7 +162,7 @@ Plug 'scrooloose/syntastic'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 
 " Easy motion
-Plug 'Lokaltog/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
 " Commenting
 if g:bully_dev == "demelev" || g:bully_dev == "dstavila"
@@ -590,25 +610,25 @@ set cmdheight=2
 
 " == Unite ==
 
-let g:unite_enable_start_insert = 1
-let g:unite_split_rule = "botright"
-let g:unite_force_overwrite_statusline = 0
-let g:unite_winheight = 10
-let g:unite_candidate_icon="▷"
-let g:unite_source_rec_async_command= ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
-let g:unite_source_history_yank_enable = 1
+" let g:unite_enable_start_insert = 1
+" let g:unite_split_rule = "botright"
+" let g:unite_force_overwrite_statusline = 0
+" let g:unite_winheight = 10
+" let g:unite_candidate_icon="▷"
+" let g:unite_source_rec_async_command= ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+" let g:unite_source_history_yank_enable = 1
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-\ 'ignore_pattern', join([
-\ '.class$', '\.jar$',
-\ '\.jpg$', '\.jpeg$', '\.bmp$', '\.png$', '\.gif$',
-\ '\.o$', '\.so$', '\.lo$', '\.lib$', '\.out$', '\.obj$', 
-\ '\.zip$', '\.tar\.gz$', '\.tar\.bz2$', '\.rar$', '\.tar\.xz$',
-\ '\.ac$', '\.cache$', '\.0$', '\.meta$',
-\ '\.anim$', '\.controller$'
-\ ], '\|'))
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" call unite#filters#sorter_default#use(['sorter_rank'])
+" call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+" \ 'ignore_pattern', join([
+" \ '.class$', '\.jar$',
+" \ '\.jpg$', '\.jpeg$', '\.bmp$', '\.png$', '\.gif$',
+" \ '\.o$', '\.so$', '\.lo$', '\.lib$', '\.out$', '\.obj$', 
+" \ '\.zip$', '\.tar\.gz$', '\.tar\.bz2$', '\.rar$', '\.tar\.xz$',
+" \ '\.ac$', '\.cache$', '\.0$', '\.meta$',
+" \ '\.anim$', '\.controller$'
+" "\ ], '\|'))
 
 " == You complete me ==
 
