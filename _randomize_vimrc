@@ -36,12 +36,6 @@ if !exists("g:os")
     endif
 endif
 
-if !exists("g:bully_dev")
-    let g:bully_dev = $bully_dev
-    "let g:bully_dev = "dstavila"
-    " let g:bully_dev = "demelev"
-endif
-
 " }}}
 "
 " =========================================================================
@@ -110,17 +104,19 @@ Plug 'junegunn/vim-plug'
 "}}}
 
 " Plugs {{{
-Plug 'Buffergator'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'qpkorr/vim-bufkill'
+
+" SQL
 Plug 'vim-scripts/dbext.vim'
-Plug 'ludovicchabant/vim-ctrlp-autoignore'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dadbod'
+Plug 'vim-scripts/SQLUtilities'
 
-" let Vundle manage Vundle
-Plug 'gmarik/Vundle.vim'
-
-Plug 'WebAPI.vim'
-Plug 'open-browser.vim'
+Plug 'vim-scripts/WebAPI.vim'
+Plug 'tyru/open-browser.vim'
 " ColorSchemeEditor
-Plug 'ColorSchemeEditor'
+Plug 'vim-scripts/ColorSchemeEditor'
 
 " TagHighlight
 Plug 'demelev/TagHighlight'
@@ -131,11 +127,6 @@ Plug 'derekwyatt/vim-fswitch'
 " creates C++ class method implementations
 Plug 'derekwyatt/vim-protodef'
 
-" Todo plugin
-Plug 'neochrome/todo.vim'
-" Plugin 'vitalk/vim-simple-todo'
-Plug 'vim-scripts/TaskList.vim'
-
 " Git support
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -143,10 +134,8 @@ Plug 'airblade/vim-gitgutter'
 " Mercurial support
 Plug 'mhinz/vim-signify'
 
-Plug 'tpope/vim-dispatch'
-
 " Super increment
-Plug 'VisIncr'
+Plug 'vim-scripts/VisIncr'
 
 " Auto completion
 Plug 'Valloric/YouCompleteMe'
@@ -156,7 +145,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Plugin to show syntax errors
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 
 " LaTeX
 Plug 'LaTeX-Box-Team/LaTeX-Box'
@@ -165,13 +154,12 @@ Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'easymotion/vim-easymotion'
 
 " Commenting
-if g:bully_dev == "demelev" || g:bully_dev == "dstavila"
-    Plugin 'scrooloose/nerdcommenter'
-elseif g:bully_dev == "eugene"
-    Plugin 'tomtom/tcomment_vim'
-endif
+Plug 'scrooloose/nerdcommenter'
 
-" Unite - obsoletes: command-t, fuzzy-finder and buffer explorer
+" Debugging
+Plug 'joonty/vdebug'
+
+" Denite
 Plug 'Shougo/denite.nvim',  { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neomru.vim'
@@ -209,6 +197,16 @@ Plug 'vim-scripts/taglist.vim'
 " Rainbow prentheses
 Plug 'kien/rainbow_parentheses.vim'
 
+" ==== LITERACY ========================
+
+" Todo plugin
+Plug 'neochrome/todo.vim'
+Plug 'vim-scripts/TaskList.vim'
+
+" Date
+Plug 'tpope/vim-speeddating'
+Plug 'mattn/calendar-vim'
+
 " ==== SYNTAX =========================
 Plug 'vim-scripts/ck.vim'
 Plug 'vim-scripts/glsl.vim'
@@ -216,17 +214,22 @@ Plug 'vim-scripts/cg.vim'
 Plug 'leshill/vim-json'
 Plug 'chrisbra/csv.vim'
 Plug 'dag/vim2hs'
+Plug 'jceb/vim-orgmode'
+Plug 'Rykka/os.vim'
+Plug 'Rykka/riv.vim'
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+
 Plug 'vim-scripts/octave.vim--'
-Plug 'vim-perl/vim-perl'
-Plug 'rust-lang/rust.vim'
-" Plugin 'andersoncustodio/vim-tmux'
 Plug 'vim-scripts/Logcat-syntax-highlighter'
 
 " ==== Other ==========================
 
-Plug 'L9'
+Plug 'vim-scripts/CompleteHelper'
+Plug 'vim-scripts/CamelCaseComplete'
+Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-expand-region'
@@ -235,9 +238,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
-Plug 'Raimondi/delimitMate'
+Plug 'cohama/lexima.vim'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
+
 Plug 'justincampbell/vim-eighties'
 
 Plug 'mhinz/vim-startify'
@@ -245,20 +250,33 @@ Plug 'mhinz/vim-startify'
 Plug 'xuhdev/SingleCompile'
 Plug 'vim-scripts/Improved-AnsiEsc'
 
-" === C# and Uniy =====================
+" === C# and Unity =====================
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'OrangeT/vim-csharp'
 
-" === Java Script and HTML =====================
+" === HTML =====================
+Plug 'mattn/emmet-vim'
+Plug 'othree/html5.vim'
+Plug 'valloric/MatchTagAlways'
+Plug 'skammer/vim-css-color'
+
+" === Java Script =====================
+Plug 'epilande/vim-es2015-snippets'
+Plug 'epilande/vim-react-snippets'
 Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
+Plug 'mxw/vim-jsx'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install tern' }
 
-" === Ruby ================================
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
-
+" ==== Python =========================
+Plug 'tmhedberg/SimpylFold'
+Plug 'davidhalter/jedi-vim'
 
 "===== Themes =========================
+Plug 'vim-scripts/win9xblueback.vim'
+Plug 'vim-scripts/darkblack.vim'
+Plug 'vim-scripts/oceanblack.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 Plug 'sjl/badwolf'
 Plug 'jordwalke/flatlandia'
@@ -318,15 +336,13 @@ colorscheme molokai
 " colorscheme base16-tomorrow
 
 " Cursor free positioning
-if g:bully_dev == "eugene"
-    set virtualedit=all
-endif
+set virtualedit=all
 
 " Highlight syntax
 syntax on
+filetype on
+filetype plugin indent on
 
-" No highlighting limit
-"set synmaxcol=0
 
 " Visual
 set number         " Show line numbers
@@ -346,13 +362,8 @@ set formatoptions-=t " Don't wrap while typing
 set cmdwinheight=16  " Command-line window
 set vb t_vb=
 
-if bully_dev == "demelev"
-    "set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
-endif
-
-
 " Unprintable
-set nolist
+set list
 set listchars=tab:‣\ ,trail:·,extends:>,eol:¶,precedes:·
 
 " Buffers ans splits
@@ -360,11 +371,6 @@ set hidden " allow hidden buffers
 set splitbelow " new splits go down
 set splitright " and right
 
-
-" place a dollar sign when in change mode to indicate end
-if g:bully_dev == "eugene"
-    set cpoptions+=$
-endif
 
 " Update time (def 4000)
 set updatetime=750
@@ -395,8 +401,8 @@ exec ":set undodir=".g:dev_temp
 
 
 " History depth
-set history=256
-set undolevels=256
+set history=1000
+set undolevels=1000
 
 " Search
 
@@ -432,7 +438,6 @@ set foldlevel=100       " Unfold on start
 set foldopen=block,hor,mark,percent,quickfix,tag
 
 " Russian layout
-set keymap=russian-jcukenwin    " C-^ to switch
 set iminsert=0                  " insert mode default en
 set imsearch=0                  " search mode default en
 
@@ -443,35 +448,11 @@ set modelines=5
 " View options
 set viewoptions=cursor,options,folds,slash,unix
 
-" System default for mappings is now the ',' character
-if g:bully_dev != "demelev"
-    let mapleader = ","
-endif
 
 " Setup GVIM separately
 if has("gui_running")
 
-    if g:os == "Darwin"
-        if bully_dev == "demelev"
-            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14
-        else
-            set guifont=PragmataPro:h14
-        endif
-    elseif g:os == "Linux"
-        if bully_dev == "demelev"
-            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
-        else
-            set guifont=PragmataProMono\ 12
-        endif
-    elseif g:os == "Windows"
-        if bully_dev == "demelev"
-            set guifont=DejaVu_Sans_Mono_for_Powerline:h12
-        elseif bully_dev == "dstavila"
-            set guifont=Pragmata_Pro:h12
-        else
-            set guifont=PragmataPro:h14
-        endif
-    endif
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 
     " Set default size for GVIM
     set lines=60 columns=200
@@ -485,15 +466,6 @@ if has("gui_running")
     set guioptions-=b
 
    " Cursor settings
-   " TODO: cursor play with blinking
-    if g:bully_dev == "eugene"
-        highlight Cursor guifg=black guibg=white
-        highlight iCursor guifg=black guibg=red
-        set guicursor=n-v-c:block-Cursor
-        set guicursor+=i:ver100-iCursor
-        set guicursor+=n-v:blinkon0
-        set guicursor+=i-c:blinkwait10
-    endif
 
     if g:os == "Linux"
    " Bash in gvim will understand my aliases
@@ -516,7 +488,7 @@ else
    highlight SpellLocal term=underline cterm=underline
 
    " Italic comments on Linux (tmux must support)
-   if g:os == "Linux" && g:bully_dev == "eugene"
+   if g:os == "Linux"
        highlight Comment cterm=italic
    endif
 
@@ -545,10 +517,6 @@ let g:openbrowser_search_engines = extend(
 
 " == startify ===============
 let g:startify_bookmarks = ['~/.vimrc','~/.zshrc','~/nfo/commands.txt',]
-if g:os != "Windows"
-    let g:startify_custom_header =
-                \ map(split(system('fortune | cowsay -W 60'), '\n') , '"   ". v:val') + ['','']
-endif
 let g:startify_change_to_dir = 0
 let g:startify_files_number = 8
 
@@ -589,11 +557,6 @@ let g:protodefprotogetter = '/home/randy/.vim/bundle/vim-protodef/pullproto.pl'
 
 " == Airline / Powerline  ==
 
-" bufferline
-" let g:bufferline_modified = '*'
-" let g:bufferline_echo = 0
-" let g:Powerline_symbols="fancy"
-
 let g:airline_theme='powerlineish'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -601,34 +564,28 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline#extensions#tabline#show_buffers = 1
 
-" == Syntastic ==
+" == ALE ==
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 0
+let g:ale_open_list = 0
+let g:ale_keep_list_window_open = 0
+let g:ali_lint_delay = 1000
+let g:ale_linters = {
+            \ 'php': ['phpmd', 'phpcs'],
+            \ 'python': ['flake8'],
+            \ 'javascript': ['eslint'],
+            \ 'cs': ['syntax', 'semantic', 'issues']
+            \ }
+let g:ale_fixers = {
+            \ 'python': ['autopep8', 'yapf'],
+            \ 'javascript': ['eslint']
+            \ }
+let g:ale_php_phpmd_ruleset = 'cleancode'
 
-let g:syntastic_error_symbol="✖"
-let g:syntastic_warning_symbol="⚠"
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+" let g:syntastic_error_symbol="✖"
+" let g:syntastic_warning_symbol="⚠"
 set cmdheight=2
-
-" == Unite ==
-
-" let g:unite_enable_start_insert = 1
-" let g:unite_split_rule = "botright"
-" let g:unite_force_overwrite_statusline = 0
-" let g:unite_winheight = 10
-" let g:unite_candidate_icon="▷"
-" let g:unite_source_rec_async_command= ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
-" let g:unite_source_history_yank_enable = 1
-
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" call unite#filters#sorter_default#use(['sorter_rank'])
-" call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-" \ 'ignore_pattern', join([
-" \ '.class$', '\.jar$',
-" \ '\.jpg$', '\.jpeg$', '\.bmp$', '\.png$', '\.gif$',
-" \ '\.o$', '\.so$', '\.lo$', '\.lib$', '\.out$', '\.obj$', 
-" \ '\.zip$', '\.tar\.gz$', '\.tar\.bz2$', '\.rar$', '\.tar\.xz$',
-" \ '\.ac$', '\.cache$', '\.0$', '\.meta$',
-" \ '\.anim$', '\.controller$'
-" "\ ], '\|'))
 
 " == You complete me ==
 
@@ -688,11 +645,7 @@ let g:OmniSharp_timeout = 1
 let g:OmniSharp_server_type = 'v1'
 let g:OmniSharp_server_type = 'roslyn'
 
-"if g:bully_dev == "dstavila"
-    "let g:OmniSharp_selector_ui = "ctrlp"
-"else 
-    let g:OmniSharp_selector_ui = "unite"
-"endif
+let g:OmniSharp_selector_ui = "denite"
 
 " === Buffergator ===
 let g:buffergator_suppress_keymaps = 1
@@ -704,17 +657,6 @@ let NERDTreeWinPos='right'
 " only use for hg for now 
 let g:signify_vcs_list = [ 'hg' ]
 
-" === Conque Settings =================
-"let g:ConqueTerm_FastMode = 1
-"let g:ConqueTerm_ReadUnfocused = 1
-"let g:ConqueTerm_InsertOnEnter = 1
-"let g:ConqueTerm_PromptRegex = '^-->'
-"let g:ConqueTerm_TERM = 'rxvt-unicode-256color'
-"let g:ConqueTerm_CloseOnEnd = 1
-"let g:ConqueTerm_SendFunctionKeys = 1
-"let g:ConqueTerm_Color = 1 "disable colors
-"
-" }}}
 
 " =========================================================================
 " Helper functions
@@ -856,6 +798,18 @@ if g:os == "Darwin"
     map \ <leader>
 endif
 
+" Don't use Ex mode, use Q for formatting
+noremap Q gq
+
+" when wrapping is enabled do wrap friendly scrolling
+nnoremap j gj
+nnoremap k gk
+
+" Maps for switching windows 
+noremap <c-j> <c-w>j
+noremap <c-h> <c-w>h
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
 
 
 " == Function keys ==============
@@ -868,48 +822,13 @@ imap <silent> <F2>  <c-o>:call <SID>QuickfixToggle()<cr>
 nmap <silent> <F3>  :call TRANSLATE()<cr>
 imap <silent> <F3>  <c-o>:call TRANSLATE()<cr>
 
-if g:bully_dev == "demelev"
-
-    " Save file
-    nmap <F4> :w!<CR>
-    imap <F4> <Esc>:w!<CR>
-    vmap <F4> <Esc>:w!<CR>
-
-    " Quit vim
-    nmap <F5> :q<CR>
-    imap <F5> <Esc>:q<CR>
-    vmap <F5> <Esc>:q<CR>
-
-elseif g:bully_dev == "eugene"
-
-    " Single compile binding
-    nmap <silent> <F5> <ESC>:SCCompile<CR>
-    nmap <silent> <F6> <ESC>:SCCompileRun<CR>
-
-endif
-
-" Toggle spelling with the F7 key
-nmap <silent> <F7> <ESC>:setlocal spell!<CR>
-imap <silent> <F7> <c-o>:setlocal spell!<CR>
-
-" Toggle keyboard layout
-imap <silent> <F9> <C-^>
-
 " Toggle unprintable <F10>
 nmap <silent> <F10> <ESC>:set list!<CR>
 imap <silent> <F10> <c-o>:set list!<CR>
 
-nmap <silent>  <F11> :emenu Encoding.<Tab><Tab>
-nmap <silent> <S-F11> :emenu FileFormat.<Tab><Tab>
-
-nmap <silent> <F12> :NERDTreeToggle<CR>
 
 " == Leader mappings =============
 
-" CtrlP maps
-" TODO: clear it
-map <A-b> :CtrlPBuffer<cr>
-map <A-m> :CtrlPBufTag<cr>
 map <c-Tab> :tabn<cr>
 
 " OmniSharp bindings TODO: compare with Eugene's - CS only!
@@ -961,20 +880,12 @@ vnoremap > ><CR>gv
 vnoremap < <<CR>gv
 
 " move current line up/down one
-nmap <c-j> ddp
-nmap <c-k> ddkP
+vnoremap - "td"tp'[V']
+vnoremap _ "tdk"tP'[V']
 
 " move visual block up/down one
-vmap <c-j> dp'[V']
-vmap <c-k> dkP'[V']
-
-" Duplications
-" TODO: prevent register wipe
-vmap <silent> <leader>= yP
-nmap <silent> <leader>= YP
-
-" move stuff to the right of cursor to next line
-nmap <silent> <leader><CR> i<CR><ESC>k$
+nnoremap - "tdd"tp
+nnoremap _ "tddk"tP
 
 " cd to the directory containing the file in the buffer
 nmap <silent> <leader>cd :lcd %:h<CR>
@@ -996,11 +907,6 @@ nmap <silent> <leader>oK :FSSplitAbove<CR>
 nmap <silent> <leader>oj :FSBelow<CR>
 nmap <silent> <leader>oJ :FSSplitBelow<CR>
 
-" Alright... let's try this out
-imap jj <esc>
-
-" Line wrap toggle
-nmap <silent> <leader>w :set invwrap<CR>:set wrap?<CR>
 
 " Buffers
 
@@ -1086,47 +992,12 @@ nmap <leader>yc :YcmCompleter GoToDeclaration<cr>
 nmap <leader>yt :YcmCompleter GetType<cr>
 
 
-" == Unite =====
-let g:unite_source_history_yank_enable = 1
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-
-nnoremap <leader>uf :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async <cr>
-
-nnoremap <leader>ut :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-nnoremap <leader>ur :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-nnoremap <leader>uo :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-nnoremap <leader>uy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-nnoremap <leader>ub :<C-u>Unite -buffer-name=buffer  buffer<cr>
-nnoremap <leader>ul :<C-u>Unite -buffer-name=lines  line<cr>
-nnoremap <leader>um :<C-u>Unite -buffer-name=bookmarks  bookmark<cr>
-nnoremap <leader>uc :<C-u>Unite colorscheme<cr>
-nnoremap <leader>uh :<C-u>Unite resume<cr>
-
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-endfunction
-
 " Tab in normal mode is useless - use it to %
 nmap <Tab> %
 vmap <Tab> %
 
 " Ack on ,a
 nmap <leader>a :Ack<space>
-
-if bully_dev != "demelev"
-    " == Fugitive =======
-    noremap <leader>gd :Gdiff<CR>
-    noremap <leader>gc :Gcommit<CR>
-    noremap <leader>gs :Gstatus<CR>
-    noremap <leader>gw :Gwrite<CR>
-    noremap <leader>gb :Gblame<CR>
-endif
 
 vmap v <Plug>(expand_region_expand)
 vmap <c-v> <Plug>(expand_region_shrink)
@@ -1179,13 +1050,8 @@ endfunction
 
 function! SetupCs()
 
-    if g:bully_dev == "eugene"
-        call Enable80CharsLimit()
-        :IndentGuidesEnable
-    endif
-
-    " == Unite ===
-    nnoremap <leader>uf :call Unite_ctrlp()<cr>
+    call Enable80CharsLimit()
+    :IndentGuidesEnable
 
     " == Omnisharp ===
     nnoremap <leader>sg :OmniSharpGotoDefinition<cr>
@@ -1250,11 +1116,6 @@ autocmd BufNewFile,BufRead *.cs call SetupCs()
 
 " }}}
 
-
-" TODO: Insert g:bully_dev here?
-if filereadable(expand("$VIM/vimfiles/demelev/helpers.vim"))
-    source $VIM/vimfiles/demelev/helpers.vim
-endif
 
 " =============================================================================
 " Tab visual 
@@ -1334,10 +1195,6 @@ endif
 " ==============================================================================
 " Appendix
 " ==============================================================================
-if bully_dev == "demelev"
-    colorscheme Monokai_next
-endif
-
 " vim -b : edit binary using xxd-format!
 augroup Binary
   au!
