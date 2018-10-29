@@ -45,76 +45,104 @@ endif
 " }}}
 "
 " =========================================================================
-" Vundle
+" Plug
 " =========================================================================
 " {{{
 "
+
+" Download VimPlug {{{
+let g:freshPlugInstall = 0
+let vimfiles_dir = ".vim"
+let bundles_dir = expand("~/" . vimfiles_dir . "/bundle")
+
+let plugfile=expand("~/" . vimfiles_dir . "/autoload/plug.vim")
+if !filereadable(plugfile)
+    echo "Installing vim-plug.."
+    echo ""
+
+    let mkdir_flags = " -p "
+    let link_cmd =  "silent !ln " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim")) . " " .  EscapePath(expand("~/" . vimfiles_dir  .  "/autoload/plug.vim"))
+    if has('win32')
+        let mkdir_flags = ""
+        let link_cmd = "silent !mklink /h " .  EscapePath(expand("~/" .  vimfiles_dir  .  "/autoload/plug.vim")) . " " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim"))
+    endif
+
+    execute "silent !mkdir " . mkdir_flags . EscapePath(bundles_dir)
+    execute "silent !git clone https://github.com/junegunn/vim-plug " . EscapePath(bundles_dir . "/vim-plug")
+    execute "silent !mkdir " . mkdir_flags . EscapePath(expand("~/" . vimfiles_dir . "/autoload"))
+    execute link_cmd
+    execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
+
+    let g:freshPlugInstall = 1
+endif
+" }}}
+
+" Setup VimPlug {{{
+
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
 
-if g:os == "Windows"
-    set rtp+=~/.vim
-endif
+call plug#begin(bundles_dir)
 
-call vundle#begin()
+Plug 'junegunn/vim-plug'
 
-Plugin 'Buffergator'
-Plugin 'vim-scripts/dbext.vim'
-Plugin 'ludovicchabant/vim-ctrlp-autoignore'
+"}}}
+
+" Plugs {{{
+Plug 'Buffergator'
+Plug 'vim-scripts/dbext.vim'
+Plug 'ludovicchabant/vim-ctrlp-autoignore'
 
 " let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
+Plug 'gmarik/Vundle.vim'
 
-Plugin 'WebAPI.vim'
-Plugin 'open-browser.vim'
+Plug 'WebAPI.vim'
+Plug 'open-browser.vim'
 " ColorSchemeEditor
-Plugin 'ColorSchemeEditor'
-
-" CtrlP
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ColorSchemeEditor'
 
 " TagHighlight
-Plugin 'demelev/TagHighlight'
+Plug 'demelev/TagHighlight'
 
 " cpp/h switch
-Plugin 'derekwyatt/vim-fswitch'
+Plug 'derekwyatt/vim-fswitch'
 
 " creates C++ class method implementations
-Plugin 'derekwyatt/vim-protodef'
+Plug 'derekwyatt/vim-protodef'
 
 " Todo plugin
-Plugin 'neochrome/todo.vim'
+Plug 'neochrome/todo.vim'
 " Plugin 'vitalk/vim-simple-todo'
-Plugin 'vim-scripts/TaskList.vim'
+Plug 'vim-scripts/TaskList.vim'
 
 " Git support
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Mercurial support
-Plugin 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 
-Plugin 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch'
 
 " Super increment
-Plugin 'VisIncr'
+Plug 'VisIncr'
 
 " Auto completion
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
 " Snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Plugin to show syntax errors
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " LaTeX
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 
 " Easy motion
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 
 " Commenting
 if g:bully_dev == "demelev" || g:bully_dev == "dstavila"
@@ -124,114 +152,114 @@ elseif g:bully_dev == "eugene"
 endif
 
 " Unite - obsoletes: command-t, fuzzy-finder and buffer explorer
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'ujihisa/unite-colorscheme'
-Plugin 'Shougo/neoyank.vim'
-Plugin 'Shougo/neomru.vim'
-Plugin 'unite-yarm'
+Plug 'Shougo/denite.nvim',  { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/neomru.vim'
+Plug 'vim-scripts/EasyGrep'
 
 " Indent guides
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Tabling
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'godlygeek/tabular'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'godlygeek/tabular'
 
 " Status line
 " Plugin 'bling/vim-airline' - Old Path
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Session save/restore
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 
 " Undo visual tree
 " Plugin 'sjl/gundo.vim' " Older one
-Plugin 'mbbill/undotree'
+Plug 'mbbill/undotree'
 
 " Tags for C++/C and others
-Plugin 'demelev/tagbar'
+Plug 'demelev/tagbar'
 
 " Formatting with clanfg format
-Plugin 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 
 " Taglist
-Plugin 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/taglist.vim'
 
 " Rainbow prentheses
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 
 " ==== SYNTAX =========================
-Plugin 'vim-scripts/ck.vim'
-Plugin 'vim-scripts/glsl.vim'
-Plugin 'vim-scripts/cg.vim'
-Plugin 'leshill/vim-json'
-Plugin 'chrisbra/csv.vim'
-Plugin 'dag/vim2hs'
-Plugin 'tpope/vim-markdown'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'vim-scripts/octave.vim--'
-Plugin 'vim-perl/vim-perl'
-Plugin 'rust-lang/rust.vim'
+Plug 'vim-scripts/ck.vim'
+Plug 'vim-scripts/glsl.vim'
+Plug 'vim-scripts/cg.vim'
+Plug 'leshill/vim-json'
+Plug 'chrisbra/csv.vim'
+Plug 'dag/vim2hs'
+Plug 'tpope/vim-markdown'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'vim-scripts/octave.vim--'
+Plug 'vim-perl/vim-perl'
+Plug 'rust-lang/rust.vim'
 " Plugin 'andersoncustodio/vim-tmux'
-Plugin 'vim-scripts/Logcat-syntax-highlighter'
+Plug 'vim-scripts/Logcat-syntax-highlighter'
 
 " ==== Other ==========================
 
-Plugin 'L9'
-Plugin 'tpope/vim-surround'
-Plugin 'mileszs/ack.vim'
-Plugin 'terryma/vim-expand-region'
+Plug 'L9'
+Plug 'tpope/vim-surround'
+Plug 'mileszs/ack.vim'
+Plug 'terryma/vim-expand-region'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-vinegar'
-Plugin 'vim-scripts/restore_view.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'Raimondi/delimitMate'
-Plugin 'justincampbell/vim-eighties'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-scripts/restore_view.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-unimpaired'
+Plug 'Raimondi/delimitMate'
+Plug 'justincampbell/vim-eighties'
 
-Plugin 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 
-Plugin 'xuhdev/SingleCompile'
-Plugin 'vim-scripts/Improved-AnsiEsc'
-" Plugin 'vim-scripts/genutils'
-" Plugin 'idbrii/vim-perforce'
+Plug 'xuhdev/SingleCompile'
+Plug 'vim-scripts/Improved-AnsiEsc'
 
 " === C# and Uniy =====================
-Plugin 'OmniSharp/omnisharp-vim'
-Plugin 'OrangeT/vim-csharp'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'OrangeT/vim-csharp'
 
 " === Java Script and HTML =====================
-Plugin 'pangloss/vim-javascript'
-Plugin 'moll/vim-node'
+Plug 'pangloss/vim-javascript'
+Plug 'moll/vim-node'
 
 " === Ruby ================================
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 
 
 "===== Themes =========================
-" Plugin 'chriskempson/base16-vim' ==== still prefer molokai
-Plugin 'tomasr/molokai'
-Plugin 'sjl/badwolf'
-Plugin 'jordwalke/flatlandia'
-Plugin 'morhetz/gruvbox'
-Plugin 'flazz/vim-colorschemes'
-" Plugin 'benjaminwhite/Benokai'
+Plug 'tomasr/molokai'
+Plug 'sjl/badwolf'
+Plug 'jordwalke/flatlandia'
+Plug 'morhetz/gruvbox'
+Plug 'flazz/vim-colorschemes'
 
+" }}}
 
-" ==== Obsolete  =====================
+" End VimPlug {{{
 
-" Plugin 'mkitt/tabline.vim'      " Buildin into airline
-" Plugin 'bling/vim-bufferline'   " Deprecated since tabline buffer support
-" Plugin 'Lokaltog/vim-powerline' " Using airline
+let $LPLUG = expand('~/_local_plug.vim')
+if filereadable($LPLUG)
+    source $LPLUG
+endif
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
+
+if ( g:freshPlugInstall == 1)
+    execute 'PlugInstall'
+endif
+" }}}
 
 " }}}
 

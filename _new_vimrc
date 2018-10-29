@@ -215,30 +215,6 @@ endif
 " }}}
 
 " Setup VimPlug {{{
-let g:freshPlugInstall = 0
-let vimfiles_dir = ".vim"
-let bundles_dir = expand("~/" . vimfiles_dir . "/bundle")
-
-let plugfile=expand("~/" . vimfiles_dir . "/autoload/plug.vim")
-if !filereadable(plugfile)
-    echo "Installing vim-plug.."
-    echo ""
-
-    let mkdir_flags = " -p "
-    let link_cmd =  "silent !ln " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim")) . " " .  EscapePath(expand("~/" . vimfiles_dir  .  "/autoload/plug.vim"))
-    if has('win32')
-        let mkdir_flags = ""
-        let link_cmd = "silent !mklink /h " .  EscapePath(expand("~/" .  vimfiles_dir  .  "/autoload/plug.vim")) . " " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim"))
-    endif
-
-    execute "silent !mkdir " . mkdir_flags . EscapePath(bundles_dir)
-    execute "silent !git clone https://github.com/junegunn/vim-plug " . EscapePath(bundles_dir . "/vim-plug")
-    execute "silent !mkdir " . mkdir_flags . EscapePath(expand("~/" . vimfiles_dir . "/autoload"))
-    execute link_cmd
-    execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
-
-    let g:freshPlugInstall = 1
-endif
 
 set nocompatible
 filetype off
