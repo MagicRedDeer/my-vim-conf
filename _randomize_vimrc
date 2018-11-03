@@ -811,6 +811,20 @@ noremap <c-h> <c-w>h
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 
+" nvim specific settings
+if has('nvim')
+    :tnoremap <Esc><Esc> <C-\><C-n>
+    :tnoremap <C-k> <C-\><C-n><C-w>k
+    :tnoremap <C-l> <C-\><C-n><C-w>l
+    :tnoremap <C-h> <C-\><C-n><C-w>h
+    :tnoremap <C-j> <C-\><C-n><C-w>j
+    :tnoremap <C-w> <C-\><C-n><C-w>
+    augroup terminalau
+        autocmd!
+        autocmd BufEnter term://* startinsert
+    augroup end
+endif
+
 
 " == Function keys ==============
 
