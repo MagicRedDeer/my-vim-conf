@@ -5,7 +5,6 @@
 "
 "   1) play with args and argdo commands (like :args `ag -l foo`)
 "   2) quickfix commands (go, t, i etc)
-"   3) Unite setup : file_mru outline history/yank - why not working?
 "   4) unimpaired keys learn
 "   5) vim-multiple-cursors
 "   6) vim-easy-align
@@ -715,17 +714,6 @@ endfunction
 
 " Build the ctrlp function, using projectroot to define the
 " working directory.
-function! Unite_ctrlp()
-  execute ':Unite  -buffer-name=files -start-insert buffer file_rec/async:'.fnameescape(FindProjectRoot("Assets")).'/'
-endfunction
-
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-endfunction
 
 " Quick Fix window on/off
 let g:quickfix_is_open = 0
