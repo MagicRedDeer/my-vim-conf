@@ -303,18 +303,6 @@ endif
 
 
 " =========================================================================
-" Colors (should precede colorscheme command)
-" =========================================================================
-" {{{
-
-" Show whitespace
-" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=124 guibg=red
-" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-" highlight Pmenu ctermfg=1 ctermbg=4 guibg=grey30
-
-" }}}
-
-" =========================================================================
 " Settings
 " =========================================================================
 " {{{
@@ -759,6 +747,7 @@ command! -nargs=1 OpenURL :call OpenURL(<q-args>)
 "}}}
 
 let g:ctrlp_extensions = ['autoignore']
+let g:startify_session_dir= g:session_directory
 "let g:ctrlp_root_markers = ['_vimroot']
 "let g:ctrlp_working_path_mode = "r"
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$|.*\.(meta|scene|anim|prefab)$'
@@ -962,7 +951,7 @@ nmap <silent> <space>PP "*P
 nmap <silent> <leader>gw :vimgrep /<C-r><C-w>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
 
 " Edit the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>ev :rightbelow vsplit $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Yank to end (like D and C)
