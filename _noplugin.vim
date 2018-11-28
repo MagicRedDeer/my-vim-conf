@@ -130,7 +130,7 @@ endif
 "}}}
 
 "{{{ nvim specific settings
-if has('nvim')
+if has('nvim') || version >= 800
     :tnoremap <Esc><Esc> <C-\><C-n>
     :tnoremap <C-k> <C-\><C-n><C-w>k
     :tnoremap <C-l> <C-\><C-n><C-w>l

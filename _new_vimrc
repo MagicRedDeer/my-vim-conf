@@ -258,9 +258,9 @@ Plug 'cohama/lexima.vim'
 " }}}
 
 " C/C++ {{{
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'derekwyatt/vim-protodef'
-Plugin 'rhysd/vim-clang-format'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'derekwyatt/vim-protodef'
+Plug 'rhysd/vim-clang-format'
 " }}}
 
 " For Python {{{
@@ -286,7 +286,7 @@ Plug 'skammer/vim-css-color'
 Plug 'epilande/vim-es2015-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'pangloss/vim-javascript'
-Plugin 'moll/vim-node'
+Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install tern' }
 " }}}
@@ -313,13 +313,13 @@ Plug 'tyru/open-browser.vim'
 "}}}
 
 " Browser and Web {{{
-Plugin 'WebAPI.vim'
+Plug 'WebAPI.vim'
 Plug 'tyru/open-browser.vim'
 " }}}
 
 " C# and Unity {{{
-Plugin 'OmniSharp/omnisharp-vim'
-Plugin 'OrangeT/vim-csharp'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'OrangeT/vim-csharp'
 " }}}
 
 " }}}
@@ -406,7 +406,7 @@ Plug 'vim-scripts/VisIncr'
 Plug 'tpope/vim-markdown'
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
-Plugin 'jtratner/vim-flavored-markdown'
+Plug 'jtratner/vim-flavored-markdown'
 " }}}
 
 " }}}
@@ -651,8 +651,8 @@ nnoremap <leader>gd :OmniSharpGotoDefinition<cr>
 
 " Read Local PlugSettings {{{
 let $LOCALPLUGSETTINGS = expand('~/_local_plug_settings.vim')
-if filereadable($$LOCALPLUGSETTINGS)
-    source $$LOCALPLUGSETTINGS
+if filereadable($LOCALPLUGSETTINGS)
+    source $LOCALPLUGSETTINGS
 endif 
 " }}}
 
