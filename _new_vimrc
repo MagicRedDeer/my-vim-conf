@@ -436,8 +436,8 @@ let g:lexima_enable_endwise_rules = 0
 " }}}
 
 " UltiSnips Settings {{{
-let g:UltiSnipsExpandTrigger = '<c-l>'
-let g:UltiSnipsListSnippets = '<s-c-l>'
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsListSnippets = '<c-k>'
 " }}}
 
 " FSwitch mappings {{{
