@@ -313,7 +313,7 @@ Plug 'tyru/open-browser.vim'
 "}}}
 
 " Browser and Web {{{
-Plug 'WebAPI.vim'
+Plug 'vim-scripts/WebAPI.vim'
 Plug 'tyru/open-browser.vim'
 " }}}
 
@@ -428,6 +428,29 @@ endif
 " }}}
 
 " Settings for Plugs {{{
+
+" lexima Settings {{{
+let g:lexima_enable_basic_rules = 1
+let g:lexima_enable_newline_rules = 0
+let g:lexima_enable_endwise_rules = 0
+" }}}
+
+" UltiSnips Settings {{{
+let g:UltiSnipsExpandTrigger = '<c-l>'
+let g:UltiSnipsListSnippets = '<s-c-l>'
+" }}}
+
+" FSwitch mappings {{{
+nmap <silent> <leader>of :FSHere<CR>
+nmap <silent> <leader>ol :FSRight<CR>
+nmap <silent> <leader>oL :FSSplitRight<CR>
+nmap <silent> <leader>oh :FSLeft<CR>
+nmap <silent> <leader>oH :FSSplitLeft<CR>
+nmap <silent> <leader>ok :FSAbove<CR>
+nmap <silent> <leader>oK :FSSplitAbove<CR>
+nmap <silent> <leader>oj :FSBelow<CR>
+nmap <silent> <leader>oJ :FSSplitBelow<CR>
+" }}}
 
 " Open Browser Settings {{{
 let g:openbrowser_default_search = 'unity3d'
@@ -557,12 +580,6 @@ hi link todocomment comment
 " define like this to enable explicit comments
 " comments then start with //
 let g:todoexplicitcommentsenabled = 1
-" }}}
-
-" Lexima Settings {{{
-let g:lexima_enable_basic_rules = 1
-let g:lexima_enable_newline_rules = 0
-let g:lexima_enable_endwise_rules = 0
 " }}}
 
 " HTML MatchTagAlways Settings {{{
@@ -823,7 +840,7 @@ endif
 "}}}
 
 " {{{ nvim specific settings
-if has('nvim')
+if has('nvim') || version >= 800
     :tnoremap <Esc><Esc> <C-\><C-n>
     :tnoremap <C-k> <C-\><C-n><C-w>k
     :tnoremap <C-l> <C-\><C-n><C-w>l
