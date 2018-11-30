@@ -186,7 +186,7 @@ Plug 'xolox/vim-misc'
 Plug 'mbbill/undotree'
 
 " Tags for C++/C and others
-Plug 'demelev/tagbar'
+Plug 'majutsushi/tagbar'
 
 " Formatting with clanfg format
 Plug 'rhysd/vim-clang-format'
