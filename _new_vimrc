@@ -699,7 +699,7 @@ endif
 " }}}
 
 " ColorScheme {{{
-colorscheme OceanBlack
+colorscheme oceanblack
 " }}}
 
 " History and undo settings  {{{
