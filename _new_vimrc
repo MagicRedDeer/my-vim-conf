@@ -860,12 +860,12 @@ if has('nvim') || version >= 800
     augroup terminalau
         autocmd!
         if !has('nvim')
-            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> <M-v> i<M-v>
-            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> <C-b> i<C-b>
-            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> <C-v> i<C-v>
-            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> p i<C-v>
-            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> "*p i<C-b>
-            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> P i<M-v>
+            "autocmd BufEnter *[Terminal] :nmap <buffer> <M-v> i<M-v>
+            "autocmd BufEnter *[Terminal] :nmap <buffer> <C-b> i<C-b>
+            "autocmd BufEnter *[Terminal] :nmap <buffer> <C-v> i<C-v>
+            "autocmd BufEnter *[Terminal] :nmap <buffer> p i<C-v>
+            "autocmd BufEnter *[Terminal] :nmap <buffer> "*p i<C-b>
+            "autocmd BufEnter *[Terminal] :nmap <buffer> P i<M-v>
         endif
     augroup end
 endif
