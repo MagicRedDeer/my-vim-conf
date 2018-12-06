@@ -851,9 +851,22 @@ if has('nvim') || version >= 800
     :tnoremap <C-h> <C-\><C-n><C-w>h
     :tnoremap <C-j> <C-\><C-n><C-w>j
     :tnoremap <C-w> <C-\><C-n><C-w>
+    if !has('nvim')
+        set termwinkey=<M-y>
+        :tnoremap <M-v> <M-y>"
+        :tnoremap <C-b> <M-y>"*
+        :tnoremap <C-v> <M-y>""
+    endif
     augroup terminalau
         autocmd!
-        autocmd BufEnter term://* startinsert
+        if !has('nvim')
+            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> <M-v> i<M-v>
+            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> <C-b> i<C-b>
+            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> <C-v> i<C-v>
+            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> p i<C-v>
+            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> "*p i<C-b>
+            autocmd BufCreate,BufEnter *[Terminal] :nmap <buffer> P i<M-v>
+        endif
     augroup end
 endif
 " }}}
