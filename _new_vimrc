@@ -322,6 +322,9 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'OrangeT/vim-csharp'
 " }}}
 
+" Maya Integration {{{
+Plug 'vim-scripts/Tail-Bundle'
+Plug 'https://gitlab.com/LazyLeopard/vimya.git'
 " }}}
 
 """"""""""""""""""""""
@@ -505,7 +508,9 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#auto_close_doc = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
-let g:jedi#force_py_version = 2
+if has('win32')
+    let $PYTHONPATH = $PYTHONPATH . ';C:\Program Files\Autodesk\Maya2018\Python\Lib\site-packages'
+endif
 " }}}
 
 " YCM Settings {{{
@@ -677,6 +682,22 @@ if filereadable($LOCALPLUGSETTINGS)
 endif 
 " }}}
 
+" Settings for vimya {{{
+let g:Tail_Height = 15
+let vimyaPort = 7720
+let vimyaTailCommand = 'STail'
+let vimyaSplitBelow = 1
+let vimyaForceRefresh = 1
+let vimyaRefreshWait = 2.0
+nnoremap <leader>mr :py vimyaRefreshLog ()<cr>
+nnoremap <leader>mt :py vimyaOpenLog ()<cr>
+nnoremap <leader>ml :py vimyaResetLog ()<cr>
+nnoremap <leader>mw :VimyaWhatIs <cr>
+nnoremap <leader>mu :VimyaSend undo()<cr>
+nnoremap <leader>mU :VimyaSend redo()<cr>
+" }}}
+" }}}
+
 " }}}
 
 " }}}
@@ -705,6 +726,7 @@ colorscheme oceanblack
 " History and undo settings  {{{
 set backup
 set writebackup
+set noswapfile
 set backupdir =$temp
 if has('unix')
     set backupdir =~/.backup/

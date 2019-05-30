@@ -426,7 +426,7 @@ else
   Plug 'Shougo/denite.nvim'
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
-  let g:python3_host_prog='c:\Program Files\Python35\python.exe'
+  let g:python3_host_prog='c:\Program Files\Python37\python.exe'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 let g:deoplete#enable_at_startup = 1
