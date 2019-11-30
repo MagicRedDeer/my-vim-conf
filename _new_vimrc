@@ -270,6 +270,10 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'davidhalter/jedi-vim'
 " }}}
 
+" For GLSL {{{
+Plug 'tikhomirov/vim-glsl'
+" }}}
+
 "For SQL {{{
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-dadbod'
