@@ -860,18 +860,15 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%,eol:~
 set nofixendofline
 set laststatus=2
 set noshowmode     " Mode is in airline, no need stock one
-set ttyfast        " Term is fast
 set formatoptions-=t " Don't wrap while typing
 set viewoptions=cursor,options,folds,slash,unix
 
 " Setting gui options and fonts {{{
-if exists(':Guifont')
+if has('gui_running')
     colorscheme angr
-    Guifont! Liberation\ Mono:h8
-elseif has('gui_running')
-    colorscheme angr
-    set guifont=Liberation\ Mono:h8
+    set guifont=Liberation\ Mono:h9
 else
+    set guifont=Hasklig
     colorscheme desert
 end
 set guioptions-=m
