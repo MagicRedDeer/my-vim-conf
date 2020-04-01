@@ -864,13 +864,6 @@ set formatoptions-=t " Don't wrap while typing
 set viewoptions=cursor,options,folds,slash,unix
 
 " Setting gui options and fonts {{{
-if has('gui_running')
-    colorscheme angr
-    set guifont=Liberation\ Mono:h9
-else
-    set guifont=Hasklig
-    colorscheme desert
-end
 set guioptions-=m
 set guioptions-=T
 set guioptions-=l
