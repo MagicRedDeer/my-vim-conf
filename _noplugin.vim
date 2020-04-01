@@ -1,12 +1,5 @@
+" Essentials {{{
 set nocompatible
-
-" General Settings {{{
-filetype on
-syntax on
-filetype plugin indent on
-if has("win32")
-    behave mswin
-endif
 " }}}
 
 " Custom Functions {{{
@@ -163,72 +156,15 @@ if has("multi_byte")
 endif
 " }}}
 
-if has('gui_running')
-    color desert
-else
-    color murphy
-endif
-
-set tabstop=4
-set expandtab
-set softtabstop=4
-set shiftwidth=4
-set textwidth=78
-set autoindent
-
-set shiftround
-
-set path+=**
-
-" when wrapping is enabled do wrap friendly scrolling
-nnoremap j gj
-nnoremap k gk
-
-" Maps for switching windows 
-noremap <C-j> <C-w>j
-noremap <C-h> <C-w>h
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" backspace in Visual mode deletes selection
-vnoremap <BS> d
-
-" CTRL-X and SHIFT-Del are Cut
-vnoremap <C-X> "+x
-vnoremap <S-Del> "+x
-
-" CTRL-C and CTRL-Insert are Copy
-vnoremap <C-C> "+y
-vnoremap <C-Insert> "+y
-
-" CTRL-V and SHIFT-Insert are Paste
-map <C-V>               "+gP
-map <S-Insert>          "+gP
-
-cmap <C-V>      <C-R>+
-cmap <S-Insert>     <C-R>+
-
-" Use CTRL-S for saving, also in Insert mode
-noremap <C-S>       :update<CR>
-vnoremap <C-S>      <C-C>:update<CR>
-inoremap <C-S>      <C-O>:update<CR>
-
-
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-set whichwrap+=<,>,[,]
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-
+" History and undo settings  {{{
 set backup
-set backupdir=$temp
+set writebackup
+set noswapfile
+set backupdir =$temp
 if has('unix')
     set backupdir =~/.backup/
     execute "silent !mkdir -p " . EscapePath(expand("~/.backup"))
 endif
-set noswapfile
 set undofile
 set undodir =$temp
 if has('unix')
@@ -237,9 +173,67 @@ if has('unix')
 endif
 set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
+" }}}
+
+" General Settings {{{
+filetype on
+syntax on
+filetype plugin indent on
+if has("win32")
+    behave mswin
+endif
+" }}}
+
+" Editing Options {{{
+
+" Allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+set whichwrap+=<,>,[,]
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+" }}}
+
+" Default options for indenting {{{
+set tabstop=4
+set expandtab
+set softtabstop=4
+set shiftwidth=4
+set textwidth=78
+set autoindent
+set shiftround
+" }}}
+
+" Default options for folding {{{
+set foldenable
+set foldmethod=syntax
+set foldlevel=100       " Unfold on start
+set foldopen=block,hor,mark,percent,quickfix,tag
+set foldlevelstart=99
+" }}}
+
+" Behaviour Settings {{{
+set visualbell
+if has('virtualedit')
+    set virtualedit=all
+endif
 set hidden
+" }}}
+
+" Search Settings {{{
+set hlsearch     " Highlight search results
+set ignorecase   " no sensitive to case
+set incsearch    " enable incremental search
+set smartcase    " When meet uppercase -> sensitive
+" }}}
 
 " Some display settings {{{
+if has('gui_running')
+    color desert
+else
+    color murphy
+endif
 set ruler               " show the cursor position all the time
 set nowrap              " Dont wrap from screen end
 set nonumber              " show display settings
@@ -247,14 +241,12 @@ set relativenumber
 set showcmd             " display incomplete commands
 set incsearch           " do incremental searching
 set hlsearch            " highlighting matching search results
-set ignorecase
-set smartcase
-set incsearch
 set list                " visualizing tabs, spaces, trails etc.
 set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%
 set laststatus=2
 set formatoptions-=t
 set viewoptions=cursor,options,folds,slash,unix
+"}}}
 
 " guioptions {{{
 colorscheme default
@@ -277,27 +269,31 @@ set nosplitbelow
 set equalalways
 " }}}
 
-" Default options for folding {{{
-set foldenable
-set foldmethod=syntax
-set foldlevel=100       " Unfold on start
-set foldopen=block,hor,mark,percent,quickfix,tag
-set foldlevelstart=99
+" Completion Settings {{{
+set complete-=u,t
+set complete+=k
+set complete+=kspell
+set completeopt=menu,menuone,longest
+let g:omnicomplete_fetch_documentation=1
 " }}}
 
-" Behaviour Settings {{{
-set visualbell
-if has('virtualedit')
-    set virtualedit=all
-endif
-set hidden
+" Wild Menu Settings {{{
+set wildmenu
+set wildmode=full
+set wildignore=*.o,*.obj,*~
+set wildcharm=<Tab>
 " }}}
 
 "Columns and lines{{{
+set colorcolumn=80
 if has('gui_running')
     set columns=999
     set lines=999
-    set colorcolumn=80
+    if has('win32')
+        simalt ~x
+    else
+        simalt <F10>
+    endif
 else
     augroup nonGuiCommands
         autocmd!
@@ -327,19 +323,12 @@ if has('nvim') || version >= 800
 endif
 "}}}
 
-" Completion Settings {{{
-set complete+=k
-set complete+=kspell
-set completeopt=menu,menuone,longest
-let g:omnicomplete_fetch_documentation=1
-" }}}
-
-
-" Wild Menu Settings {{{
-set wildmenu
-set wildmode=full
-set wildignore=*.o,*.obj,*~
-set wildcharm=<Tab>
+" Default options for folding {{{
+set foldenable
+set foldmethod=syntax
+set foldlevel=100       " Unfold on start
+set foldopen=block,hor,mark,percent,quickfix,tag
+set foldlevelstart=99
 " }}}
 
 " Commands {{{
@@ -365,10 +354,7 @@ augroup vimrcEx
 augroup END
 " }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                Mappings                                 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" {{{
+" Mappings {{{
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
@@ -481,4 +467,5 @@ vnoremap > ><CR>gv
 vnoremap < <<CR>gv
 
 " }}}
+
 " vim: fdm=marker

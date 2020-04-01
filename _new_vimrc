@@ -880,6 +880,9 @@ endif
 " Settings for split and Tabs {{{
 set nosplitbelow
 set equalalways
+" }}}
+
+" Completion Settings {{{
 set complete-=u,t
 set complete+=k
 set complete+=kspell
@@ -909,7 +912,7 @@ else
 endif
 "}}}
 
-" {{{ nvim specific settings
+" {{{ terminal specific settings
 if has('nvim') || version >= 800
     :tnoremap <Esc><Esc> <C-\><C-n>
     :tnoremap <C-k> <C-\><C-n><C-w>k
@@ -925,14 +928,7 @@ if has('nvim') || version >= 800
     endif
     augroup terminalau
         autocmd!
-        if !has('nvim')
-            "autocmd BufEnter *[Terminal] :nmap <buffer> <M-v> i<M-v>
-            "autocmd BufEnter *[Terminal] :nmap <buffer> <C-b> i<C-b>
-            "autocmd BufEnter *[Terminal] :nmap <buffer> <C-v> i<C-v>
-            "autocmd BufEnter *[Terminal] :nmap <buffer> p i<C-v>
-            "autocmd BufEnter *[Terminal] :nmap <buffer> "*p i<C-b>
-            "autocmd BufEnter *[Terminal] :nmap <buffer> P i<M-v>
-        endif
+        autocmd BufEnter term://* startinsert
     augroup end
 endif
 " }}}
