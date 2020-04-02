@@ -1,237 +1,27 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Pre                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" At Start {{{
-set nocompatible
-
-" Read Local Settings {{{
-let $LOCALPRE = expand('~/_local_pre.vim')
-if filereadable($LOCALPRE)
-    source $LOCALPRE
-endif
-" }}}
-
-" }}}
+source common/_vimrc_start.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Functions                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom Functions {{{
-
-" filetype dependent indent and folding settings {{{
-
-function! Set_YAML_Settings()
-    setlocal foldignore=#
-
-    setlocal tabstop=2
-    setlocal expandtab
-    setlocal softtabstop=2
-    setlocal shiftwidth=2
-    setlocal textwidth=79
-    setlocal autoindent
-
-    setlocal shiftround
-endfunction
-
-function! Set_Python_Settings()
-    " code folding settings
-    "setlocal foldmethod=indent
-    "setlocal foldcolumn=1
-    setlocal foldignore=
-
-    "pep8 settings
-    setlocal tabstop=4
-    setlocal expandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth=79
-    setlocal autoindent
-
-    setlocal shiftround
-endfunction
-
-function! Set_Vim_Settings()
-    setlocal foldmethod=marker
-    setlocal foldmarker={{{,}}}
-
-    setlocal tabstop=4
-    setlocal expandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth=79
-    setlocal autoindent
-endfunction
-
-function! Set_JS_Settings()
-    " code folding settings
-    setlocal foldmethod=marker
-    setlocal foldmarker={,}
-
-    setlocal tabstop=4
-    setlocal expandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth&
-    setlocal autoindent
-endfunction
-
-function! Set_ML_Settings()
-    " code folding settings
-    "setlocal foldmethod=marker
-    "setlocal foldmarker={,}
-
-    setlocal tabstop=4
-    setlocal expandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth=0
-    setlocal autoindent
-endfunction
-
-function! Set_Mel_Settings()
-    " code folding settings
-    setlocal foldmethod=marker
-    setlocal foldmarker={,}
-
-    setlocal tabstop=4
-    setlocal noexpandtab
-    setlocal softtabstop=4
-    setlocal shiftwidth=4
-    setlocal textwidth=79
-    setlocal autoindent
-endfunction
-" }}}
-
-function! EscapePath(path, ...)
-
-    let win32 = 1
-
-    if a:0 > 0 
-        if a:1 != 'win32'
-            let win32 = 0
-        endif
-    elseif !has('win32')
-        let win32 = 0
-    endif
-
-    if win32
-        return ('"' . a:path . '"')
-    else
-        return substitute(a:path, ' ', '\\ ', '')
-    endif
-
-endfunction
-
-function! IndentationFixer(from, tonum)
-    let from = a:from+0
-    let tonum = a:tonum+0
-
-    let &l:sw=from
-    let &l:sts=from
-    let &l:ts=from
-    let &l:et=0
-    retab!
-
-    let &l:sw=tonum
-    let &l:sts=tonum
-    let &l:ts=tonum
-    let &l:et=1
-    retab!
-endfunction
-
-" Refreshing {{{
-function! RefreshCurrentBuffer()
-    let k = &l:buftype
-    if k==''
-        execute 'e!'
-    endif
-endfun
-
-function! RefreshAllBuffers()
-    let bn = bufnr('%')
-    set noconfirm
-    bufdo call RefreshCurrentBuffer()
-    set confirm
-    execute 'b ' . bn
-    syn on
-endfun
-" }}}
-
-" Assigning diff expression for GNU diff utils {{{
-"if has('win32')
-  "set diffexpr=MyDiff()
-  "function! MyDiff()
-    "let opt = '-a --binary '
-    "if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    "if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    "let arg1 = v:fname_in
-    "if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    "let arg2 = v:fname_new
-    "if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    "let arg3 = v:fname_out
-    "if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    "let diff = '"C:\Program Files (x86)\GnuWin32\bin\diff.exe"'
-    "if &sh =~ '\<cmd'
-      "silent execute '!' . diff . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . ''
-    "else
-      "silent execute '!'. diff .' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-    "endif
-  "endfunction
-"endif
-"}}}
-
-" }}}
+source common/functions.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Plugins                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{
-
-" Download VimPlug {{{
-let g:freshPlugInstall = 0
-let vimfiles_dir = ".vim"
-let bundles_dir = expand("~/" . vimfiles_dir . "/bundle")
-
-let plugfile=expand("~/" . vimfiles_dir . "/autoload/plug.vim")
-if !filereadable(plugfile)
-    echo "Installing vim-plug.."
-    echo ""
-
-    let mkdir_flags = " -p "
-    let link_cmd =  "silent !ln " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim")) . " " .  EscapePath(expand("~/" . vimfiles_dir  .  "/autoload/plug.vim"))
-    if has('win32')
-        let mkdir_flags = ""
-        let link_cmd = "silent !mklink /h " .  EscapePath(expand("~/" .  vimfiles_dir  .  "/autoload/plug.vim")) . " " .  EscapePath(expand(bundles_dir .  "/vim-plug/plug.vim"))
-    endif
-
-    execute "silent !mkdir " . mkdir_flags . EscapePath(bundles_dir)
-    execute "silent !git clone https://github.com/junegunn/vim-plug " . EscapePath(bundles_dir . "/vim-plug")
-    execute "silent !mkdir " . mkdir_flags . EscapePath(expand("~/" . vimfiles_dir . "/autoload"))
-    execute link_cmd
-    execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
-
-    let g:freshPlugInstall = 1
-endif
-" }}}
-
-" Setup VimPlug {{{
-
-set nocompatible
-filetype off
-execute "silent source " . EscapePath(expand("~/" . vimfiles_dir . "/autoload/plug.vim"), '')
-
-call plug#begin(bundles_dir)
-
-Plug 'junegunn/vim-plug'
-
-"}}}
+source common/vim-plug_download.vim
+source common/vim-plug_setup.vim
 
 " Plugs {{{
 
 """""""""""""""
 "  IDE Plugs  "
 """""""""""""""
-" {{{
+
+" IDE Plugs {{{
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
@@ -336,6 +126,8 @@ Plug 'vim-scripts/Tail-Bundle'
 Plug 'https://gitlab.com/LazyLeopard/vimya.git'
 " }}}
 
+" }}}
+
 """"""""""""""""""""""
 "  Vim Improvements  "
 """"""""""""""""""""""
@@ -427,21 +219,10 @@ Plug 'jtratner/vim-flavored-markdown'
 
 " }}}
 
+
 " }}}
 
-" End VimPlug {{{
-
-let $LPLUG = expand('~/_local_plug.vim')
-if filereadable($LPLUG)
-    source $LPLUG
-endif
-
-call plug#end()
-
-if ( g:freshPlugInstall == 1)
-    execute 'PlugInstall'
-endif
-" }}}
+source common/vim-plug_endsetup.vim
 
 " Settings for Plugs {{{
 
@@ -755,8 +536,6 @@ nnoremap <leader>mw :VimyaWhatIs <cr>
 nnoremap <leader>mu :VimyaSend undo()<cr>
 nnoremap <leader>mU :VimyaSend redo()<cr>
 " }}}
-" }}}
-
 " }}}
 
 " }}}
@@ -1100,11 +879,6 @@ vnoremap < <<CR>gv
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           Customization Hook                            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Read Local Settings {{{
-let $LOCALVIM = expand('~/_local.vim')
-if filereadable($LOCALVIM)
-    source $LOCALVIM
-endif
-" }}}
+source common/_vimrc_end.vim
 
 " vim: fdm=marker
