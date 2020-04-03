@@ -1,7 +1,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Pre                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pre {{{
+redir @t
+execute 'silent pwd'
+redir END
+execute 'silent lcd ' . expand('<sfile>:h')
 source common/_vimrc_start.vim
+"}}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Functions                                "
@@ -574,8 +580,11 @@ source common/mappings-general.vim
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           Customization Hook                            "
+"                                  Post                                   "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Post {{{
 source common/_vimrc_end.vim
-
+execute 'silent lcd ' . trim(@t)
+"}}}
+ 
 " vim: fdm=marker
