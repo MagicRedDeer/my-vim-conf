@@ -3,8 +3,8 @@
 " history, undo and backup settings.
 
 " History and undo settings  {{{
-set backup
-set writebackup
+set nobackup
+set nowritebackup
 set noswapfile
 set backupdir =$temp
 if has('unix')
@@ -19,5 +19,6 @@ if has('unix')
 endif
 set history =1000         " remember more commands and search history
 set undolevels =1000      " use many muchos levels of undo
+set updatetime =300
 " }}}
 

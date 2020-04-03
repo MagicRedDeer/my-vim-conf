@@ -12,6 +12,7 @@ set laststatus=2
 set noshowmode     " Mode is in airline, no need stock one
 set formatoptions-=t " Don't wrap while typing
 set viewoptions=cursor,options,folds,slash,unix
+set shortmess +=c
 
 " Settings for split and Tabs {{{
 set nosplitbelow

@@ -1,0 +1,34 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Pre                                    "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pre {{{
+redir @t
+execute 'silent pwd'
+redir END
+execute 'silent lcd ' . expand('<sfile>:h')
+source common/_vimrc_start.vim
+"}}}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                Functions                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source common/functions.vim
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 Plugins                                 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plug Setup, Import and Settings {{{
+source common/vim-plug_download.vim
+source common/vim-plug_setup.vim
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+source common/vim-plug_endsetup.vim
+
+source plugs/settings-coc.vim
+
+" }}}
+
+
+
+
