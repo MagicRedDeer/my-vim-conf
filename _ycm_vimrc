@@ -43,21 +43,6 @@ if has('nvim')
     Plug 'ncm2/float-preview.nvim'
 end
 
-" Session Management {{{
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'mhinz/vim-startify'
-" }}}
-
-" Debugging {{{
-Plug 'joonty/vdebug'
-" }}}
-
-" AutoClose and Jumping {{{
-Plug 'vim-scripts/matchit.zip'
-Plug 'cohama/lexima.vim'
-" }}}
-
 " C/C++ {{{
 Plug 'derekwyatt/vim-fswitch'
 Plug 'derekwyatt/vim-protodef'
@@ -96,6 +81,15 @@ Plug 'mxw/vim-jsx'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install tern' }
 " }}}
 
+" C# and Unity {{{
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'OrangeT/vim-csharp'
+" }}}
+
+" Debugging {{{
+Plug 'joonty/vdebug'
+" }}}
+
 " PHP things {{{
 Plug 'StanAngeloff/php.vim'
 Plug 'docteurklein/php-getter-setter.vim'
@@ -111,20 +105,22 @@ Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 
 Plug 'dsawardekar/wordpress.vim'
-
-
-Plug 'tyru/open-browser.vim'
-
 "}}}
+
+" Session Management {{{
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'mhinz/vim-startify'
+" }}}
+
+" AutoClose and Jumping {{{
+Plug 'vim-scripts/matchit.zip'
+Plug 'cohama/lexima.vim'
+" }}}
 
 " Browser and Web {{{
 Plug 'vim-scripts/WebAPI.vim'
 Plug 'tyru/open-browser.vim'
-" }}}
-
-" C# and Unity {{{
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'OrangeT/vim-csharp'
 " }}}
 
 " Maya Integration {{{
@@ -158,7 +154,6 @@ Plug 'tpope/vim-repeat'
 " Buffer Handling
 Plug 'jlanzarotta/bufexplorer'
 Plug 'qpkorr/vim-bufkill'
-" }}}
 
 " Text Objects {{{
 Plug 'vim-scripts/argtextobj.vim'
@@ -174,6 +169,8 @@ Plug 'sjl/badwolf'
 Plug 'jordwalke/flatlandia'
 Plug 'morhetz/gruvbox'
 Plug 'flazz/vim-colorschemes'
+" }}}
+
 " }}}
 
 """""""""""""
@@ -224,326 +221,40 @@ Plug 'jtratner/vim-flavored-markdown'
 " }}}
 
 " }}}
-
-
 " }}}
 
 source common/vim-plug_endsetup.vim
 
 " Settings for Plugs {{{
-
-" CamelCaseMotion Settings {{{
-call camelcasemotion#CreateMotionMappings('<leader>')
-"}}}
-
-" lexima Settings {{{
-let g:lexima_enable_basic_rules = 1
-let g:lexima_enable_newline_rules = 0
-let g:lexima_enable_endwise_rules = 0
+source plugs/settings-camelcasemotion.vim
+source plugs/settings-lexima.vim
+source plugs/settings-ultisnips.vim
+source plugs/settings-fswitch.vim
+source plugs/settings-openbrowser.vim
+source plugs/settings-airline.vim
+source plugs/settings-ale.vim
+source plugs/settings-fastfold.vim
+source plugs/settings-denite.vim
+source plugs/settings-easygrep.vim
+source plugs/settings-simpylfold.vim
+source plugs/settings-jedi.vim
+source plugs/settings-ycm.vim
+source plugs/settings-speeddating.vim
+source plugs/settings-dbext_dadbod.vim
+source plugs/settings-session_startify.vim
+source plugs/settings-latexbox.vim
+source plugs/settings-todo.vim
+source plugs/settings-matchtagalways.vim
+source plugs/settings-jsx.vim
+source plugs/settings-php.vim
+source plugs/settings-phpgettersetter.vim
+source plugs/settings-phpcomplete.vim
+source plugs/settings-phphelper.vim
+source plugs/settings-omnisharp.vim
+source plugs/settings-vimya.vim
 " }}}
 
-" UltiSnips Settings {{{
-let g:UltiSnipsExpandTrigger = '<c-j>'
-let g:UltiSnipsListSnippets = '<c-k>'
-" }}}
-
-" FSwitch mappings {{{
-nmap <silent> <leader>of :FSHere<CR>
-nmap <silent> <leader>ol :FSRight<CR>
-nmap <silent> <leader>oL :FSSplitRight<CR>
-nmap <silent> <leader>oh :FSLeft<CR>
-nmap <silent> <leader>oH :FSSplitLeft<CR>
-nmap <silent> <leader>ok :FSAbove<CR>
-nmap <silent> <leader>oK :FSSplitAbove<CR>
-nmap <silent> <leader>oj :FSBelow<CR>
-nmap <silent> <leader>oJ :FSSplitBelow<CR>
-" }}}
-
-" Open Browser Settings {{{
-let g:openbrowser_default_search = 'unity3d'
-let g:openbrowser_search_engines = extend(
-    \get(g:, 'openbrowser_search_engines', {}),
-    \{
-    \   'unity3d' : 'http://docs.unity3d.com/ScriptReference/30_search.html?q={query}'
-    \})
-" }}}
-
-" Airline Settings {{{
-let g:airline_theme='jellybeans'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-" }}}
-
-" Ale settings {{{
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_enter = 0
-let g:ale_open_list = 0
-let g:ale_keep_list_window_open = 0
-let g:ali_lint_delay = 1000
-let g:ale_linters = {
-            \ 'php': ['phpmd', 'phpcs'],
-            \ 'python': ['flake8'],
-            \ 'javascript': ['eslint'],
-            \ }
-let g:ale_fixers = {
-            \ 'python': ['autopep8', 'yapf'],
-            \ 'javascript': ['eslint']
-            \ }
-let g:ale_php_phpmd_ruleset = 'cleancode'
-" }}}
-
-" FastFold Settings {{{
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-" }}}
-
-" Settings for Denite {{{
-" Define mappings
-function! s:denite_filter_my_settings() abort
-    imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
-endfunction
-
-function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-endfunction
-
-augroup deniteSettings
-    autocmd!
-    autocmd FileType denite call s:denite_my_settings()
-    autocmd FileType denite-filter call s:denite_filter_my_settings()
-augroup END
-" }}}
-
-" Settings for Easy Grep {{{
-let EasyGrepWindow = 0
-let EasyGrepMode = 1
-" }}}
-
-" SimpylFold Settings {{{
-let g:SimpylFold_docstring_preview = 1
-" }}} 
-
-" Jedi Settings {{{
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#auto_close_doc = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 1
-" }}}
-
-" YCM Settings {{{
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
-let g:ycm_auto_trigger = 1
-let g:ycm_use_clangd = 0
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_always_populate_location_list = 0
-if has('nvim')
-    let g:ycm_add_preview_to_completeopt = 0
-else
-    let g:ycm_add_preview_to_completeopt = 1
-end
-let g:ycm_autoclose_preview_window_after_insertion=1
-
-" let g:ycm_key_invoke_completion = '<c-Tab>'
-let g:ycm_key_list_select_completion = ['<tab>', '<up>']
-"let g:ycm_key_list_previous_completion = ['<s-tab>']
-"
-let g:ycm_extra_conf_globlist = ['~/rdev/cpp/*']
-
-" Disable for latex
-let g:ycm_filetype_blacklist = {
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'text' : 1,
-      \ 'tex' : 1,
-      \}
-" YCM mappings {{{
-nmap <leader>yy :YcmForceCompileAndDiagnostics<cr>
-nmap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<cr>
-nmap <leader>yd :YcmCompleter GetDoc<cr>
-nmap <leader>yc :YcmCompleter GoToDeclaration<cr>
-nmap <leader>yt :YcmCompleter GetType<cr>
-nmap <leader>yr :YcmCompleter GoToReferences<cr>
-nmap <leader>yp :YcmCompleter GoToParent<cr>
-nmap <leader>yf :YcmCompleter FixIt
-" }}}
-" }}}
-
-" SpeedDating Settings {{{
-if !exists("g:speeddating_no_mappings") || !g:speeddating_no_mappings
-  nmap  <M-u>     <Plug>SpeedDatingUp
-  nmap  <M-d>     <Plug>SpeedDatingDown
-  xmap  <M-u>     <Plug>SpeedDatingUp
-  xmap  <M-d>     <Plug>SpeedDatingDown
-  nmap d<M-u>     <Plug>SpeedDatingNowUTC
-  nmap d<M-d>     <Plug>SpeedDatingNowLocal
-  let g:speeddating_no_mappings = 1
-endif
-" }}}
-
-" SQL Plug Settings {{{
-let g:dadbod_manage_dbext = 1
-let g:dbext_default_SQLSRV_bin = 'sqlcmd'
-let g:dbext_default_SQLSRV_cmd_options = '-w 10000 -r -b '
-" }}}
-
-" Settings for Easy Grep {{{
-let EasyGrepWindow = 0
-let EasyGrepMode = 1
-" }}}
-
-" Session Management Settings {{{
-let g:session_directory = expand('~/' . vimfiles_dir . '/sessions')
-let g:session_autosave = 'no'
-let g:startify_session_dir= g:session_directory
-let g:session_autoload = "no"
-let g:session_autosave = "no"
-let g:session_command_aliases = 1
-" }}}
-
-" Latex Box Settings {{{
-let g:LatexBox_viewer = 'zathura'
-let g:LatexBox_latexmk_options = '-pvc -pdflatex="pdflatex -shell-escape"'
-" }}}
-
-" Todo Plugin Settings {{{
-" todo.vim default highlight groups, feel free to override as wanted
-hi link todotitle title
-hi link todotitlemark normal
-hi link todoitem special
-hi link todoitemadditionaltext comment
-hi link todoitemcheckbox identifier
-hi link todoitemdone ignore
-hi link todocomment comment
-
-" define like this to enable explicit comments
-" comments then start with //
-let g:todoexplicitcommentsenabled = 1
-" }}}
-
-" HTML MatchTagAlways Settings {{{
-let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'javascript.jsx': 1
-    \}
-" }}}
-
-" JSX Settings {{{
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-if has('win32')
-    let $PATH='C:\Program Files\nodejs\;' . $PATH
-    let $PATH='C:\Program Files\nodejs\node_modules\.bin;' . $PATH
-endif
-" }}}
-
-" php.vim syntax override {{{
-function! PhpSyntaxOverride()
-    hi! def link phpDocTags  phpDefine
-    hi! def link phpDocParam phpType
-endfunction
-augroup phpSyntaxOverride
-    autocmd!
-    autocmd FileType php call PhpSyntaxOverride()
-augroup END
-"}}}
-
-" php getter setter both mapping{{{
-augroup phpsetter
-    autocmd!
-    autocmd FileType php nnoremap <buffer> <leader>pb <Plug>PhpgetsetInsertBothGetterSetter
-    autocmd FileType php nnoremap <buffer> <leader>ps <Plug>PhpgetsetInsertSetter
-    autocmd FileType php nnoremap <buffer> <leader>pg <Plug>PhpgetsetInsertGetter
-augroup end
-"}}}
-
-" PhpComplete Settings {{{
-let g:phpcomplete_parse_docblock_comments=1
-let g:phpcomplete_cache_taglists=1
-let g:phpcomplete_complete_for_unknown_classes=1
-" }}}
-
-" PHP Helper Settings {{{
-let g:php_refactor_command='refactor'
-let g:tagbar_phpctags_bin='phpctags'
-let g:composer_cmd = 'composer'
-
-let g:pdv_template_dir = bundles_dir . "/pdv/templates_snip"
-augroup pdv_config
-    autocmd!
-    autocmd FileType php nnoremap <buffer> <leader>d :call pdv#DocumentWithSnip()<CR>
-augroup end
-
-" }}}
-
-" OmniSharp Settings {{{
-let g:Omnisharp_start_server = 0
-let g:Omnisharp_stop_server  = 0
-let g:OmniSharp_host="http://localhost:20001"
-let g:ycm_csharp_server_port = 20001
-let g:OmniSharp_timeout = 1
-let g:OmniSharp_server_type = 'v1'
-let g:OmniSharp_server_type = 'roslyn'
-
-let g:OmniSharp_selector_ui = "denite"
-
-" OmniSharp bindings TODO: compare with Eugene's - CS only!
-nnoremap <leader>fi :OmniSharpFindImplementations<cr>
-nnoremap <leader>ft :OmniSharpFindType<cr>
-nnoremap <leader>fs :OmniSharpFindSymbol<cr>
-nnoremap <leader>fu :OmniSharpFindUsages<cr>
-nnoremap <leader>fm :OmniSharpFindMembersInBuffer<cr>
-nnoremap <leader><space> :OmniSharpFindMembersInBuffer<cr>
-
-" cursor can be anywhere on the line containing an issue for this one
-nnoremap <leader>x  :OmniSharpFixIssue<cr>
-nnoremap <leader>fx :OmniSharpFixUsings<cr>
-nnoremap <leader>tt :OmniSharpTypeLookup<cr>
-nnoremap <leader>dc :OmniSharpDocumentation<cr>
-nnoremap <leader>gd :OmniSharpGotoDefinition<cr>
-" }}}
-
-" Read Local PlugSettings {{{
-let $LOCALPLUGSETTINGS = expand('~/_local_plug_settings.vim')
-if filereadable($LOCALPLUGSETTINGS)
-    source $LOCALPLUGSETTINGS
-endif 
-" }}}
-
-" Settings for vimya {{{
-let g:Tail_Height = 15
-let vimyaPort = 7720
-let vimyaTailCommand = 'STail'
-let vimyaSplitBelow = 1
-let vimyaForceRefresh = 1
-let vimyaRefreshWait = 2.0
-nnoremap <leader>mr :py vimyaRefreshLog ()<cr>
-nnoremap <leader>mt :py vimyaOpenLog ()<cr>
-nnoremap <leader>ml :py vimyaResetLog ()<cr>
-nnoremap <leader>mw :VimyaWhatIs <cr>
-nnoremap <leader>mu :VimyaSend undo()<cr>
-nnoremap <leader>mU :VimyaSend redo()<cr>
-" }}}
-" }}}
-
+source common/vim-plug_settings.vim
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

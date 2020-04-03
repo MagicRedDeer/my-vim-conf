@@ -21,14 +21,169 @@ source common/functions.vim
 source common/vim-plug_download.vim
 source common/vim-plug_setup.vim
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plugs {{{
 
-source common/vim-plug_endsetup.vim
+" IDE Features {{{
 
-source plugs/settings-coc.vim
+" Completion, Refactoring & Diagnostics {{{
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
+" }}}
+
+" Git Plugs {{{
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc-git'
+" }}}
+
+" File Explorer {{{
+Plug 'scrooloose/nerdtree'
+" }}}
+
+" Commenting {{{
+Plug 'scrooloose/nerdcommenter'
+" }}}
+
+" Snippets {{{
+Plug 'neoclide/coc-snippets'
+Plug 'honza/vim-snippets'
+" }}}
+
+" Session Management {{{
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'mhinz/vim-startify'
+" }}}
+
+" AutoClose and Jumping {{{
+Plug 'vim-scripts/matchit.zip'
+Plug 'cohama/lexima.vim'
+" }}}
+
+" Browser and Web {{{
+Plug 'vim-scripts/WebAPI.vim'
+Plug 'tyru/open-browser.vim'
+" }}}
+
+" Maya Integration {{{
+Plug 'vim-scripts/Tail-Bundle'
+Plug 'https://gitlab.com/LazyLeopard/vimya.git'
+" }}}
 
 " }}}
 
+" Vim Improvements {{{
+
+" Behaviour Extensions {{{
+Plug 'vim-scripts/CompleteHelper'
+Plug 'vim-scripts/CamelCaseComplete'
+Plug 'bkad/CamelCaseMotion'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'Konfekt/FastFold'
+" }}}
+
+" Undos {{{
+Plug 'mbbill/undotree'
+" }}}
+
+" Buffer Handling {{{
+Plug 'jlanzarotta/bufexplorer'
+Plug 'qpkorr/vim-bufkill'
+" }}}
+
+" Text Objects {{{
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
+" }}}
+
+" ColorSchemes {{{
+Plug 'vim-scripts/win9xblueback.vim'
+Plug 'vim-scripts/darkblack.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'sjl/badwolf'
+Plug 'jordwalke/flatlandia'
+Plug 'morhetz/gruvbox'
+Plug 'flazz/vim-colorschemes'
+" }}}
+
+" }}}
+
+" Finders {{{
+if !has('nvim') && version >= 800
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'Shougo/denite.nvim',  { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'vim-scripts/EasyGrep'
+Plug 'neoclide/coc-denite'
+" }}}
+
+" }}}
+
+source common/vim-plug_endsetup.vim
+
+" Plug Settings {{{
+source plugs/settings-coc.vim
+source plugs/settings-camelcasemotion.vim
+source plugs/settings-fastfold.vim
+source plugs/settings-lexima.vim
+source plugs/settings-openbrowser.vim
+source plugs/settings-airline.vim
+source plugs/settings-denite.vim
+source plugs/settings-easygrep.vim
+source plugs/settings-speeddating.vim
+source plugs/settings-session_startify.vim
+source plugs/settings-vimya.vim
+
+" }}}
+
+" }}}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                Settings                                 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Settings {{{
+source common/settings-encoding.vim
+source common/settings-history_backup_undo.vim
+source common/settings-filetype.vim
+source common/settings-editing.vim
+source common/settings-fold_indent.vim
+source common/settings-completion.vim
+source common/settings-guioptions.vim
+source common/settings-search.vim
+source common/settings-wild.vim
+source common/settings-terminal.vim
+source common/settings-display.vim
+" }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                       Auto Commands and Commands                       "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Command and Auto Commands {{{
+source common/commands.vim
+source common/autocommands.vim
+" }}}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                Mappings                                 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings {{{
+source common/mappings-mswin.vim
+source common/mappings-general.vim
+" }}}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Post                                   "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Post {{{
+source common/_vimrc_end.vim
+execute 'silent lcd ' . trim(@t)
+"}}}
 
 
-
+" vim: fdm=marker
