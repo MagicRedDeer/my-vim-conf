@@ -11,7 +11,7 @@ source common/functions.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Plugins                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" {{{
+" Plug Setup, Import and Settings {{{
 source common/vim-plug_download.vim
 source common/vim-plug_setup.vim
 
@@ -543,337 +543,34 @@ nnoremap <leader>mU :VimyaSend redo()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Settings                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" {{{
-
-" Encoding settings {{{
-if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1
-endif
-" }}}
-
-" History and undo settings  {{{
-set backup
-set writebackup
-set noswapfile
-set backupdir =$temp
-if has('unix')
-    set backupdir =~/.backup/
-    execute "silent !mkdir -p " . EscapePath(expand("~/.backup"))
-endif
-set undofile
-set undodir =$temp
-if has('unix')
-    set undodir =~/.undo/
-    execute "silent !mkdir -p " . EscapePath(expand("~/.undo"))
-endif
-set history =1000         " remember more commands and search history
-set undolevels =1000      " use many muchos levels of undo
-" }}}
-
-" FileType and Syntax Settings {{{
-filetype on
-syntax on
-filetype plugin indent on
-if has("win32")
-    behave mswin
-endif
-" }}}
-
-" Editing Options {{{
-
-" Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-set whichwrap+=<,>,[,]
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-" }}}
-
-" Default options for indenting {{{
-set tabstop=4
-set expandtab
-set softtabstop=4
-set shiftwidth=4
-set textwidth=78
-set autoindent
-set shiftround
-" }}}
-
-" Default options for folding {{{
-set foldenable
-set foldmethod=syntax
-set foldlevel=100       " Unfold on start
-set foldopen=block,hor,mark,percent,quickfix,tag
-set foldlevelstart=99
-" }}}
-
-" Behaviour Settings {{{
-set visualbell
-if has('virtualedit')
-    set virtualedit=all
-endif
-set hidden
-" }}}
-
-" Search Settings {{{
-set hlsearch     " Highlight search results
-set ignorecase   " no sensitive to case
-set incsearch    " enable incremental search
-set smartcase    " When meet uppercase -> sensitive
-" }}}
-
-" Some display settings {{{
-set ruler               " show the cursor position all the time
-set nowrap              " Dont wrap from screen end
-set nonumber            " show display settings
-set showcmd             " display incomplete commands
-set list                " visualizing tabs, spaces, trails etc.
-set listchars=tab:>.,trail:.,extends:#,nbsp:.,precedes:%,eol:~
-set nofixendofline
-set laststatus=2
-set noshowmode     " Mode is in airline, no need stock one
-set formatoptions-=t " Don't wrap while typing
-set viewoptions=cursor,options,folds,slash,unix
-
-" Setting gui options and fonts {{{
-set guioptions-=m
-set guioptions-=T
-set guioptions-=l
-set guioptions-=r
-set guioptions-=L
-set guioptions-=R
-set guioptions-=e
-set guioptions+=c
-if !has("unix")
-  set guioptions-=a
-endif
-" }}}
-
-" Settings for split and Tabs {{{
-set nosplitbelow
-set equalalways
-" }}}
-
-" Completion Settings {{{
-set complete-=u,t
-set complete+=k
-set complete+=kspell
-set completeopt=menu,menuone,longest
-let g:omnicomplete_fetch_documentation=1
-" }}}
-
-" Wild Menu Settings {{{
-set wildmenu
-set wildmode=full
-set wildignore=*.o,*.obj,*~
-set wildcharm=<Tab>
-" }}}
-
-"Columns and lines{{{
-if has('gui_running')
-    if has('win32')
-        simalt ~x
-    else
-        simalt <F10>
-    endif
-else
-    augroup nonGuiCommands
-        autocmd!
-        autocmd InsertLeave,InsertEnter * set cursorline!
-    augroup END
-endif
-"}}}
-
-" {{{ terminal specific settings
-if has('nvim') || version >= 800
-    :tnoremap <Esc><Esc> <C-\><C-n>
-    :tnoremap <C-k> <C-\><C-n><C-w>k
-    :tnoremap <C-l> <C-\><C-n><C-w>l
-    :tnoremap <C-h> <C-\><C-n><C-w>h
-    :tnoremap <C-j> <C-\><C-n><C-w>j
-    :tnoremap <C-w> <C-\><C-n><C-w>
-    if !has('nvim')
-        set termwinkey=<M-y>
-        :tnoremap <M-v> <M-y>"
-        :tnoremap <C-b> <M-y>"*
-        :tnoremap <C-v> <M-y>""
-    endif
-    augroup terminalau
-        autocmd!
-        autocmd BufEnter term://* startinsert
-    augroup end
-endif
-" }}}
-
-" }}}
-
-" Completion Options {{{
-set complete=.,w,b,i,k,t,U,u,s
-if has('nvim')
-    set completeopt-=preview
-    let g:float_preview#docked=0
-endif
-" }}}
-
-" Modeline {{{
-set modeline
-set modelines=5
-" }}}
-
+" Settings {{{
+source common/settings-encoding.vim
+source common/settings-history_backup_undo.vim
+source common/settings-filetype.vim
+source common/settings-editing.vim
+source common/settings-fold_indent.vim
+source common/settings-completion.vim
+source common/settings-guioptions.vim
+source common/settings-search.vim
+source common/settings-wild.vim
+source common/settings-terminal.vim
+source common/settings-display.vim
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Auto Commands and Commands                       "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" {{{
-
-" Commands {{{
-command! -nargs=+ FixIndent call IndentationFixer(<f-args>)
-" }}}
-
-" Custom AutoCommands {{{
-augroup lang_settings
-    autocmd!
-    autocmd FileType python :call Set_Python_Settings()
-    autocmd FileType html :call Set_ML_Settings()
-    autocmd FileType javascript :call Set_JS_Settings()
-    autocmd BufEnter,BufRead *.{mel,ma} :call Set_Mel_Settings()
-    autocmd FileType vim :call Set_Vim_Settings()
-    autocmd FileType yaml :call Set_YAML_Settings()
-augroup END
-augroup vimrcEx
-    autocmd!
-    autocmd BufReadPost *
-        \ if line("'\"") > 1 && line("'\"") <= line("$") |
-        \   exe "normal! g`\"" |
-        \ endif
-augroup END
-" }}}
-
+" Command and Auto Commands {{{
+source common/commands.vim
+source common/autocommands.vim
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Mappings                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" {{{
-
-" Don't use Ex mode, use Q for formatting
-noremap Q gq
-
-" Edit and source my vimrc file
-nnoremap <leader>ev :rightbelow vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" when wrapping is enabled do wrap friendly scrolling
-nnoremap j gj
-nnoremap k gk
-
-" Maps for switching windows 
-noremap <c-j> <c-w>j
-noremap <c-h> <c-w>h
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-
-" Map for refreshing all open buffers
-nnoremap <leader>rb :call RefreshAllBuffers()<cr>
-
-" move visual block up/down one
-vmap <c-j> "td"tp'[V']
-vmap <c-k> "tdk"tP'[V']
-
-" move a line up or down
-nnoremap - "tdd"tp
-nnoremap _ "tddk"tP
-
-" move stuff to the right of cursor to next line
-nmap <silent> <leader><CR> i<CR><ESC>k$
-
-" Maps for switching buffers
-nnoremap <M-j> :bn<Enter>
-nnoremap <M-k> :bp<Enter>
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" from mswin.vim {{{
-" backspace in Visual mode deletes selection
-vnoremap <BS> d
-
-" CTRL-X and SHIFT-Del are Cut
-vnoremap <C-X> "+x
-vnoremap <S-Del> "+x
-
-" CTRL-C and CTRL-Insert are Copy
-vnoremap <C-C> "+y
-vnoremap <C-Insert> "+y
-
-" CTRL-V and SHIFT-Insert are Paste
-map <C-V>               "+gP
-map <S-Insert>          "+gP
-
-cmap <C-V>      <C-R>+
-cmap <S-Insert>     <C-R>+
-
-" Pasting blockwise and linewise selections is not possible in Insert and
-" Visual mode without the +virtualedit feature.  They are pasted as if they
-" were characterwise instead.
-" Uses the paste.vim autoload script.
-" Use CTRL-G u to have CTRL-Z only undo the paste.
-
-exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
-exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
-
-imap <S-Insert>     <C-V>
-vmap <S-Insert>     <C-V>
-
-" Use CTRL-Q to do what CTRL-V used to do
-noremap <C-Q>       <C-V>
-
-" Use CTRL-S for saving, also in Insert mode
-noremap <C-S>       :update<CR>
-vnoremap <C-S>      <C-C>:update<CR>
-inoremap <C-S>      <C-O>:update<CR>
-
-" Alt-Space is System menu
-if has('gui_running')
-  noremap <M-Space> :simalt ~<CR>
-  inoremap <M-Space> <C-O>:simalt ~<CR>
-  cnoremap <M-Space> <C-C>:simalt ~<CR>
-endif
-
-" CTRL-Tab is Next window
-noremap <C-Tab> <C-W>w
-inoremap <C-Tab> <C-O><C-W>w
-cnoremap <C-Tab> <C-C><C-W>w
-onoremap <C-Tab> <C-C><C-W>w
-
-" CTRL-F4 is Close window
-noremap <C-F4> <C-W>c
-inoremap <C-F4> <C-O><C-W>c
-cnoremap <C-F4> <C-C><C-W>c
-onoremap <C-F4> <C-C><C-W>c
-" }}}
-
-" Meta-A is Select all
-noremap <M-a> gggH<C-O>G
-inoremap <M-a> <C-O>gg<C-O>gH<C-O>G
-cnoremap <M-a> <C-C>gggH<C-O>G
-onoremap <M-a> <C-C>gggH<C-O>G
-snoremap <M-a> <C-C>gggH<C-O>G
-xnoremap <M-a> <C-C>ggVG
-
-" Indentation changes, but visual stays
-vnoremap > ><CR>gv
-vnoremap < <<CR>gv
-
+" Mappings {{{
+source common/mappings-mswin.vim
+source common/mappings-general.vim
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
