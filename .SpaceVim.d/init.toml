@@ -26,7 +26,7 @@
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
     statusline_unicode_symbols = false
-    guifont = "BitstreamVeraSansMono Nerd Font:h10"
+    guifont = "BitstreamVeraSansMono Nerd Font:h9"
 
     # Enable vim compatible mode, avoid changing origin vim key bindings
     vimcompatible = true
@@ -47,7 +47,6 @@ auto_completion_tab_key_behavior = "cycle"
 
 [[layers]]
 name = 'shell'
-default_position = 'bottom'
 
 [[layers]]
 name = 'lang#python'
@@ -71,12 +70,15 @@ name = 'git'
 [[layers]]
 name = 'VersionControl'
 
+[[layers]]
+name = 'lsp'
+
 [[custom_plugins]]
 repo = 'tmhedberg/SimpylFold'
 merged = false
 
 [[custom_plugins]]
-repo = 'jmcantrell/vim-virtualenv'
+repo = 'Coacher/vim-virtualenv'
 merged = false
 
 [[custom_plugins]]
