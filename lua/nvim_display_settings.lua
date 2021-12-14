@@ -21,3 +21,7 @@ vim.o.equalalways = true
 -- behaviour
 vim.o.visualbell = true
 vim.o.hidden = true
+
+-- numbers column
+vim.o.nu = true
+vim.o.relativenumber = true
