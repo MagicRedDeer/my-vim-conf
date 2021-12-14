@@ -1,7 +1,7 @@
 
 -- some display and window settings
 vim.o.ruler = true               -- show the cursor position all the time
-vim.o.wrap = true              -- Dont wrap from screen end
+vim.o.wrap = false              -- Dont wrap from screen end
 vim.o.number = false             -- show display settings
 vim.o.showcmd = true             -- display incomplete commands
 vim.o.list = true                -- visualizing tabs, spaces, trails etc.

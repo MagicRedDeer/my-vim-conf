@@ -1,9 +1,15 @@
-print 'utils_loaded'
-
-local function test_me (a)
-    print("test me was called", a)
+local function nvim_create_augroups(definitions)
+    for group_name, definition in pairs(definitions) do
+        api.nvim_command('augroup '..group_name)
+        api.nvim_command('autocmd!')
+        for _, def in ipairs(definition) do
+            local command = table.concat(vim.tbl_flatten{'autocmd', def}, ' ')
+            api.nvim_command(command)
+        end
+        api.nvim_command('augroup END')
+    end
 end
 
 return {
-    test_me = test_me
+    nvim_create_augroups = nvim_create_augroups
 }
