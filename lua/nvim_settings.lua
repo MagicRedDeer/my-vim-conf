@@ -1,5 +1,3 @@
-print('settings loaded')
-
 -- file and edit options 
 vim.o.undofile = true
 vim.o.writebackup = false
