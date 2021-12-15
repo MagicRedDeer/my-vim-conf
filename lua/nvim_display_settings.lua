@@ -9,6 +9,7 @@ vim.o.listchars='tab:>.,trail:.,extends:#,nbsp:.,precedes:%,eol:~'
 vim.o.fixendofline=false
 vim.o.laststatus=2
 vim.o.showmode=false
+
 -- vim.o.formatoptions:remove({'t'])  -- Don't wrap while typing
 vim.o.viewoptions='cursor,options,folds,slash,unix'
 vim.o.shortmess = vim.o.shortmess .. 'c'
@@ -23,5 +24,5 @@ vim.o.visualbell = true
 vim.o.hidden = true
 
 -- numbers column
-vim.o.nu = true
+vim.o.number = true
 vim.o.relativenumber = true

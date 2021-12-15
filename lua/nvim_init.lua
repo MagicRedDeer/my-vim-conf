@@ -1,26 +1,19 @@
 vim.cmd [[colorscheme desert]]
 
--- for resetting {{{
+
+package.loaded['nvim_utils'] = nil
+local utils = require 'nvim_utils'
+
+
 modules = {
-    'nvim_utils',
     'nvim_settings',
     'nvim_display_settings',
     'nvim_mappings',
     'nvim_plugins'
 }
-local remove_modules = function() 
-    for _, module in ipairs(modules) do
-        package.loaded[module] = nil
-    end
-end
-remove_modules(modules)
--- }}}
 
-local utils = require 'nvim_utils'
 
-require 'nvim_plugins'
-require 'nvim_settings'
-require 'nvim_display_settings'
-require 'nvim_mappings'
+utils.remove_modules(modules)
+utils.require_modules(modules)
 
 -- vim: foldmethod=marker foldmarker={{{,}}}

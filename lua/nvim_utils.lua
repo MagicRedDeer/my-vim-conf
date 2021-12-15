@@ -1,5 +1,17 @@
 api = vim.api
 
+local remove_modules = function(modules) 
+    for _, module in ipairs(modules) do
+        package.loaded[module] = nil
+    end
+end
+
+local require_modules = function(modules)
+    for _, module in ipairs(modules) do
+        require(module)
+    end
+end
+
 local function nvim_create_augroups(definitions)
     for group_name, definition in pairs(definitions) do
         api.nvim_command('augroup '..group_name)
@@ -65,5 +77,7 @@ end
 
 return {
     nvim_create_augroups = nvim_create_augroups,
-    install_packer = install_packer
+    install_packer = install_packer,
+    remove_modules = remove_modules,
+    require_modules = require_modules
 }

@@ -25,7 +25,7 @@ vim.api.nvim_set_keymap('n', '-', '"tdd"tp', {noremap=true})
 vim.api.nvim_set_keymap('n', '_', '"tddk"tP', {noremap=true})
 
 vim.api.nvim_set_keymap('i', '<C-U>', '<C-G>u<C-U>', {noremap=true})
-vim.api.nvim_set_keymap('n', '<leader><CR>', 'i<CR><ESC>k$', {silent=true})
+-- vim.api.nvim_set_keymap('n', '<localleader><CR>', 'i<CR><ESC>k$', {silent=true})
 
 -- Meta-A is Select all
 vim.api.nvim_set_keymap('', '<M-a>', 'gggH<C-O>G', {noremap=true})
