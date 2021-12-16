@@ -6,6 +6,7 @@ plugins = {
      'nvim_plugin_settings/lualine',
      'nvim_plugin_settings/nerdtree',
      'nvim_plugin_settings/autopair',
+     'nvim_plugin_settings/telescope',
 }
 require 'nvim_utils'.remove_modules(plugins)
 
