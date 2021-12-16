@@ -19,6 +19,7 @@ map ('', '<c-l>', '<c-w>l', {noremap=true})
 -- when wrapping is enabled do wrap friendly scrolling
 map ('n', 'j', 'gj', {noremap=true})
 map ('n', 'k', 'gk', {noremap=true})
+map ('n', 'Q', 'gq', {noremap=true})  -- Q for formatting
 
 -- move visual block up/down one
 map ('v', '<c-j>', '"td"tp\'[V\']', {})
@@ -32,12 +33,12 @@ map ('i', '<C-U>', '<C-G>u<C-U>', {noremap=true})
 -- map ('n', '<localleader><CR>', 'i<CR><ESC>k$', {silent=true})
 
 -- Meta-A is Select all
-map ('', '<M-a>', 'gggH<C-O>G', {noremap=true})
-map ('i', '<M-a>', '<C-O>gg<C-O>gH<C-O>G', {noremap=true})
-map ('c', '<M-a>', '<C-C>gggH<C-O>G', {noremap=true})
-map ('o', '<M-a>', '<C-C>gggH<C-O>G', {noremap=true})
-map ('s', '<M-a>', '<C-C>gggH<C-O>G', {noremap=true})
-map ('x', '<M-a>', '<C-C>ggVG', {noremap=true})
+map ('n', '<leader>sa', 'gggH<C-O>G', {noremap=true})
+map ('i', '<leader>sa', '<C-O>gg<C-O>gH<C-O>G', {noremap=true})
+map ('c', '<leader>sa', '<C-C>gggH<C-O>G', {noremap=true})
+map ('o', '<leader>sa', '<C-C>gggH<C-O>G', {noremap=true})
+map ('s', '<leader>sa', '<C-C>gggH<C-O>G', {noremap=true})
+map ('x', '<leader>sa', '<C-C>ggVG', {noremap=true})
 
 -- Indentation changes, but visual stays
 map ('v', '>', '><CR>gv', {noremap=true})
@@ -45,3 +46,4 @@ map ('v', '<', '<<CR>gv', {noremap=true})
 
 -- sourcing vimrc
 map ('n', '<leader>fv', ':source $MYVIMRC<cr>', {noremap=true})
+map ('n', '<leader>fv', ':rightbelow vsplit $MYVIMRC<cr>', {noremap=true})
