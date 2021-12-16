@@ -24,13 +24,12 @@ local function nvim_create_augroups(definitions)
     end
 end
 
-local pack_location, packer_location, path_sep, is_windows, packer_gh
-is_windows = _G.jit.os == "Windows"
-path_sep = isWindows and '\\' or '/'
+local is_windows = _G.jit.os == "Windows"
+local path_sep = isWindows and '\\' or '/'
 
 local function path_join(parts)
     local first = true
-    path = ''
+    local path = ''
     for _, part in pairs(parts) do
         if not first then
             path = path .. path_sep
@@ -43,7 +42,7 @@ local function path_join(parts)
 end
 
 local function dirname(path)
-    parts = vim.split(path, path_sep)
+    local parts = vim.split(path, path_sep)
     parts[#parts]=nil
     return path_join(parts)
 end
@@ -53,12 +52,13 @@ local function directory_exists(path)
 end
 
 
+local pack_location
 if is_windows then
     pack_location = os.getenv('LOCALAPPDATA') .. '\\nvim-data\\site\\pack'
 else
-    pack_location = '~/.local/share/nvim/site/pack'
+    pack_location = vim.fn.expand('~/.local/share/nvim/site/pack')
 end
-packer_location = path_join({pack_location, 'packer', 'start', 'packer.nvim'})
+local packer_location = path_join({pack_location, 'packer', 'start', 'packer.nvim'})
 
 local function packer_exists()
     return directory_exists(packer_location)
@@ -67,7 +67,7 @@ end
 packer_gh = 'https://github.com/wbthomason/packer.nvim'
 local function install_packer()
     if not packer_exists() then
-		os.execute('mkdir ' .. packer_location)
+        os.execute('mkdir ' .. packer_location)
         local cmd='git clone ' .. packer_gh .. ' ' .. packer_location
         print('downloading packer ...')
         print(cmd)

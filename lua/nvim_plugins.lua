@@ -4,6 +4,7 @@ plugins = {
 	 'nvim_plugin_settings/which_key',
      'nvim_plugin_settings/treesitter',
      'nvim_plugin_settings/lualine',
+     'nvim_plugin_settings/nerdtree',
 }
 require 'nvim_utils'.remove_modules(plugins)
 
@@ -14,6 +15,7 @@ require('packer').startup(function(use)
    use 'wbthomason/packer.nvim'
    use 'tpope/vim-surround'
    use 'morhetz/gruvbox'
+
    for _, module in ipairs(plugins) do
         require(module).install(use)
    end
