@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 -- moving from terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', '<C-\\><C-n>', {noremap=true})
 vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', {noremap=true})
@@ -38,3 +40,6 @@ vim.api.nvim_set_keymap('x', '<M-a>', '<C-C>ggVG', {noremap=true})
 -- Indentation changes, but visual stays
 vim.api.nvim_set_keymap('v', '>', '><CR>gv', {noremap=true})
 vim.api.nvim_set_keymap('v', '<', '<<CR>gv', {noremap=true})
+
+-- sourcing vimrc
+vim.api.nvim_set_keymap('n', '<leader>fv', ':source $MYVIMRC<cr>', {noremap=true})

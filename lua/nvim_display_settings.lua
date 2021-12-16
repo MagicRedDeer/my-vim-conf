@@ -1,3 +1,7 @@
+vim.cmd [[colorscheme gruvbox]]
+
+vim.o.guifont = "Hack Nerd Font Mono:h9"
+
 
 -- some display and window settings
 vim.o.ruler = true               -- show the cursor position all the time
@@ -23,6 +27,16 @@ vim.o.equalalways = true
 vim.o.visualbell = true
 vim.o.hidden = true
 
--- numbers column
-vim.o.number = true
-vim.o.relativenumber = true
+-- columns
+vim.wo.number = true
+vim.wo.relativenumber = true
+vim.wo.signcolumn = 'yes'
+
+vim.opt.termguicolors = true
+vim.o.conceallevel = 2
+
+-- scrolling
+vim.o.scrolloff = 3
+vim.o.sidescrolloff=5
+
+vim.o.showtabline=1

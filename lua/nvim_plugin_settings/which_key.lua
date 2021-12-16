@@ -1,6 +1,6 @@
-local which_key = {}
+local module = {}
 
-which_key.install = function(use)
+module.install = function(use)
  use {
   "folke/which-key.nvim",
   config = function()
@@ -13,4 +13,8 @@ which_key.install = function(use)
 }
 end
 
-return which_key
+module.configure = function ()
+    vim.o.timeoutlen = 300
+end
+
+return module
