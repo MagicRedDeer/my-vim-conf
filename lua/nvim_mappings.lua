@@ -32,13 +32,8 @@ map ('n', '_', '"tddk"tP', {noremap=true})
 map ('i', '<C-U>', '<C-G>u<C-U>', {noremap=true})
 -- map ('n', '<localleader><CR>', 'i<CR><ESC>k$', {silent=true})
 
--- Meta-A is Select all
+-- select all
 map ('n', '<leader>sa', 'gggH<C-O>G', {noremap=true})
-map ('i', '<leader>sa', '<C-O>gg<C-O>gH<C-O>G', {noremap=true})
-map ('c', '<leader>sa', '<C-C>gggH<C-O>G', {noremap=true})
-map ('o', '<leader>sa', '<C-C>gggH<C-O>G', {noremap=true})
-map ('s', '<leader>sa', '<C-C>gggH<C-O>G', {noremap=true})
-map ('x', '<leader>sa', '<C-C>ggVG', {noremap=true})
 
 -- Indentation changes, but visual stays
 map ('v', '>', '><CR>gv', {noremap=true})
@@ -46,4 +41,4 @@ map ('v', '<', '<<CR>gv', {noremap=true})
 
 -- sourcing vimrc
 map ('n', '<leader>fv', ':source $MYVIMRC<cr>', {noremap=true})
-map ('n', '<leader>fv', ':rightbelow vsplit $MYVIMRC<cr>', {noremap=true})
+map ('n', '<leader>ev', ':rightbelow vsplit $MYVIMRC<cr>', {noremap=true})
