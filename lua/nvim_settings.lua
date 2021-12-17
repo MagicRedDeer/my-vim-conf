@@ -45,3 +45,4 @@ vim.o.fileencoding = 'utf-8'
 
 -- register
 vim.o.clipboard = "unnamedplus"
+

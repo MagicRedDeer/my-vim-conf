@@ -29,6 +29,7 @@ module.configure = function ()
         b = {
             name = "buffers"
         },
+        l = require'nvim_plugin_settings/lsp'.lsp_maps.l
     }
     local opts = {
         prefix = "<leader>"
