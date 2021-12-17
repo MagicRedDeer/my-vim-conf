@@ -12,7 +12,7 @@ end
 
 module.configure = function ()
     map('n', '<leader>ft', ':NERDTreeToggle<CR>', {noremap = true})
-    map('n', '<leader>ff', ':NERDTreeFindFile<CR>', {noremap = true})
+    map('n', '<leader>fd', ':NERDTreeFind<CR>', {noremap = true})
 end
 
 return module

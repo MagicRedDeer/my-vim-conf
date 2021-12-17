@@ -1,5 +1,3 @@
-vim.g.mapleader = ' '
-
 map = vim.api.nvim_set_keymap
 
 -- moving from terminal

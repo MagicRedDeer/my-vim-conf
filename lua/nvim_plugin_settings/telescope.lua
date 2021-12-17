@@ -13,12 +13,12 @@ module.configure = function ()
             -- Default configuration for telescope goes here:
             -- config_key = value,
             mappings = {
-            i = {
-                -- map actions.which_key to <C-h> (default: <C-/>)
-                -- actions.which_key shows the mappings for your picker,
-                -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-                ["<C-h>"] = "which_key"
-            }
+                i = {
+                    -- map actions.which_key to <C-h> (default: <C-/>)
+                    -- actions.which_key shows the mappings for your picker,
+                    -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+                    ["<C-h>"] = "which_key"
+                }
             }
         },
         pickers = {
@@ -38,6 +38,20 @@ module.configure = function ()
             -- please take a look at the readme of the extension you want to configure
         }
     }
+
+    local map = vim.api.nvim_set_keymap
+
+    map ('n', '<leader>ff', ":Telescope find_files<CR>",
+            {noremap=true, silent=true})
+    map ('n', '<leader>bf', ":Telescope buffers<CR>",
+            {noremap=true, silent=true})
+    map ('n', '<leader>sg', ":Telescope live_grep<CR>",
+            {noremap=true, silent=true})
+    map ('n', '<leader>ss', ":Telescope<CR>",
+            {noremap=true, silent=true})
+    map ('n', '<leader>fo', ":Telescope oldfiles<CR>",
+            {noremap=true, silent=true})
+
 end
 
 return module

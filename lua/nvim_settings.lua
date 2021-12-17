@@ -1,5 +1,7 @@
 vim.cmd [[filetype plugin indent on]]
 
+vim.g.mapleader = ' '
+
 -- file and edit options 
 vim.o.undofile = true
 vim.o.backup = false

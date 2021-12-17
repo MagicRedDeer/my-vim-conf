@@ -23,9 +23,12 @@ module.configure = function ()
             name = "edit"
         },
         s = {
-            name = "select/other",
+            name = "select/search",
             a = { "Select All" }
-        }
+        },
+        b = {
+            name = "buffers"
+        },
     }
     local opts = {
         prefix = "<leader>"
