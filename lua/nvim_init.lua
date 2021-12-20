@@ -1,7 +1,7 @@
 package.loaded['nvim_utils'] = nil
 local utils = require 'nvim_utils'
 
-modules = {
+local modules = {
     'nvim_settings',
     'nvim_plugins',
     'nvim_display_settings',
