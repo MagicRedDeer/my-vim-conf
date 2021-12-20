@@ -8,6 +8,8 @@ local modules = {
      'nvim_plugin_settings/telescope',
      'nvim_plugin_settings/autopair',
      'nvim_plugin_settings/which_key',
+     'nvim_plugin_settings/colorizer',
+     'nvim_plugin_settings/gitsigns',
 }
 require 'nvim_utils'.remove_modules(modules)
 
