@@ -10,6 +10,8 @@ local modules = {
      'nvim_plugin_settings/which_key',
      'nvim_plugin_settings/colorizer',
      'nvim_plugin_settings/gitsigns',
+     'nvim_plugin_settings/dashboard',
+     'nvim_plugin_settings/indentguides',
 }
 require 'nvim_utils'.remove_modules(modules)
 
