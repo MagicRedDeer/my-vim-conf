@@ -3,8 +3,8 @@ local utils = require 'nvim_utils'
 
 local modules = {
     'nvim_settings',
-    'nvim_plugins',
     'nvim_display_settings',
+    'nvim_plugins',
     'nvim_mappings',
 }
 

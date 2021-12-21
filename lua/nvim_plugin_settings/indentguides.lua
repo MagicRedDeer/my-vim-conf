@@ -13,7 +13,7 @@ module.configure = function()
         show_current_context = true,
         show_current_context_start = true,
         buftype_exclude = {"terminal"},
-        filetype_exclude = {"dashboard, NERDTree", "packer"}
+        filetype_exclude = {"dashboard", "NERDTree", "packer", "alpha"}
     }
 end
 

@@ -16,8 +16,15 @@ end
 module.configure = function ()
     vim.o.timeoutlen = 300
     local mappings = {
+        q = {
+            name = "quit"
+        },
+        wq = {
+            name = "write and quit"
+        },
         f = {
-            name = "file"
+            name = "file",
+            s = {name="file save"},
         },
         e = {
             name = "edit"
@@ -27,7 +34,9 @@ module.configure = function ()
             a = { "Select All" }
         },
         b = {
-            name = "buffers"
+            name = "buffers",
+            w = {name = "buffer wipeout"},
+            d = {name = "buffer delete"},
         },
         l = require'nvim_plugin_settings/lsp'.maps.l
     }

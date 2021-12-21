@@ -40,3 +40,10 @@ map ('v', '<', '<<CR>gv', {noremap=true})
 -- sourcing vimrc
 map ('n', '<leader>fv', ':source $MYVIMRC<cr>', {noremap=true})
 map ('n', '<leader>ev', ':rightbelow vsplit $MYVIMRC<cr>', {noremap=true})
+
+-- nvim cmds
+map ('n', '<leader>q', ':q<cr>', {noremap=true})
+map ('n', '<leader>wq', ':wq<cr>', {noremap=true})
+map ('n', '<leader>bw', ':bw<cr>', {noremap=true})
+map ('n', '<leader>bd', ':bd<cr>', {noremap=true})
+map ('n', '<leader>fs', ':w!<cr>', {noremap=true})

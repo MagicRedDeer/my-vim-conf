@@ -47,6 +47,8 @@ module.configure = function ()
             {noremap=true, silent=true})
     map ('n', '<leader>sg', ":Telescope live_grep<CR>",
             {noremap=true, silent=true})
+    map ('n', '<leader>fg', ":Telescope live_grep<CR>",
+            {noremap=true, silent=true})
     map ('n', '<leader>ss', ":Telescope<CR>",
             {noremap=true, silent=true})
     map ('n', '<leader>fo', ":Telescope oldfiles<CR>",

@@ -1,7 +1,5 @@
-vim.cmd [[colorscheme gruvbox]]
-
 vim.o.guifont = "Hack Nerd Font Mono:h9"
-
+vim.o.background = 'dark'
 
 -- some display and window settings
 vim.o.ruler = true               -- show the cursor position all the time
