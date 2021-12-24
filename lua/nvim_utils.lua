@@ -1,18 +1,56 @@
-api = vim.api
+local module = {}
+local api = vim.api
+vim.g.which_key_maps = {}
 
-local remove_modules = function(modules) 
+module.update_which_key_maps = function(maps)
+    vim.g.which_key_maps = vim.tbl_deep_extend(
+        'force', vim.g.which_key_maps, maps)
+end
+
+module.get_which_key_maps = function ()
+    return vim.g.which_key_maps
+end
+
+module.remove_modules = function(modules) 
     for _, module in ipairs(modules) do
         package.loaded[module] = nil
     end
 end
 
-local require_modules = function(modules)
+local function make_leader_map(combo, desc)
+    keymap = {}
+    key = '<leader>'
+    if vim.startswith(string.lower(combo), key) then
+        parent_map = keymap
+        for i = #key+1, #combo do
+            current_map = {}
+            parent_map[combo:sub(i, i)] = current_map
+            parent_map = current_map
+        end
+        parent_map['name'] = desc
+    end
+    return keymap
+end
+
+module.keymap = function(mode, lhs, rhs, ...)
+    opts = (...)
+    desc = opts['desc']
+    opts['desc'] = nil
+    api.nvim_set_keymap(mode, lhs, rhs, opts)
+    if desc ~=nil and vim.startswith(lhs, '<leader>') then
+        local map = make_leader_map(lhs, desc)
+        module.update_which_key_maps(map)
+    end
+end
+
+
+module.require_modules = function(modules)
     for _, module in ipairs(modules) do
         require(module)
     end
 end
 
-local function nvim_create_augroups(definitions)
+module.nvim_create_augroups = function(definitions)
     for group_name, definition in pairs(definitions) do
         api.nvim_command('augroup '..group_name)
         api.nvim_command('autocmd!')
@@ -25,7 +63,7 @@ local function nvim_create_augroups(definitions)
 end
 
 local is_windows = _G.jit.os == "Windows"
-local path_sep = isWindows and '\\' or '/'
+local path_sep = is_windows and '\\' or '/'
 
 local function path_join(parts)
     local first = true
@@ -65,7 +103,7 @@ local function packer_exists()
 end
 
 packer_gh = 'https://github.com/wbthomason/packer.nvim'
-local function install_packer()
+module.install_packer = function()
     if not packer_exists() then
         os.execute('mkdir ' .. packer_location)
         local cmd='git clone ' .. packer_gh .. ' ' .. packer_location
@@ -75,9 +113,4 @@ local function install_packer()
     end
 end
 
-return {
-    nvim_create_augroups = nvim_create_augroups,
-    install_packer = install_packer,
-    remove_modules = remove_modules,
-    require_modules = require_modules
-}
+return module

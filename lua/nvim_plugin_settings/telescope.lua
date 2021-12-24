@@ -39,21 +39,30 @@ module.configure = function ()
         }
     }
 
-    local map = vim.api.nvim_set_keymap
+    local map = require('nvim_utils').keymap
 
-    map ('n', '<leader>ff', ":Telescope find_files<CR>",
-            {noremap=true, silent=true})
+    -- b maps
     map ('n', '<leader>bf', ":Telescope buffers<CR>",
-            {noremap=true, silent=true})
-    map ('n', '<leader>sg', ":Telescope live_grep<CR>",
-            {noremap=true, silent=true})
-    map ('n', '<leader>fg', ":Telescope live_grep<CR>",
-            {noremap=true, silent=true})
-    map ('n', '<leader>ss', ":Telescope<CR>",
-            {noremap=true, silent=true})
-    map ('n', '<leader>fo', ":Telescope oldfiles<CR>",
-            {noremap=true, silent=true})
+    {noremap=true, silent=true, desc='Find Buffers (Telescope)'})
 
+    -- f maps
+    map ('n', '<leader>ff', ":Telescope find_files<CR>",
+    {noremap=true, silent=true, desc='File Finder (Telescope)'})
+    map ('n', '<leader>fg', ":Telescope live_grep<CR>",
+    {noremap=true, silent=true, desc='File grep (Telescope)'})
+    map ('n', '<leader>fo', ":Telescope oldfiles<CR>",
+    {noremap=true, silent=true, desc='Files: Old (Telescope)'})
+
+    -- s maps
+    map ('n', '<leader>sg', ":live_grep<CR>",
+    {noremap=true, silent=true, desc='Search by Grep'})
+    map ('n', '<leader>ss', ":Telescope<CR>",
+    {noremap=true, silent=true, desc='Search by Telescope'})
+    map ('n', '<leader>sb', ":Telescope marks<CR>",
+    {noremap=true, silent=true, desc='Search bookmarks'})
+    map ('n', '<leader>sc', ":Telescope colorscheme<CR>",
+    {noremap=true, silent=true, desc='Search ColorSchemes'})
 end
+
 
 return module

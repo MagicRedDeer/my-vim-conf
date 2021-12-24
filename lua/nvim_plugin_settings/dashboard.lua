@@ -62,8 +62,6 @@ local footer_light_bg = {
 [[|?::f&z,,^r:,':F>;*LLvir;_,,,:::_:ruMXSov=;,,':^Luk6HBQ@@@@@@@@@Du|cNgOo,`    ``]],
 [['.:}NO>'vBz',:\\,,,~,_:|\'.''_1],,:tez?^;_,''''''',_~~~;;*/v]wDNqeSm&QQQ\-``````]],
 [[                                                                                ]],
-[[                                                                                ]],
-[[                              Stop Coming in my Khayal                          ]],
 }
 
 local footer_dark_bg = {
@@ -82,8 +80,6 @@ local footer_dark_bg = {
 [[c7ea;`>EUFJm6qZ^zyv\\*|1jwUkPaZewet;`~;:?v2P69eF\;,,.           -;i|``':EW###NN8]],
 [[Odm^ 'zq= >96Z/LPhhXPwei/9dOqmr^h$or:>7]SmkKKqq9K9PmPXPSjv\?^_- ':;:`   /DWgNNNg]],
 [[                                                                                ]],
-[[                                                                                ]],
-[[                              Stop Coming in my Khayal                          ]],
 }
 
 if vim.o.background == 'dark' then
@@ -93,6 +89,24 @@ else
     vim.g.dashboard_custom_header = header_light_bg
     vim.g.dashboard_custom_footer = footer_light_bg
 end
+
+-- local map = require('nvim_utils').keymap
+-- map('n', '<leader>sl', ':<C-u>SessionLoad<CR>', {
+--     noremap = true, desc='Session / Load'
+-- })
+-- map('n', '<leader>sw', ':<C-u>SessionSave<CR>', {
+--     noremap = true, desc='Session / Write'
+-- })
+
+vim.g.dashboard_custom_shortcut = {
+    last_session = 'SPC s l',
+    find_history = 'SPC f h',
+    find_file = 'SPC f f',
+    new_file = 'SPC f n',
+    change_colorscheme = 'SPC s c',
+    find_word = 'SPC s g',
+    book_marks = 'SPC s b',
+}
 
 return module
 

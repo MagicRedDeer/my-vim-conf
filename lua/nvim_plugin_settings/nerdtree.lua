@@ -13,6 +13,14 @@ end
 module.configure = function ()
     map('n', '<leader>ft', ':NERDTreeToggle<CR>', {noremap = true})
     map('n', '<leader>fd', ':NERDTreeFind<CR>', {noremap = true})
+
+    require('nvim_utils').update_which_key_maps {
+        f = {
+            name = 'files',
+            t = {name='NERD Tree Toggle'},
+            d = {name='NERD Tree Find File'}
+        }
+    }
 end
 
 return module

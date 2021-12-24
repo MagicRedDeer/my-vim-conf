@@ -15,37 +15,29 @@ end
 
 module.configure = function ()
     vim.o.timeoutlen = 300
+
     local mappings = {
-        q = {
-            name = "quit"
-        },
-        wq = {
-            name = "write and quit"
-        },
         f = {
             name = "file",
-            s = {name="file save"},
         },
         e = {
             name = "edit"
         },
         s = {
             name = "select/search",
-            a = { "Select All" }
         },
         b = {
             name = "buffers",
-            w = {name = "buffer wipeout"},
-            d = {name = "buffer delete"},
         },
-        l = require'nvim_plugin_settings/lsp'.maps.l
     }
+    utils = require('nvim_utils')
+    utils.update_which_key_maps(mappings)
+
     local opts = {
         prefix = "<leader>"
     }
 
-    require("which-key").register(mappings, opts)
-
+    require("which-key").register(utils.get_which_key_maps(), opts)
 end
 
 return module

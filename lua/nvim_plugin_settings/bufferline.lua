@@ -1,9 +1,10 @@
 local module = {}
 
 module.install = function(use)
- use {
-     'akinsho/bufferline.nvim',
-     requires = 'kyazdani42/nvim-web-devicons'}
+    use {
+        'akinsho/bufferline.nvim',
+        requires = 'kyazdani42/nvim-web-devicons'
+    }
 end
 
 module.configure = function ()
@@ -24,6 +25,17 @@ module.configure = function ()
     nnoremap <silent>bd :BufferLineSortByDirectory<CR>
     nnoremap <silent>bi :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
     ]]
+
+    require('nvim_utils').update_which_key_maps {
+        b = {
+            name = 'buffer',
+            n = {name='BufferLine Next Buffer'},
+            p = {name='BufferLine Previous Buffer'},
+            e = {name='BufferLine Sort by Extension'},
+            d = {name='BufferLine Sort by Directory'},
+            i = {name='BufferLine Sort by ID'},
+        }
+    }
 end
 
 return module

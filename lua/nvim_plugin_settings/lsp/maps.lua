@@ -1,4 +1,4 @@
-return  {
+require 'nvim_utils'.update_which_key_maps {
     l = {
         name = "LSP",
         i = {":LspInfo<cr>", "Connected Language Servers"},
