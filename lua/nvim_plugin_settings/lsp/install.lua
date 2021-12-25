@@ -8,6 +8,7 @@ local install = function(use)
     use "hrsh7th/cmp-vsnip"
     use "hrsh7th/vim-vsnip"
     use "onsails/lspkind-nvim"
+
     use "tami5/lspsaga.nvim"
 end
 
