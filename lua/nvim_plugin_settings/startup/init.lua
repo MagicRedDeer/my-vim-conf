@@ -1,6 +1,6 @@
 local module = {}
 
-ascii_art = require('nvim_plugin_settings/startup/ascii_art')
+local ascii_art = require('nvim_plugin_settings/startup/ascii_art')
 
 module.install = function(use)
     use {
@@ -8,25 +8,47 @@ module.install = function(use)
         requires = { 'kyazdani42/nvim-web-devicons' },
     }
     use {
-        'Shatur/neovim-session-manager',
-        requires = 'nvim-lua/plenary.nvim'
+        'xolox/vim-session',
+        requires = { 'xolox/vim-misc' },
     }
+end
+
+local function centrify(opts)
+    if opts.type == "text" or opts.type == "button" then
+        _opts = opts.opts
+        if _opts == nil then
+            opts.opts = {}
+            _opts = opts.opts
+        end
+        _opts.position = "center"
+        _opts.width = 100
+    elseif opts.type == "group" then
+        if type(opts.val) == "function" then
+            local value = opts.val
+            opts.val = function()
+                return centrify(value())
+            end
+        end
+    end
+
+    for key, value in pairs(opts) do
+        if type(value) == "table" then
+            opts[key] = centrify(value)
+        end
+    end
+
+    return opts
 end
 
 local alpha_configure = function()
     local alpha = require 'alpha'
+    package.loaded['alpha.themes.startify'] = nil
     local startify = require 'alpha.themes.startify'
+    startify.section.header.opts.hl = "DevIconImportConfiguration"
     if vim.o.background == 'dark' then
         startify.section.header.val = ascii_art.header_dark_bg
-        startify.section.header.opts.position = "center"
-        startify.section.footer = {
-            { type = "text", val = ascii_art.footer_dark_bg },
-        }
     else
         startify.section.header.val = ascii_art.header_light_bg
-        startify.section.footer = {
-            { type = "text", val = ascii_art.footer_light_bg },
-        }
     end
     startify.section.top_buttons.val = {
         startify.button( "e", "  New file" , ":ene <BAR> startinsert <CR>"),
@@ -34,21 +56,17 @@ local alpha_configure = function()
     startify.section.bottom_buttons.val = {
         startify.button( "q", "  Quit NVIM" , ":qa<CR>"),
     }
+    centrify(startify.opts)
     alpha.setup(startify.opts)
 end
 
 local session_configure = function()
-    local Path = require('plenary.path')
-    require('session_manager').setup({
-        sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'), -- The directory where the session files will be saved.
-        path_replacer = '__', -- The character to which the path separator will be replaced for session files.
-        colon_replacer = '++', -- The character to which the colon symbol will be replaced for session files.
-        autoload_mode = require('session_manager.config').AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
-        autosave_last_session = true, -- Automatically save last session on exit.
-        autosave_ignore_not_normal = true, -- Plugin will not save a session when no writable and listed buffers are opened.
-        autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
-    })
-    require('telescope').load_extension('sessions')
+    vim.g.session_directory = vim.fn.stdpath('data') .. '/sessions'
+    vim.g.session_lock_enabled = 0
+    vim.g.session_autosave = 'no'
+    vim.g.session_autoload = 'no'
+    vim.o.sessionoptions = "blank,buffers,curdir,folds,help,localoptions,tabpages,terminal,winsize"
+    -- TODO integrate with alpha and telescope
 end
 
 module.configure = function ()
