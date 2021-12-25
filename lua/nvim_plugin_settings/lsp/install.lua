@@ -10,6 +10,8 @@ local install = function(use)
     use "onsails/lspkind-nvim"
 
     use "tami5/lspsaga.nvim"
+    use "jose-elias-alvarez/null-ls.nvim"
+    use "williamboman/nvim-lsp-installer"
 end
 
 return install

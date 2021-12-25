@@ -7,124 +7,157 @@ local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+local lsp_installer_configure = function()
+end
+
+local null_ls_configure = function()
+    null_ls = require("null-ls")
+
+    local formatting = null_ls.builtins.formatting
+    local diagnostics = null_ls.builtins.diagnostics
+
+    null_ls.setup(
+        {
+            debug = false,
+            sources = {
+                formatting.prettier,
+                formatting.yapf,
+                formatting.isort,
+                formatting.stylua.with({extra_args = {"--indent-type Spaces"}})
+            }
+        }
+    )
+    require("nvim_utils").update_which_key_maps(
+        {
+            l = {
+                f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"}
+            }
+        }
+    )
+end
+
 local lspsaga_configure = function()
-    local lspsaga = require "lspsaga"
-    lspsaga.setup {
-        -- defaults ...
-        debug = false,
-        use_saga_diagnostic_sign = true,
-        -- diagnostic sign
-        error_sign = "",
-        warn_sign = "",
-        hint_sign = "",
-        infor_sign = "",
-        diagnostic_header_icon = "   ",
-        -- code action title icon
-        code_action_icon = " ",
-        code_action_prompt = {
-            enable = true,
-            sign = true,
-            sign_priority = 40,
-            virtual_text = true
-        },
-        finder_definition_icon = "  ",
-        finder_reference_icon = "  ",
-        max_preview_lines = 10,
-        finder_action_keys = {
-            open = "o",
-            vsplit = "s",
-            split = "i",
-            quit = "q",
-            scroll_down = "<C-f>",
-            scroll_up = "<C-b>"
-        },
-        code_action_keys = {
-            quit = "q",
-            exec = "<CR>"
-        },
-        rename_action_keys = {
-            quit = "<C-c>",
-            exec = "<CR>"
-        },
-        definition_preview_icon = "  ",
-        border_style = "single",
-        rename_prompt_prefix = "➤",
-        server_filetype_map = {},
-        diagnostic_prefix_format = "%d. "
-    }
+    local lspsaga = require("lspsaga")
+    lspsaga.setup(
+        {
+            -- defaults ...
+            debug = false,
+            use_saga_diagnostic_sign = true,
+            -- diagnostic sign
+            error_sign = "",
+            warn_sign = "",
+            hint_sign = "",
+            infor_sign = "",
+            diagnostic_header_icon = "   ",
+            -- code action title icon
+            code_action_icon = " ",
+            code_action_prompt = {
+                enable = true,
+                sign = true,
+                sign_priority = 40,
+                virtual_text = true
+            },
+            finder_definition_icon = "  ",
+            finder_reference_icon = "  ",
+            max_preview_lines = 10,
+            finder_action_keys = {
+                open = "o",
+                vsplit = "s",
+                split = "i",
+                quit = "q",
+                scroll_down = "<C-f>",
+                scroll_up = "<C-b>"
+            },
+            code_action_keys = {
+                quit = "q",
+                exec = "<CR>"
+            },
+            rename_action_keys = {
+                quit = "<C-c>",
+                exec = "<CR>"
+            },
+            definition_preview_icon = "  ",
+            border_style = "single",
+            rename_prompt_prefix = "➤",
+            server_filetype_map = {},
+            diagnostic_prefix_format = "%d. "
+        }
+    )
 end
 
 local cmp_configure = function()
-    local cmp = require "cmp"
-    local lspkind = require "lspkind"
+    local cmp = require("cmp")
+    local lspkind = require("lspkind")
 
-    cmp.setup {
-        -- REQUIRED - you must specify a snippet engine
-        snippet = {
-            expand = function(args)
-                vim.fn["vsnip#anonymous"](args.body)
-            end
-        },
-        mapping = {
-            ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
-            ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
-            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
-            ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            ["<C-e>"] = cmp.mapping(
-                {
-                    i = cmp.mapping.abort(),
-                    c = cmp.mapping.close()
-                }
-            ),
-            -- Accept currently selected item. If none selected, `select` first item.
-            -- Set `select` to `false` to only confirm explicitly selected items.
-            ["<CR>"] = cmp.mapping.confirm({select = true}),
-            ["<Tab>"] = cmp.mapping(
-                function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif vim.fn["vsnip#available"](1) == 1 then
-                        feedkey("<Plug>(vsnip-expand-or-jump)", "")
-                    elseif has_words_before() then
-                        cmp.complete()
-                    else
-                        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-                    end
-                end,
-                {"i", "s"}
-            ),
-            ["<S-Tab>"] = cmp.mapping(
-                function()
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                        feedkey("<Plug>(vsnip-jump-prev)", "")
-                    end
-                end,
-                {"i", "s"}
-            )
-        },
-        sources = cmp.config.sources(
-            {
-                {name = "nvim_lsp"},
-                {name = "vsnip"} -- For vsnip users.
-                -- { name = 'luasnip' }, -- For luasnip users.
-                -- { name = 'ultisnips' }, -- For ultisnips users.
-                -- { name = 'snippy' }, -- For snippy users.
+    cmp.setup(
+        {
+            -- REQUIRED - you must specify a snippet engine
+            snippet = {
+                expand = function(args)
+                    vim.fn["vsnip#anonymous"](args.body)
+                end
             },
-            {
-                {name = "buffer"}
-            }
-        ),
-        formatting = {
-            format = lspkind.cmp_format(
+            mapping = {
+                ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
+                ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
+                ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+                ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+                ["<C-e>"] = cmp.mapping(
+                    {
+                        i = cmp.mapping.abort(),
+                        c = cmp.mapping.close()
+                    }
+                ),
+                -- Accept currently selected item. If none selected, `select` first item.
+                -- Set `select` to `false` to only confirm explicitly selected items.
+                ["<CR>"] = cmp.mapping.confirm({select = true}),
+                ["<Tab>"] = cmp.mapping(
+                    function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif vim.fn["vsnip#available"](1) == 1 then
+                            feedkey("<Plug>(vsnip-expand-or-jump)", "")
+                        elseif has_words_before() then
+                            cmp.complete()
+                        else
+                            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+                        end
+                    end,
+                    {"i", "s"}
+                ),
+                ["<S-Tab>"] = cmp.mapping(
+                    function()
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+                            feedkey("<Plug>(vsnip-jump-prev)", "")
+                        end
+                    end,
+                    {"i", "s"}
+                )
+            },
+            sources = cmp.config.sources(
                 {
-                    with_text = true, -- do not show text alongside icons
-                    maxwidth = 50 -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                    {name = "nvim_lsp"},
+                    {name = "vsnip"} -- For vsnip users.
+                    -- { name = 'luasnip' }, -- For luasnip users.
+                    -- { name = 'ultisnips' }, -- For ultisnips users.
+                    -- { name = 'snippy' }, -- For snippy users.
+                },
+                {
+                    {name = "buffer"}
                 }
-            )
+            ),
+            formatting = {
+                format = lspkind.cmp_format(
+                    {
+                        with_text = true, -- do not show text alongside icons
+                        maxwidth = 50 -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                    }
+                )
+            }
         }
-    } -- end setup
+    ) -- end setup
 
     -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(
@@ -165,8 +198,9 @@ end
 local configure = function()
     cmp_configure()
     lspsaga_configure()
-    require "nvim_plugin_settings/lsp/signs"
-    require "nvim_plugin_settings/lsp/servers"
+    null_ls_configure()
+    require("nvim_plugin_settings/lsp/signs")
+    require("nvim_plugin_settings/lsp/servers")
 end
 
 return configure
