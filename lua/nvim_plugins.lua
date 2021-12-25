@@ -33,6 +33,7 @@ require("packer").startup(
         use "tpope/vim-surround"
         use "tpope/vim-repeat"
         use "tpope/vim-unimpaired"
+        use "tpope/vim-fugitive"
 
         for _, module in ipairs(modules) do
             require(module).install(use)
