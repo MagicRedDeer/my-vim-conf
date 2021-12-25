@@ -13,6 +13,7 @@ local modules = {
     "nvim_plugin_settings/indentguides",
     "nvim_plugin_settings/formatting",
     "nvim_plugin_settings/terminal",
+    "nvim_plugin_settings/comments",
     "nvim_plugin_settings/which_key"
 }
 require "nvim_utils".remove_modules(modules)
@@ -32,7 +33,6 @@ require("packer").startup(
         use "tpope/vim-surround"
         use "tpope/vim-repeat"
         use "tpope/vim-unimpaired"
-        use "tpope/vim-commentary"
 
         for _, module in ipairs(modules) do
             require(module).install(use)
