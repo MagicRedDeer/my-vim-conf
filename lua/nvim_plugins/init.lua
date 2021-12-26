@@ -1,21 +1,21 @@
-utils = require ("nvim_utils")
+utils = require("nvim_utils")
 utils.install_packer()
 
 local modules = {
-    "nvim_plugin_settings/treesitter",
-    "nvim_plugin_settings/lualine",
-    "nvim_plugin_settings/nerdtree",
-    "nvim_plugin_settings/telescope",
-    "nvim_plugin_settings/autopair",
-    "nvim_plugin_settings/colorizer",
-    "nvim_plugin_settings/gitsigns",
-    "nvim_plugin_settings/startup",
-    "nvim_plugin_settings/indentguides",
-    "nvim_plugin_settings/formatting",
-    "nvim_plugin_settings/terminal",
-    "nvim_plugin_settings/comments",
-    "nvim_plugin_settings/lsp",
-    "nvim_plugin_settings/which_key"
+    "nvim_plugins/treesitter",
+    "nvim_plugins/lualine",
+    "nvim_plugins/nerdtree",
+    "nvim_plugins/telescope",
+    "nvim_plugins/autopair",
+    "nvim_plugins/colorizer",
+    "nvim_plugins/gitsigns",
+    "nvim_plugins/startup",
+    "nvim_plugins/indentguides",
+    "nvim_plugins/formatting",
+    "nvim_plugins/terminal",
+    "nvim_plugins/comments",
+    "nvim_plugins/lsp",
+    "nvim_plugins/which_key"
 }
 utils.remove_modules(modules)
 
@@ -39,7 +39,6 @@ require("packer").startup(
         utils.install_modules(modules, use)
     end
 )
-
 
 -- now configure all modules with settings
 utils.configure_modules(modules)

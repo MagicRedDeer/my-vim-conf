@@ -3,9 +3,9 @@ utils = require("nvim_utils")
 vim.o.completeopt = "menu,menuone,noselect,noinsert"
 
 local modules = {
-    "nvim_plugin_settings.lsp.cmp",
-    "nvim_plugin_settings.lsp.lspsaga",
-    "nvim_plugin_settings.lsp.null_ls"
+    "nvim_plugins.lsp.cmp",
+    "nvim_plugins.lsp.lspsaga",
+    "nvim_plugins.lsp.null_ls"
 }
 utils.remove_modules(modules)
 

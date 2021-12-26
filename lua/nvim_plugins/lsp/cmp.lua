@@ -1,7 +1,7 @@
 module = {}
 
-local signs_configure = require "nvim_plugin_settings.lsp.signs"
-local servers_configure = require "nvim_plugin_settings.lsp.servers"
+local signs_configure = require "nvim_plugins.lsp.signs"
+local servers_configure = require "nvim_plugins.lsp.servers"
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))

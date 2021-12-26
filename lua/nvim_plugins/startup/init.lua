@@ -1,6 +1,6 @@
 local module = {}
 
-local ascii_art = require("nvim_plugin_settings/startup/ascii_art")
+local ascii_art = require("nvim_plugins/startup/ascii_art")
 
 module.install = function(use)
     use {

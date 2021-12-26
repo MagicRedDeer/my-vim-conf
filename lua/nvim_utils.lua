@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 local module = {}
 local api = vim.api
 vim.g.which_key_maps = {}
@@ -11,12 +12,12 @@ module.get_which_key_maps = function()
 end
 
 local function make_leader_map(combo, desc)
-    keymap = {}
-    key = "<leader>"
+    local keymap = {}
+    local key = "<leader>"
     if vim.startswith(string.lower(combo), key) then
-        parent_map = keymap
+        local parent_map = keymap
         for i = #key + 1, #combo do
-            current_map = {}
+            local current_map = {}
             parent_map[combo:sub(i, i)] = current_map
             parent_map = current_map
         end
@@ -26,8 +27,8 @@ local function make_leader_map(combo, desc)
 end
 
 module.keymap = function(mode, lhs, rhs, ...)
-    opts = (...)
-    desc = opts["desc"]
+    local opts = (...)
+    local desc = opts["desc"]
     opts["desc"] = nil
     api.nvim_set_keymap(mode, lhs, rhs, opts)
     if desc ~= nil and vim.startswith(lhs, "<leader>") then
@@ -119,7 +120,7 @@ local function packer_exists()
     return directory_exists(packer_location)
 end
 
-packer_gh = "https://github.com/wbthomason/packer.nvim"
+local packer_gh = "https://github.com/wbthomason/packer.nvim"
 module.install_packer = function()
     if not packer_exists() then
         os.execute("mkdir " .. packer_location)
