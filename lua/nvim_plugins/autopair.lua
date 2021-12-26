@@ -1,13 +1,13 @@
-local module = {}
+local M = {}
 
-module.install = function(use)
-    use 'windwp/nvim-autopairs'
+M.install = function(use)
+    use "windwp/nvim-autopairs"
 end
 
-module.configure = function ()
-    require('nvim-autopairs').setup{
-        check_ts = true,
+M.configure = function()
+    require("nvim-autopairs").setup {
+        check_ts = true
     }
 end
 
-return module
+return M

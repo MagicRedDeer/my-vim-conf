@@ -1,13 +1,13 @@
-local module = {}
+local M = {}
 
-module.install = function(use)
+M.install = function(use)
     use {
         "nvim-telescope/telescope.nvim",
         requires = {{"nvim-lua/plenary.nvim"}}
     }
 end
 
-module.configure = function()
+M.configure = function()
     require("telescope").setup {
         defaults = {
             -- Default configuration for telescope goes here:
@@ -47,4 +47,4 @@ module.configure = function()
     map("n", "<leader>sc", ":Telescope colorscheme<CR>", {noremap = true, silent = true, desc = "Search ColorSchemes"})
 end
 
-return module
+return M

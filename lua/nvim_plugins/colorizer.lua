@@ -1,14 +1,11 @@
-local module = {}
+local M = {}
 
-
-module.install = function(use)
-   use 'norcalli/nvim-colorizer.lua'
+M.install = function(use)
+    use "norcalli/nvim-colorizer.lua"
 end
 
-
-module.configure = function()
-    require'colorizer'.setup()
+M.configure = function()
+    require "colorizer".setup()
 end
 
-
-return module
+return M

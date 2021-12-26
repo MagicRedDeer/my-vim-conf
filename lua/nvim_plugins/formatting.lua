@@ -1,10 +1,10 @@
-module = {}
+M = {}
 
-module.install = function(use)
+M.install = function(use)
     use {"mhartington/formatter.nvim"}
 end
 
-module.configure = function()
+M.configure = function()
     require("formatter").setup {
         filetype = {
             javascript = {
@@ -51,4 +51,4 @@ module.configure = function()
     )
 end
 
-return module
+return M

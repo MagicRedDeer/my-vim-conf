@@ -1,13 +1,10 @@
+local M = {}
 
-local module = {}
-
-
-module.install = function(use)
+M.install = function(use)
     use "lukas-reineke/indent-blankline.nvim"
 end
 
-
-module.configure = function()
+M.configure = function()
     require("indent_blankline").setup {
         -- for example, context is off by default, use this to turn it on
         show_current_context = true,
@@ -17,5 +14,4 @@ module.configure = function()
     }
 end
 
-
-return module
+return M

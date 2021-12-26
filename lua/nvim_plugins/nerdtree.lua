@@ -1,9 +1,9 @@
-local module = {}
+local M = {}
 
 map = vim.api.nvim_set_keymap
 vim.g.NERDTreeLimitedSyntax = 1
 
-module.install = function(use)
+M.install = function(use)
     use "preservim/nerdtree"
     use "Xuyuanp/nerdtree-git-plugin"
     use "ryanoasis/vim-devicons"
@@ -12,7 +12,7 @@ module.install = function(use)
     use "PhilRunninger/nerdtree-visual-selection"
 end
 
-module.configure = function()
+M.configure = function()
     map("n", "<leader>ft", ":NERDTreeToggle<CR>", {noremap = true})
     map("n", "<leader>fd", ":NERDTreeFind<CR>", {noremap = true})
 
@@ -25,4 +25,4 @@ module.configure = function()
     }
 end
 
-return module
+return M

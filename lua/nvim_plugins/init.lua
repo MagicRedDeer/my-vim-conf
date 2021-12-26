@@ -1,4 +1,4 @@
-utils = require("nvim_utils")
+local utils = require("nvim_utils")
 utils.install_packer()
 
 local modules = {
@@ -11,7 +11,6 @@ local modules = {
     "nvim_plugins/gitsigns",
     "nvim_plugins/startup",
     "nvim_plugins/indentguides",
-    "nvim_plugins/formatting",
     "nvim_plugins/terminal",
     "nvim_plugins/comments",
     "nvim_plugins/lsp",

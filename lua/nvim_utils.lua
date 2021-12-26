@@ -1,13 +1,13 @@
 ---@diagnostic disable: unused-local
-local module = {}
+local M = {}
 local api = vim.api
 vim.g.which_key_maps = {}
 
-module.update_which_key_maps = function(maps)
+M.update_which_key_maps = function(maps)
     vim.g.which_key_maps = vim.tbl_deep_extend("force", vim.g.which_key_maps, maps)
 end
 
-module.get_which_key_maps = function()
+M.get_which_key_maps = function()
     return vim.g.which_key_maps
 end
 
@@ -26,32 +26,32 @@ local function make_leader_map(combo, desc)
     return keymap
 end
 
-module.keymap = function(mode, lhs, rhs, ...)
+M.keymap = function(mode, lhs, rhs, ...)
     local opts = (...)
     local desc = opts["desc"]
     opts["desc"] = nil
     api.nvim_set_keymap(mode, lhs, rhs, opts)
     if desc ~= nil and vim.startswith(lhs, "<leader>") then
         local map = make_leader_map(lhs, desc)
-        module.update_which_key_maps(map)
+        M.update_which_key_maps(map)
     end
 end
 
--- module functions
+-- M functions
 
-module.remove_modules = function(modules)
+M.remove_modules = function(modules)
     for _, mod in ipairs(modules) do
         package.loaded[mod] = nil
     end
 end
 
-module.require_modules = function(modules)
+M.require_modules = function(modules)
     for _, mod in ipairs(modules) do
         require(mod)
     end
 end
 
-module.install_modules = function(modules, use)
+M.install_modules = function(modules, use)
     for _, mod in ipairs(modules) do
         local install = require(mod).install
         if type(install) == "function" then
@@ -60,7 +60,7 @@ module.install_modules = function(modules, use)
     end
 end
 
-module.configure_modules = function(modules)
+M.configure_modules = function(modules)
     for _, mod in ipairs(modules) do
         local configure = require(mod).configure
         if type(configure) == "function" then
@@ -69,7 +69,7 @@ module.configure_modules = function(modules)
     end
 end
 
-module.nvim_create_augroups = function(definitions)
+M.nvim_create_augroups = function(definitions)
     for group_name, definition in pairs(definitions) do
         api.nvim_command("augroup " .. group_name)
         api.nvim_command("autocmd!")
@@ -121,7 +121,7 @@ local function packer_exists()
 end
 
 local packer_gh = "https://github.com/wbthomason/packer.nvim"
-module.install_packer = function()
+M.install_packer = function()
     if not packer_exists() then
         os.execute("mkdir " .. packer_location)
         local cmd = "git clone " .. packer_gh .. " " .. packer_location
@@ -131,4 +131,4 @@ module.install_packer = function()
     end
 end
 
-return module
+return M

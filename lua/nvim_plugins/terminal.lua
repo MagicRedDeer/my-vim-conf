@@ -1,10 +1,10 @@
-module = {}
+M = {}
 
-module.install = function(use)
+M.install = function(use)
     use {"akinsho/toggleterm.nvim"}
 end
 
-module.configure = function()
+M.configure = function()
     require("toggleterm").setup {
         -- size can be a number or function which is passed the current terminal
         size = function(term)
@@ -58,4 +58,4 @@ module.configure = function()
     }
 end
 
-return module
+return M

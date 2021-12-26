@@ -1,36 +1,32 @@
-local module = {}
+local M = {}
 
-module.install = function(use)
+M.install = function(use)
     use {
-    "folke/which-key.nvim",
-    config = function()
-        require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        }
-    end
-}
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup {}
+        end
+    }
 end
 
-module.configure = function ()
+M.configure = function()
     vim.o.timeoutlen = 300
 
     local mappings = {
         f = {
-            name = "file",
+            name = "file"
         },
         e = {
             name = "edit"
         },
         s = {
-            name = "select/search",
+            name = "select/search"
         },
         b = {
-            name = "buffers",
-        },
+            name = "buffers"
+        }
     }
-    utils = require('nvim_utils')
+    utils = require("nvim_utils")
     utils.update_which_key_maps(mappings)
 
     local opts = {
@@ -40,4 +36,4 @@ module.configure = function ()
     require("which-key").register(utils.get_which_key_maps(), opts)
 end
 
-return module
+return M

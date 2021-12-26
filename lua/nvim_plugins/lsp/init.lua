@@ -9,14 +9,14 @@ local modules = {
 }
 utils.remove_modules(modules)
 
-local module = {}
+local M = {}
 
-module.install = function(use)
+M.install = function(use)
     utils.install_modules(modules, use)
 end
 
-module.configure = function()
+M.configure = function()
     utils.configure_modules(modules)
 end
 
-return module
+return M

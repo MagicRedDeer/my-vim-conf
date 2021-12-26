@@ -1,4 +1,4 @@
-module = {}
+M = {}
 
 local signs_configure = require "nvim_plugins.lsp.signs"
 local servers_configure = require "nvim_plugins.lsp.servers"
@@ -12,7 +12,7 @@ local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
-module.install = function(use)
+M.install = function(use)
     use "neovim/nvim-lspconfig"
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
@@ -24,7 +24,7 @@ module.install = function(use)
     use "onsails/lspkind-nvim"
 end
 
-module.configure = function()
+M.configure = function()
     local cmp = require("cmp")
     local lspkind = require("lspkind")
 
@@ -153,4 +153,4 @@ module.configure = function()
     servers_configure()
 end
 
-return module
+return M

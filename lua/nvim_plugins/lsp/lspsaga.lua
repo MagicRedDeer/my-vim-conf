@@ -1,10 +1,10 @@
-module = {}
+M = {}
 
-module.install = function(use)
+M.install = function(use)
     use "tami5/lspsaga.nvim"
 end
 
-module.configure = function()
+M.configure = function()
     local lspsaga = require("lspsaga")
     lspsaga.setup(
         {
@@ -64,4 +64,4 @@ module.configure = function()
     }
 end
 
-return module
+return M

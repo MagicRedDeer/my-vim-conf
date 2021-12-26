@@ -1,6 +1,6 @@
-module = {}
+M = {}
 
-module.install = function(use)
+M.install = function(use)
     use {
         "numToStr/Comment.nvim",
         config = function()
@@ -9,7 +9,7 @@ module.install = function(use)
     }
 end
 
-module.configure = function()
+M.configure = function()
 end
 
-return module
+return M
