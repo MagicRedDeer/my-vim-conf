@@ -1,4 +1,10 @@
-return function()
+module = {}
+
+module.install = function(use)
+    use "tami5/lspsaga.nvim"
+end
+
+module.configure = function()
     local lspsaga = require("lspsaga")
     lspsaga.setup(
         {
@@ -45,4 +51,17 @@ return function()
             diagnostic_prefix_format = "%d. "
         }
     )
+    require "nvim_utils".update_which_key_maps {
+        l = {
+            name = "LSP",
+            K = {"<cmd>Lspsaga hover_doc<cr>", "Hover Commands"},
+            R = {"<cmd>Lspsaga rename<cr>", "Rename"},
+            a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
+            e = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Show Line Diagnostics"},
+            n = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Go To Next Diagnostic"},
+            N = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Go To Previous Diagnostic"}
+        }
+    }
 end
+
+return module

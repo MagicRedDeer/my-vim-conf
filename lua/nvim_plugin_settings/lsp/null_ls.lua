@@ -1,4 +1,10 @@
-return function()
+module = {}
+
+module.install = function(use)
+    use "jose-elias-alvarez/null-ls.nvim"
+end
+
+module.configure = function()
     null_ls = require("null-ls")
 
     local formatting = null_ls.builtins.formatting
@@ -23,3 +29,5 @@ return function()
         }
     )
 end
+
+return module

@@ -8,7 +8,7 @@ module.install = function(use)
     use "Xuyuanp/nerdtree-git-plugin"
     use "ryanoasis/vim-devicons"
     use "tiagofumo/vim-nerdtree-syntax-highlight"
-    use "PhilRunninger/nerdtree-buffer-ops"
+    -- use "PhilRunninger/nerdtree-buffer-ops"
     use "PhilRunninger/nerdtree-visual-selection"
 end
 

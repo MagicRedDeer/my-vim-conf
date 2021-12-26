@@ -1,16 +1,22 @@
+utils = require("nvim_utils")
+
 vim.o.completeopt = "menu,menuone,noselect,noinsert"
 
 local modules = {
-    "nvim_plugin_settings/lsp/maps",
-    "nvim_plugin_settings/lsp/install",
-    "nvim_plugin_settings/lsp/configure"
+    "nvim_plugin_settings.lsp.cmp",
+    "nvim_plugin_settings.lsp.lspsaga",
+    "nvim_plugin_settings.lsp.null_ls"
 }
-require "nvim_utils".remove_modules(modules)
+utils.remove_modules(modules)
 
 local module = {}
 
-module.maps = require "nvim_plugin_settings/lsp/maps"
-module.install = require "nvim_plugin_settings/lsp/install"
-module.configure = require "nvim_plugin_settings/lsp/configure"
+module.install = function(use)
+    utils.install_modules(modules, use)
+end
+
+module.configure = function()
+    utils.configure_modules(modules)
+end
 
 return module

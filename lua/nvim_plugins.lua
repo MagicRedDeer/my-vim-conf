@@ -1,10 +1,10 @@
-require "nvim_utils".install_packer()
+utils = require ("nvim_utils")
+utils.install_packer()
 
 local modules = {
     "nvim_plugin_settings/treesitter",
     "nvim_plugin_settings/lualine",
     "nvim_plugin_settings/nerdtree",
-    "nvim_plugin_settings/lsp",
     "nvim_plugin_settings/telescope",
     "nvim_plugin_settings/autopair",
     "nvim_plugin_settings/colorizer",
@@ -14,9 +14,10 @@ local modules = {
     "nvim_plugin_settings/formatting",
     "nvim_plugin_settings/terminal",
     "nvim_plugin_settings/comments",
+    "nvim_plugin_settings/lsp",
     "nvim_plugin_settings/which_key"
 }
-require "nvim_utils".remove_modules(modules)
+utils.remove_modules(modules)
 
 vim.cmd [[packadd packer.nvim]]
 
@@ -35,16 +36,10 @@ require("packer").startup(
         use "tpope/vim-unimpaired"
         use "tpope/vim-fugitive"
 
-        for _, module in ipairs(modules) do
-            require(module).install(use)
-        end
+        utils.install_modules(modules, use)
     end
 )
 
+
 -- now configure all modules with settings
-for _, module in ipairs(modules) do
-    local configure = require(module).configure
-    if configure ~= nil then
-        configure()
-    end
-end
+utils.configure_modules(modules)
