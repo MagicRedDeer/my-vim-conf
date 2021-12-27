@@ -34,6 +34,7 @@ require("packer").startup(
         use "tpope/vim-repeat"
         use "tpope/vim-unimpaired"
         use "tpope/vim-fugitive"
+        use "qpkorr/vim-bufkill"
 
         utils.install_modules(modules, use)
     end

@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.install = function(use)
     use "tami5/lspsaga.nvim"

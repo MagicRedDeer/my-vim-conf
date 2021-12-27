@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.install = function(use)
     use "jose-elias-alvarez/null-ls.nvim"
@@ -21,6 +21,7 @@ M.configure = function()
             }
         }
     )
+
     require("nvim_utils").update_which_key_maps(
         {
             l = {
@@ -28,6 +29,9 @@ M.configure = function()
             }
         }
     )
+
+    require("nvim_utils")
+
 end
 
 return M

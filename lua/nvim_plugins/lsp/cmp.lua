@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 local signs_configure = require "nvim_plugins.lsp.signs"
 local servers_configure = require "nvim_plugins.lsp.servers"
@@ -27,6 +27,36 @@ end
 M.configure = function()
     local cmp = require("cmp")
     local lspkind = require("lspkind")
+
+    --   פּ ﯟ   some other good icons
+    local kind_icons = {
+        Text = "",
+        Method = "m",
+        Function = "",
+        Constructor = "",
+        Field = "",
+        Variable = "",
+        Class = "",
+        Interface = "",
+        Module = "",
+        Property = "",
+        Unit = "",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+    }
+    -- find more here: https://www.nerdfonts.com/cheat-sheet
 
     cmp.setup(
         ---@diagnostic disable-next-line: redundant-parameter
@@ -76,25 +106,36 @@ M.configure = function()
                     {"i", "s"}
                 )
             },
-            sources = cmp.config.sources(
-                {
-                    {name = "nvim_lsp"},
-                    {name = "vsnip"} -- For vsnip users.
-                    -- { name = 'luasnip' }, -- For luasnip users.
-                    -- { name = 'ultisnips' }, -- For ultisnips users.
-                    -- { name = 'snippy' }, -- For snippy users.
-                },
-                {
-                    {name = "buffer"}
-                }
-            ),
             formatting = {
-                format = lspkind.cmp_format(
-                    {
-                        with_text = true, -- do not show text alongside icons
-                        maxwidth = 50 -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-                    }
-                )
+                format = function(entry, vim_item)
+                    -- Kind icons
+                    vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+                    -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+                    vim_item.menu =
+                        ({
+                        nvim_lsp = "[LSP]",
+                        luasnip = "[Snippet]",
+                        buffer = "[Buffer]",
+                        path = "[Path]"
+                    })[entry.source.name]
+                    return vim_item
+                end
+            },
+            sources = {
+                {name = "nvim_lsp"},
+                {name = "vsnip"},
+                {name = "buffer"},
+                {name = "path"}
+            },
+            confirm_opts = {
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = false
+            },
+            documentation = {
+                border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
+            },
+            experimental = {
+                native_menu = false
             }
         }
     ) -- end setup
