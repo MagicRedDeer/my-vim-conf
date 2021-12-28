@@ -2,7 +2,7 @@ return function (opts)
     local runtime_path = vim.split(package.path, ';')
     table.insert(runtime_path, "lua/?.lua")
     table.insert(runtime_path, "lua/?/init.lua")
-    {
+    sumneko_lua_opts = {
         cmd = { "lua-language-server" },
         filetypes = { "lua" },
         log_level = 2,
@@ -32,4 +32,5 @@ return function (opts)
             },
         },
     }
+    return vim.tbl_deep_extend("force", opts, sumneko_lua_opts)
 end

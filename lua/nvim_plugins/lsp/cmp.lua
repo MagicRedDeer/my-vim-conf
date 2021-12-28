@@ -11,6 +11,7 @@ end
 
 M.install = function(use)
     use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-path"
     use "hrsh7th/cmp-cmdline"
@@ -110,6 +111,7 @@ M.configure = function()
                     vim_item.menu =
                         ({
                         nvim_lsp = "[LSP]",
+                        nvim_lua = "[NVIM_LUA]",
                         luasnip = "[Snippet]",
                         buffer = "[Buffer]",
                         path = "[Path]"
@@ -119,6 +121,7 @@ M.configure = function()
             },
             sources = {
                 {name = "nvim_lsp"},
+                {name = "nvim_lua"},
                 {name = "vsnip"},
                 {name = "buffer"},
                 {name = "path"}

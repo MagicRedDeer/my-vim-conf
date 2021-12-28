@@ -13,15 +13,16 @@ M.configure = function()
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.yapf,
             null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.stylua,
+            null_ls.builtins.formatting.stylua.with({ extra_args = { "--indent-type", "Spaces" } }),
         },
     })
 
-    require("nvim_utils").update_which_key_maps({
-        l = {
-            f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-        },
-    })
+    require("nvim_utils").keymap(
+        "n",
+        "<leader>lf",
+        "<cmd>lua vim.lsp.buf.formatting()<cr>",
+        { noremap = true, silent = true, desc = "Format" }
+    )
 
     require("nvim_utils")
 end
