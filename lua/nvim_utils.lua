@@ -1,4 +1,3 @@
----@diagnostic disable: unused-local
 local M = {}
 local api = vim.api
 vim.g.which_key_maps = {}

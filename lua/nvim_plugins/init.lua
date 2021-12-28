@@ -2,6 +2,7 @@ local utils = require("nvim_utils")
 utils.install_packer()
 
 local modules = {
+    "nvim_plugins/colorscheme",
     "nvim_plugins/treesitter",
     "nvim_plugins/lualine",
     "nvim_plugins/nerdtree",
@@ -23,13 +24,6 @@ vim.cmd [[packadd packer.nvim]]
 require("packer").startup(
     function(use)
         use "wbthomason/packer.nvim"
-        use {
-            "rakr/vim-one",
-            config = function()
-                vim.o.background = "dark"
-                vim.cmd [[colorscheme one]]
-            end
-        }
         use "tpope/vim-surround"
         use "tpope/vim-repeat"
         use "tpope/vim-unimpaired"

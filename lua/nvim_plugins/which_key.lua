@@ -4,7 +4,14 @@ M.install = function(use)
     use {
         "folke/which-key.nvim",
         config = function()
-            require("which-key").setup {}
+            require("which-key").setup {
+                window = {
+                    border = "single",
+                },
+                layout = {
+                    align = "center",
+                },
+            }
         end
     }
 end
@@ -26,7 +33,8 @@ M.configure = function()
             name = "buffers"
         }
     }
-    utils = require("nvim_utils")
+
+    local utils = require("nvim_utils")
     utils.update_which_key_maps(mappings)
 
     local opts = {
