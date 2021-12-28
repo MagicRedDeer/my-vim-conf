@@ -20,7 +20,7 @@ local function make_leader_map(combo, desc)
             parent_map[combo:sub(i, i)] = current_map
             parent_map = current_map
         end
-        parent_map["name"] = desc
+        table.insert(parent_map, desc)
     end
     return keymap
 end

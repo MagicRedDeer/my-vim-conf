@@ -1,7 +1,7 @@
 return function ()
     require "nvim_utils".update_which_key_maps {
         l = {
-            name = "LSP",
+            name = "language / LSP",
         }
     }
     local map = require('nvim_utils').keymap
@@ -15,4 +15,7 @@ return function ()
     map("n", "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<cr>", {noremap=true, silent=true, desc="Go To Definition"})
     map("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", {noremap=true, silent=true, desc="Go To Declaration"})
     map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", {noremap=true, silent=true, desc="References"})
+    map("n", "<leader>lh", "<cmd>lua vim.lsp.buf.document_highlight()<cr>", {noremap=true, silent=true, desc="References"})
+    map("n", "<leader>lH", "<cmd>lua vim.lsp.buf.document_highlight_kind()<cr>", {noremap=true, silent=true, desc="Highlight"})
+    map("n", "<leader>lc", "<cmd>lua vim.lsp.buf.clear_references()<cr>", {noremap=true, silent=true, desc="Highlight kind"})
 end

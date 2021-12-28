@@ -30,7 +30,9 @@ M.configure = function()
     -- Register a handler that will be called for all installed servers.
     -- Alternatively, you may also register handlers on specific server instances instead (see example below).
     lsp_installer.on_server_ready(function(server)
-        local opts = {}
+        local opts = {
+            capabilities = require('nvim_plugins.lsp.cmp').capabilities
+        }
 
         if server.name == 'sumneko_lua' then
             local sumneko_lua_opts = require('nvim_plugins.lsp.settings.sumneko_lua')
