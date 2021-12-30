@@ -14,6 +14,7 @@ local modules = {
     "nvim_plugins/indentguides",
     "nvim_plugins/terminal",
     "nvim_plugins/comments",
+    "nvim_plugins/trouble",
     "nvim_plugins/lsp",
     "nvim_plugins/which_key"
 }
