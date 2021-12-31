@@ -2,6 +2,7 @@ local utils = require("nvim_utils")
 utils.install_packer()
 
 local modules = {
+    "nvim_plugins/vimya",
     "nvim_plugins/colorscheme",
     "nvim_plugins/treesitter",
     "nvim_plugins/lualine",

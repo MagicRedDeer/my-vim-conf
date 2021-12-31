@@ -1,7 +1,7 @@
 my-vim-conf
 ===========
 
-This repository contains my current vim configuration as i find it helpful 
+This repository contains my current vim configuration as I find it helpful 
 I concentrate on using vim for my text editing tasks and also for programming in C/C++, Python and Web development
 
 IDE Requirements Per Language:
