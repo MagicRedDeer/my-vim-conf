@@ -3,6 +3,7 @@ utils.install_packer()
 
 local modules = {
     "nvim_plugins/vimya",
+    "nvim_plugins/sneak",
     "nvim_plugins/colorscheme",
     "nvim_plugins/treesitter",
     "nvim_plugins/lualine",
