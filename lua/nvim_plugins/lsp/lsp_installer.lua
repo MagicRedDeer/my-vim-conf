@@ -30,7 +30,7 @@ M.configure = function()
     -- Alternatively, you may also register handlers on specific server instances instead (see example below).
     lsp_installer.on_server_ready(function(server)
         local opts = {
-            capabilities = require("nvim_plugins.lsp.cmp").capabilities,
+            capabilities = require("nvim_plugins.lsp.cmp").get_capabilities(),
         }
 
         if server.name == "sumneko_lua" then

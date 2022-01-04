@@ -2,7 +2,7 @@ return {
 
     install = function(use)
         use({
-            "https://gitlab.com/LazyLeopard/vimya.git",
+            "MagicRedDeer/vimya.vim",
             requires = "vim-scripts/Tail-Bundle",
         })
     end,
