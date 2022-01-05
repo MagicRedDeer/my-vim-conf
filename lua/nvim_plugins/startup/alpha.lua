@@ -1,9 +1,48 @@
 local ascii_art = require("nvim_plugins/startup/ascii_art")
 
+local function sessions_buttons(theme, start, num)
+    local sessions = vim.fn["xolox#session#get_names"](0)
+    local buttons = {}
+    num = vim.F.if_nil(num, 10)
+    for n, session in ipairs(sessions) do
+        if #buttons == num then
+            break
+        end
+        local button = theme.button(tostring(n + start - 1), session, ":OpenSession! " .. session .. "<CR>")
+        buttons[n] = button
+    end
+    return {
+        type = "group",
+        val = buttons,
+        opts = {},
+    }
+end
+
+local function patch_theme(theme, layout_index, button_start)
+    layout_index = vim.F.if_nil(layout_index, 7)
+    button_start = vim.F.if_nil(button_start, 20)
+    theme.section.sessions = {
+        type = "group",
+        val = {
+            { type = "padding", val = 1 },
+            { type = "text", val = "Sessions", opts = { hl = "SpecialComment" } },
+            { type = "padding", val = 1 },
+            {
+                type = "group",
+                val = function()
+                    return { sessions_buttons(theme, button_start) }
+                end,
+            },
+        },
+    }
+    table.insert(theme.opts.layout, layout_index, theme.section.sessions)
+    table.insert(theme.opts.layout, layout_index, { type = "padding", val = 1 })
+end
+
 local function centrify(opts)
     if opts.type == "text" or opts.type == "button" then
         -- centrify text and position
-        _opts = opts.opts
+        local _opts = opts.opts
         if _opts == nil then
             opts.opts = {}
             _opts = opts.opts
@@ -54,6 +93,7 @@ return {
         startify.section.bottom_buttons.val = {
             startify.button("q", "  Quit NVIM", ":qa<CR>"),
         }
+        patch_theme(startify, 7, 20)
         centrify(startify.opts)
         alpha.setup(startify.opts)
     end,

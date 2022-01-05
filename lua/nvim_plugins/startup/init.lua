@@ -3,8 +3,8 @@ local M = {}
 local utils = require("nvim_utils")
 
 local modules = {
-    "nvim_plugins.startup.alpha",
     "nvim_plugins.startup.sessions",
+    "nvim_plugins.startup.alpha",
 }
 
 utils.remove_modules(modules)

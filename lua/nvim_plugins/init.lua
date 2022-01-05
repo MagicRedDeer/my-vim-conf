@@ -17,6 +17,7 @@ local modules = {
     "nvim_plugins/terminal",
     "nvim_plugins/comments",
     "nvim_plugins/trouble",
+    "nvim_plugins/bukill",
     "nvim_plugins/lsp",
     "nvim_plugins/which_key"
 }
@@ -31,7 +32,6 @@ require("packer").startup(
         use "tpope/vim-repeat"
         use "tpope/vim-unimpaired"
         use "tpope/vim-fugitive"
-        use "qpkorr/vim-bufkill"
 
         utils.install_modules(modules, use)
     end
