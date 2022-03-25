@@ -1,6 +1,6 @@
 return {
     install = function (use)
-        use "qpkorr/bufkill"
+        use "qpkorr/vim-bufkill"
     end,
 
     configure = function ()
