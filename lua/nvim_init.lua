@@ -5,6 +5,7 @@ local modules = {
     "nvim_settings",
     "nvim_display_settings",
     "nvim_mappings",
+    "nvim_autocommands",
     "nvim_plugins",
 }
 
