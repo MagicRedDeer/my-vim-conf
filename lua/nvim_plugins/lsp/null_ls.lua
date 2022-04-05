@@ -25,7 +25,13 @@ M.configure = function()
         { noremap = true, silent = true, desc = "Format" }
     )
 
-    require("nvim_utils")
+    require("nvim_utils").keymap(
+        "x",
+        "<leader>lf",
+        "<esc><cmd>lua vim.lsp.buf.range_formatting()<cr>",
+        { noremap = true, silent = true, desc = "Range Format" }
+    )
+
 end
 
 return M

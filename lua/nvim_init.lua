@@ -4,6 +4,7 @@ local utils = require("nvim_utils")
 local modules = {
     "nvim_settings",
     "nvim_display_settings",
+    "nvim_commands",
     "nvim_mappings",
     "nvim_autocommands",
     "nvim_plugins",

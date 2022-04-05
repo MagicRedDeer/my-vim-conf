@@ -19,6 +19,7 @@ local modules = {
     "nvim_plugins/trouble",
     "nvim_plugins/bukill",
     "nvim_plugins/lsp",
+    "nvim_plugins/dap",
     "nvim_plugins/which_key"
 }
 utils.remove_modules(modules)

@@ -17,7 +17,7 @@ M.install = function(use)
 end
 
 M.configure = function()
-    vim.o.timeoutlen = 300
+    vim.o.timeoutlen = 1000
 
     local mappings = {
         f = {
@@ -37,11 +37,10 @@ M.configure = function()
     local utils = require("nvim_utils")
     utils.update_which_key_maps(mappings)
 
-    local opts = {
-        prefix = "<leader>"
-    }
-
-    require("which-key").register(utils.get_which_key_maps(), opts)
+    require("which-key").register(
+        utils.get_which_key_maps(), {prefix = "<leader>"})
+    require("which-key").register(
+        utils.get_which_key_maps("x"), {mode = "x", prefix = "<leader>"})
 end
 
 return M

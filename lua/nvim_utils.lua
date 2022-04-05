@@ -1,13 +1,25 @@
 local M = {}
 local api = vim.api
+
 vim.g.which_key_maps = {}
 
-M.update_which_key_maps = function(maps)
-    vim.g.which_key_maps = vim.tbl_deep_extend("force", vim.g.which_key_maps, maps)
+M.update_which_key_maps = function(newmaps, mode)
+    if mode == nil then
+        mode = "n"
+    end
+    local maps = vim.g.which_key_maps
+    if maps[mode] == nil then
+        maps[mode] = {}
+    end
+    maps[mode] = vim.tbl_deep_extend("force", maps[mode], newmaps)
+    vim.g.which_key_maps = maps
 end
 
-M.get_which_key_maps = function()
-    return vim.g.which_key_maps
+M.get_which_key_maps = function(mode)
+    if mode == nil then
+        mode = "n"
+    end
+    return vim.g.which_key_maps[mode]
 end
 
 local function make_leader_map(combo, desc)
@@ -32,7 +44,7 @@ M.keymap = function(mode, lhs, rhs, ...)
     api.nvim_set_keymap(mode, lhs, rhs, opts)
     if desc ~= nil and vim.startswith(lhs, "<leader>") then
         local map = make_leader_map(lhs, desc)
-        M.update_which_key_maps(map)
+        M.update_which_key_maps(map, mode)
     end
 end
 
