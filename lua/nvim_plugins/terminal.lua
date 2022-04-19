@@ -1,7 +1,7 @@
 local M = {}
 
 M.install = function(use)
-    use {"akinsho/toggleterm.nvim"}
+    use {"akinsho/toggleterm.nvim", branch="main"}
 end
 
 M.configure = function()

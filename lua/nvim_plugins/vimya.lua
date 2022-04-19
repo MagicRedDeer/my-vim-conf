@@ -17,6 +17,30 @@ return {
 
         require("nvim_utils").keymap(
             "n",
+            "<leader>ms",
+            ":py vimyaRun ()<cr>",
+            { noremap = true, silent = true, desc = "Maya / Send" }
+        )
+        require("nvim_utils").keymap(
+            "v",
+            "<leader>ms",
+            ":py vimyaRun ()<cr>",
+            { noremap = true, silent = true, desc = "Maya / Send" }
+        )
+        require("nvim_utils").keymap(
+            "n",
+            "<leader>mb",
+            ":py vimyaRun (forceBuffer = True)<cr>",
+            { noremap = true, silent = true, desc = "Maya / Send Buffer" }
+        )
+        require("nvim_utils").keymap(
+            "v",
+            "<leader>mb",
+            ":py vimyaRun (forceBuffer = True)<cr>",
+            { noremap = true, silent = true, desc = "Maya / Send Buffer" }
+        )
+        require("nvim_utils").keymap(
+            "n",
             "<leader>mr",
             ":py vimyaRefreshLog ()<cr>",
             { noremap = true, silent = true, desc = "Maya / Refresh" }

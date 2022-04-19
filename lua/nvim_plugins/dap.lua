@@ -64,7 +64,7 @@ return {
 
     configure = function ()
         local dap = require('dap')
-        dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+        dap.defaults.fallback.terminal_win_cmd = 'vsplit new'
 
         require('dap-python').setup('python')
         require('telescope').load_extension('dap')

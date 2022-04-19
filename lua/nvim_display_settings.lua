@@ -36,3 +36,7 @@ vim.o.conceallevel = 2
 -- scrolling
 vim.o.scrolloff = 3
 vim.o.sidescrolloff = 5
+
+--cursor
+vim.o.cursorline = true
+vim.o.cursorcolumn = true

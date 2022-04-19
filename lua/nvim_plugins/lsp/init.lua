@@ -7,7 +7,9 @@ local modules = {
     "nvim_plugins.lsp.lsp_installer",
     "nvim_plugins.lsp.null_ls",
     "nvim_plugins.lsp.lspsaga",
+    "nvim_plugins.lsp.symbols",
 }
+
 utils.remove_modules(modules)
 
 local M = {}
