@@ -1,13 +1,12 @@
 return {
-
     install = function(use)
         use({
             "MagicRedDeer/vimya.vim",
             requires = "vim-scripts/Tail-Bundle",
         })
-    end,
+    end
 
-    configure = function()
+    configure = function() 
         vim.g.Tail_Height = 15
         vim.g.vimyaPort = 7720
         vim.g.vimyaTailCommand = "STail"
@@ -79,5 +78,5 @@ return {
         require("nvim_utils").update_which_key_maps({
             m = { name = "Maya" },
         })
-    end,
+    end
 }
