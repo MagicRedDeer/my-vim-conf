@@ -1,7 +1,7 @@
 return {
     install = function(use)
         use 'heavyimage/nuke.vim'
-    end
+    end,
 
     configure = function()
         vim.g.nukevimHost = '127.0.0.1'
