@@ -1,6 +1,6 @@
 return {
     install = function(use)
-        use 'heavyimage/nuke.vim'
+        use 'MagicRedDeer/nuke.vim'
     end,
 
     configure = function()
