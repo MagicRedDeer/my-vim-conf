@@ -11,7 +11,7 @@ M.configure = function()
         debug = false,
         sources = {
             null_ls.builtins.diagnostics.flake8,
-            null_ls.builtins.diagnostics.pylint.with({ args = {"-f", "json", "/dev/stdin", "2>", "/dev/null"}, extra_args = { "--py3k", "--disable", "no-absolute-import"}}),
+            null_ls.builtins.diagnostics.pylint,
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.yapf,
             null_ls.builtins.formatting.isort,

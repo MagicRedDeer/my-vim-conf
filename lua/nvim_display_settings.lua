@@ -9,7 +9,7 @@ vim.o.showcmd = true -- display incomplete commands
 vim.o.list = true -- visualizing tabs, spaces, trails etc.
 vim.o.listchars = "tab:>.,trail:.,extends:#,nbsp:.,precedes:%,eol:~"
 vim.o.fixendofline = false
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 vim.o.showmode = false
 
 -- vim.o.formatoptions:remove({'t'])  -- Don't wrap while typing
